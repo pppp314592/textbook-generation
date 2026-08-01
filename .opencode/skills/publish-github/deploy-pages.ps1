@@ -1,4 +1,4 @@
-# deploy-pages.ps1
+﻿# deploy-pages.ps1
 # gh-pages ブランチに公開物（index.html・各テーマの印刷用HTML/PDF/assets）を反映して push する。
 #
 # 使い方:
@@ -59,9 +59,10 @@ try {
         }
 
         # 2. gh-pages ブランチへ切り替え、一時コピーを反映
-        git branch -D gh-pages 2>$null
+        git show-ref --verify --quiet refs/heads/gh-pages
+        if ($LASTEXITCODE -eq 0) { git branch -D gh-pages }
         git checkout --orphan gh-pages
-        git rm -rf --cached . 2>$null | Out-Null
+        if (Test-Path .git\index) { git rm -rf --cached . | Out-Null }
 
         # 作業ツリーをクリアして一時コピーへ置き換え
         Get-ChildItem -Force | Where-Object { $_.Name -notin @(".git", $tmp) } | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
