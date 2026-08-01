@@ -69,8 +69,6 @@ def main():
 
         links = {}
         candidates = {
-            "README": ("README.md", child / "README.md"),
-            "教科書(Markdown)": ("教科書.md", child / "教科書.md"),
             "PDF": ("印刷用/教科書.pdf", child / "印刷用" / "教科書.pdf"),
             "印刷用HTML": ("印刷用/教科書-印刷版.html", child / "印刷用" / "教科書-印刷版.html"),
         }
@@ -78,10 +76,18 @@ def main():
             if has_link(p):
                 links[label] = rel.replace("\\", "/")
 
+        # カードタイトルのリンク先（Pages で閲覧可能な印刷用HTML・PDFを優先）
+        primary_rel = None
+        for rel in ("印刷用/教科書-印刷版.html", "印刷用/教科書.pdf"):
+            if (child / rel).is_file():
+                primary_rel = rel
+                break
+
         themes.append({
             "name": child.name,
             "meta": meta,
             "links": links,
+            "primary_rel": primary_rel,
         })
 
     # 有効なテーマが無い場合はエラーで終了
@@ -105,8 +111,12 @@ def main():
             link_html.append(f'<a class="link-btn" href="{esc(href)}">{esc(label)}</a>')
         links_html = "".join(link_html) if link_html else '<span class="no-link">公開リンクなし</span>'
 
+        if t["primary_rel"]:
+            title_href = f'{name}/{t["primary_rel"]}'
+        else:
+            title_href = "#"
         theme_cards.append(f"""    <section class="card">
-      <h2><a href="{name}/README.md">{name}</a></h2>
+      <h2><a href="{esc(title_href)}">{name}</a></h2>
       <div class="meta">{meta_html}</div>
       <div class="links">{links_html}</div>
     </section>""")
