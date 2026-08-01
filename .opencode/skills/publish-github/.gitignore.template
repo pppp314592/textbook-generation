@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 仮想環境
+.venv/
+venv/
+
+# OS生成物
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# エディタ
+.vscode/
+.idea/
+
+# 環境設定・機密情報
+.env
+.env.*
+*.local
+
+# opencode キャッシュ（設定ファイル自体は管理対象）
+.opencode/skills/*/__pycache__/
