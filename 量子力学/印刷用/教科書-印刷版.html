@@ -1205,36 +1205,65 @@ Y₁±₁ = ∓√(3/8π) sin θ e^(±iφ)
     var m = text.match(/(?:练习问题|練習問題)\s*(\d+)[.\s](\d+)/);
     return m ? m[1] + '.' + m[2] : null;
   }
+  function makeAnswerItem(key, p){
+    var body = document.createElement('div');
+    body.className = 'answer-body';
+    body.hidden = true;
+    body.innerHTML = p.innerHTML;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'answer-btn';
+    btn.textContent = '解答を表示';
+    btn.addEventListener('click', function(){ body.hidden = !body.hidden; });
+    var wrap = document.createElement('div');
+    wrap.className = 'answer-item';
+    wrap.id = 'answer-' + key.replace('.', '-');
+    wrap.appendChild(btn);
+    wrap.appendChild(body);
+    p.parentNode.insertBefore(wrap, p);
+    p.parentNode.removeChild(p);
+  }
   document.addEventListener('DOMContentLoaded', function(){
     var answerMap = {};
+
     var heads = document.querySelectorAll('h3');
     heads.forEach(function(h){
       var key = numOf(h.textContent);
       if(!key) return;
+      if(answerMap[key] !== undefined) return;
       var p = h.nextElementSibling;
       if(p && p.tagName === 'P'){
-        var tipText = p.textContent.replace(/^解答[：:]\s*\d+\s*[—\-]?\s*/, '').trim();
-        answerMap[key] = tipText;
-        var body = document.createElement('div');
-        body.className = 'answer-body';
-        body.hidden = true;
-        body.innerHTML = p.innerHTML;
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'answer-btn';
-        btn.textContent = '解答を表示';
-        btn.addEventListener('click', function(){ body.hidden = !body.hidden; });
-        var wrap = document.createElement('div');
-        wrap.className = 'answer-item';
-        wrap.id = 'answer-' + key.replace('.', '-');
-        wrap.appendChild(btn);
-        wrap.appendChild(body);
-        h.parentNode.insertBefore(wrap, p);
-        h.parentNode.removeChild(p);
+        answerMap[key] = p.textContent.replace(/^解答[：:]\s*\d+\s*[—\-]?\s*/, '').trim();
+        makeAnswerItem(key, p);
       }
     });
+
+    var sectionH = null;
+    var h2s = document.querySelectorAll('h2');
+    h2s.forEach(function(h2){
+      if(sectionH) return;
+      if(/付録A/.test(h2.textContent)) sectionH = h2;
+    });
+    var afterSection = function(el){
+      return sectionH && (sectionH.compareDocumentPosition(el) & 4) !== 0;
+    };
+
     var ps = document.querySelectorAll('p');
     ps.forEach(function(p){
+      var key = numOf(p.textContent);
+      if(!key) return;
+      if(answerMap[key] !== undefined) return;
+      if(!afterSection(p)) return;
+      var tipText = p.textContent
+        .replace(/^(?:练习问题|練習問題)\s*\d+[.\s]\d+\s*[：:]?/, '')
+        .replace(/^解答[：:]?\s*/, '')
+        .trim();
+      answerMap[key] = tipText;
+      makeAnswerItem(key, p);
+    });
+
+    var ps2 = document.querySelectorAll('p');
+    ps2.forEach(function(p){
       if(p.querySelector('.answer-tip')) return;
       var key = numOf(p.textContent);
       if(!key) return;
