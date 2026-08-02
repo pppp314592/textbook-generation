@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ガロア理論</title>
+<style>
+@page {
+  size: A4;
+  margin: 18mm 15mm 18mm 15mm;
+}
+@media print {
+  body { font-family: "Yu Mincho", "MS Mincho", "Noto Serif JP", serif; font-size: 10.5pt; line-height: 1.7; color: #000; background: #fff; }
+  h1 { page-break-before: always; font-size: 20pt; border-bottom: 2px solid #000; padding-bottom: 6px; }
+  h1:first-of-type { page-break-before: avoid; }
+  h2 { page-break-after: avoid; font-size: 15pt; }
+  h3 { page-break-after: avoid; font-size: 12.5pt; }
+  table { border-collapse: collapse; width: 100%; page-break-inside: auto; }
+  th, td { border: 1px solid #000; padding: 4px 8px; font-size: 9.5pt; }
+  th { background: #eee; }
+  pre, code { font-family: Consolas, "Courier New", monospace; font-size: 9pt; white-space: pre-wrap; }
+  pre { border: 1px solid #999; padding: 8px; page-break-inside: avoid; }
+  .pagebreak { page-break-after: always; }
+  a { color: #000; text-decoration: none; }
+  .answer-btn { display: none !important; }
+  .answer-body, .answer-body[hidden] { display: block !important; }
+  .answer-tip { display: none !important; }
+  img { max-width: 100%; page-break-inside: avoid; }
+}
+@media screen {
+  body { font-family: "Yu Mincho", "MS Mincho", "Noto Serif JP", serif; font-size: 12pt; line-height: 1.8; max-width: 210mm; margin: 24px auto; padding: 0 24px; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid #000; padding: 4px 8px; }
+  th { background: #eee; }
+  .answer-item { margin: 8px 0; }
+  .answer-btn { cursor: pointer; border: 1px solid #555; background: #eee; padding: 2px 10px; border-radius: 4px; font-size: 9pt; }
+  .answer-body { padding: 6px 10px; border-left: 3px solid #888; margin-top: 4px; }
+  .answer-body[hidden] { display: none; }
+  .answer-item:hover .answer-body { display: block; }
+  .has-answer { position: relative; cursor: pointer; }
+  .answer-tip { display: none; position: absolute; left: 0; top: 100%; z-index: 10; background: #fffbe6; border: 1px solid #bbb; padding: 6px 10px; margin-top: 4px; font-size: 10pt; line-height: 1.5; box-shadow: 0 2px 6px rgba(0,0,0,.2); }
+  .has-answer:hover .answer-tip, .answer-tip.open { display: block; }
+}
+</style>
+</head>
+<body>
+<h1 id="ガロア理論">ガロア理論</h1>
+<ul>
+<li>対象読者: 大学3〜4年生、大学院入試対策</li>
+<li>レベル: 上級（大学3〜4年・院入試）</li>
+<li>前提知識: 線形代数、群・環・体の初歩（第1章で復習）</li>
+<li>想定学習時間: 40〜60時間</li>
+</ul>
+<h2 id="目次">目次</h2>
+<ul>
+<li><a href="#はじめに">はじめに</a></li>
+<li><a href="#この本の使い方">この本の使い方</a></li>
+<li><a href="#前提知識と記号">前提知識と記号</a></li>
+<li><a href="#第1章-群環体の基礎">第1章 群・環・体の基礎</a></li>
+<li><a href="#学習目標">学習目標</a></li>
+<li><a href="#11-群の定義と例">1.1 群の定義と例</a></li>
+<li><a href="#12-正規部分群と剰余群">1.2 正規部分群と剰余群</a></li>
+<li><a href="#13-準同型と準同型定理">1.3 準同型と準同型定理</a></li>
+<li><a href="#14-環とイデアル">1.4 環とイデアル</a></li>
+<li><a href="#15-体の定義と例">1.5 体の定義と例</a></li>
+<li><a href="#16-標数と素体">1.6 標数と素体</a></li>
+<li><a href="#本章のまとめ">本章のまとめ</a></li>
+<li><a href="#練習問題">練習問題</a></li>
+<li><a href="#第2章-体の拡大と拡大次数">第2章 体の拡大と拡大次数</a></li>
+<li><a href="#学習目標-2">学習目標</a></li>
+<li><a href="#21-体の拡大">2.1 体の拡大</a></li>
+<li><a href="#22-拡大次数">2.2 拡大次数</a></li>
+<li><a href="#23-拡大次数の連鎖律">2.3 拡大次数の連鎖律</a></li>
+<li><a href="#24-代数拡大と超越拡大">2.4 代数拡大と超越拡大</a></li>
+<li><a href="#25-有限次拡大の例">2.5 有限次拡大の例</a></li>
+<li><a href="#本章のまとめ-2">本章のまとめ</a></li>
+<li><a href="#練習問題-2">練習問題</a></li>
+<li><a href="#第3章-代数拡大と最小多項式">第3章 代数拡大と最小多項式</a></li>
+<li><a href="#学習目標-3">学習目標</a></li>
+<li><a href="#31-代数的元と最小多項式">3.1 代数的元と最小多項式</a></li>
+<li><a href="#32-単拡大-Ka">3.2 単拡大 K(a)</a></li>
+<li><a href="#33-単拡大の同型と共役">3.3 単拡大の同型と共役</a></li>
+<li><a href="#34-拡大次数の計算技法">3.4 拡大次数の計算技法</a></li>
+<li><a href="#35-代数拡大の推移性">3.5 代数拡大の推移性</a></li>
+<li><a href="#本章のまとめ-3">本章のまとめ</a></li>
+<li><a href="#練習問題-3">練習問題</a></li>
+<li><a href="#第4章-分解体と代数閉包">第4章 分解体と代数閉包</a></li>
+<li><a href="#学習目標-4">学習目標</a></li>
+<li><a href="#41-分解体の定義">4.1 分解体の定義</a></li>
+<li><a href="#42-分解体の存在と一意性">4.2 分解体の存在と一意性</a></li>
+<li><a href="#43-代数閉体と代数閉包">4.3 代数閉体と代数閉包</a></li>
+<li><a href="#44-分解体の次数計算">4.4 分解体の次数計算</a></li>
+<li><a href="#本章のまとめ-4">本章のまとめ</a></li>
+<li><a href="#練習問題-4">練習問題</a></li>
+<li><a href="#第5章-分離拡大と有限体">第5章 分離拡大と有限体</a></li>
+<li><a href="#学習目標-5">学習目標</a></li>
+<li><a href="#51-分離多項式と重根">5.1 分離多項式と重根</a></li>
+<li><a href="#52-分離拡大">5.2 分離拡大</a></li>
+<li><a href="#53-完全体">5.3 完全体</a></li>
+<li><a href="#54-有限体の構成">5.4 有限体の構成</a></li>
+<li><a href="#55-有限体のガロア拡大とフロベニウス写像">5.5 有限体のガロア拡大とフロベニウス写像</a></li>
+<li><a href="#本章のまとめ-5">本章のまとめ</a></li>
+<li><a href="#練習問題-5">練習問題</a></li>
+<li><a href="#第6章-正規拡大">第6章 正規拡大</a></li>
+<li><a href="#学習目標-6">学習目標</a></li>
+<li><a href="#61-正規拡大の定義">6.1 正規拡大の定義</a></li>
+<li><a href="#62-正規拡大の同値条件">6.2 正規拡大の同値条件</a></li>
+<li><a href="#63-正規閉包">6.3 正規閉包</a></li>
+<li><a href="#本章のまとめ-6">本章のまとめ</a></li>
+<li><a href="#練習問題-6">練習問題</a></li>
+<li><a href="#第7章-ガロア拡大とガロア群">第7章 ガロア拡大とガロア群</a></li>
+<li><a href="#学習目標-7">学習目標</a></li>
+<li><a href="#71-ガロア群の定義">7.1 ガロア群の定義</a></li>
+<li><a href="#72-固定体">7.2 固定体</a></li>
+<li><a href="#73-ガロア拡大の定義">7.3 ガロア拡大の定義</a></li>
+<li><a href="#74-円分体と巡回群">7.4 円分体と巡回群</a></li>
+<li><a href="#75-有限体のガロア群再掲">7.5 有限体のガロア群（再掲）</a></li>
+<li><a href="#本章のまとめ-7">本章のまとめ</a></li>
+<li><a href="#練習問題-7">練習問題</a></li>
+<li><a href="#第8章-ガロア理論の基本定理">第8章 ガロア理論の基本定理</a></li>
+<li><a href="#学習目標-8">学習目標</a></li>
+<li><a href="#81-基本定理の主張">8.1 基本定理の主張</a></li>
+<li><a href="#82-基本定理の証明">8.2 基本定理の証明</a></li>
+<li><a href="#83-例Q2-3">8.3 例：Q(√2, √3)</a></li>
+<li><a href="#84-ガロア対応の使い方">8.4 ガロア対応の使い方</a></li>
+<li><a href="#本章のまとめ-8">本章のまとめ</a></li>
+<li><a href="#練習問題-8">練習問題</a></li>
+<li><a href="#第9章-応用作図問題と方程式の可解性">第9章 応用：作図問題と方程式の可解性</a></li>
+<li><a href="#学習目標-9">学習目標</a></li>
+<li><a href="#91-作図問題と体の理論">9.1 作図問題と体の理論</a></li>
+<li><a href="#92-作図不可能な古典的問題">9.2 作図不可能な古典的問題</a></li>
+<li><a href="#93-冪根拡大">9.3 冪根拡大</a></li>
+<li><a href="#94-可解群">9.4 可解群</a></li>
+<li><a href="#95-ガロア群と冪根可解性">9.5 ガロア群と冪根可解性</a></li>
+<li><a href="#96-対称群の可解性">9.6 対称群の可解性</a></li>
+<li><a href="#97-一般5次方程式のガロア群は-S₅">9.7 一般5次方程式のガロア群は S₅</a></li>
+<li><a href="#98-アーベルルフィニの定理5次方程式の代数解法の不存在">9.8 アーベル–ルフィニの定理：5次方程式の代数解法の不存在</a></li>
+<li><a href="#本章のまとめ-9">本章のまとめ</a></li>
+<li><a href="#練習問題-9">練習問題</a></li>
+<li><a href="#第10章-総まとめと演習">第10章 総まとめと演習</a></li>
+<li><a href="#学習目標-10">学習目標</a></li>
+<li><a href="#101-全体の流れ">10.1 全体の流れ</a></li>
+<li><a href="#102-重要定理の一覧">10.2 重要定理の一覧</a></li>
+<li><a href="#103-総合演習">10.3 総合演習</a></li>
+<li><a href="#付録A-練習問題の解答">付録A 練習問題の解答</a></li>
+<li><a href="#第1章">第1章</a></li>
+<li><a href="#第2章">第2章</a></li>
+<li><a href="#第3章">第3章</a></li>
+<li><a href="#第4章">第4章</a></li>
+<li><a href="#第5章">第5章</a></li>
+<li><a href="#第6章">第6章</a></li>
+<li><a href="#第7章">第7章</a></li>
+<li><a href="#第8章">第8章</a></li>
+<li><a href="#第9章">第9章</a></li>
+<li><a href="#第10章">第10章</a></li>
+<li><a href="#付録B-用語集">付録B 用語集</a></li>
+<li><a href="#付録C-記号表">付録C 記号表</a></li>
+</ul>
+<h2 id="はじめに">はじめに</h2>
+<p>ガロア理論は、19世紀初頭にエヴァリスト・ガロア（Évariste Galois, 1811–1832）によって創始された、<strong>体（たい）と群（ぐん）の対応</strong>を扱う理論です。その中心となる発見は、次のようなものです。</p>
+<blockquote>
+<p><strong>多項式方程式が「四則演算と冪根」だけで解けるかどうかは、その方程式に付随する対称性（ガロア群）の構造で完全に決まる。</strong></p>
+</blockquote>
+<p>この教科書の最終ゴールは、次の命題を厳密に証明することです。</p>
+<blockquote>
+<p><strong>一般の5次以上の代数方程式は、四則演算と冪根だけでは解けない（アーベル–ルフィニの定理）。</strong></p>
+</blockquote>
+<p>ガロア理論は代数学の頂点の一つであり、可換環論・代数幾何・整数論（類体論）などの土台にもなります。この本では、前提となる群・環・体の基礎を第1章で復習し、第2章以降で体拡大の理論を段階的に積み上げ、第8章で「ガロア理論の基本定理」に到達し、第9章で5次方程式の問題を解決します。</p>
+<h3 id="この本の使い方">この本の使い方</h3>
+<ul>
+<li>各章は「<strong>学習目標</strong> → 本文 → <strong>本章のまとめ</strong> → <strong>練習問題</strong>」の構成です。</li>
+<li>練習問題の解答は付録Aに解説付きであります。まず自分の力で解いてから見てください。</li>
+<li>院試対策として、各章の練習問題に加えて第10章に総合演習を用意しました。</li>
+<li>証明はこの本の流れで必要なものに絞りましたが、院試では証明も問われるため、<strong>太字の命題・定理は証明まで含めて理解する</strong>ことをおすすめします。</li>
+</ul>
+<h3 id="前提知識と記号">前提知識と記号</h3>
+<ul>
+<li>線形代数（基底、次元、線型写像）を前提とします。</li>
+<li>群・環・体の定義は第1章で復習しますが、一度学んだことがあると理解が速いです。</li>
+<li>記号は付録Cにまとめてあります（例：<code>[L:K]</code> 拡大次数、<code>Gal(L/K)</code> ガロア群）。</li>
+</ul>
+<p>それでは、第1章から始めましょう。</p>
+<hr />
+<h2 id="第1章-群環体の基礎">第1章 群・環・体の基礎</h2>
+<h3 id="学習目標">学習目標</h3>
+<ul>
+<li>群・部分群・正規部分群・準同型の定義と基本性質を確認できる。</li>
+<li>剰余群と準同型定理（第1同型定理）を使える。</li>
+<li>環・イデアル・整域・体の定義を確認できる。</li>
+<li>体の標数と素体を理解できる。</li>
+</ul>
+<h3 id="11-群の定義と例">1.1 群の定義と例</h3>
+<p><strong>定義（群）</strong> 集合 G に二項演算 <code>·: G×G → G</code> が定義されていて、次の3条件を満たすとき、(G, ·) を<strong>群</strong>と呼ぶ。</p>
+<ol>
+<li><strong>結合律</strong>: 任意の a, b, c ∈ G に対して (a·b)·c = a·(b·c)。</li>
+<li><strong>単位元の存在</strong>: 任意の a ∈ G に対して a·e = e·a = a となる元 e ∈ G が存在する。</li>
+<li><strong>逆元の存在</strong>: 任意の a ∈ G に対して a·b = b·a = e となる b ∈ G が存在する。</li>
+</ol>
+<p>演算が可換（a·b = b·a が常に成り立つ）である群を<strong>可換群</strong>（または<strong>アーベル群</strong>）と呼ぶ。以後、演算は文脈により <code>+</code>（加法群）や <code>·</code>（乗法群）で表す。</p>
+<p><strong>例 1.1</strong>
+- 整数全体 Z は加法に関して可換群（単位元 0、逆元 −a）。
+- 有理数全体 Q、実数全体 R、複素数全体 C は加法に関して可換群。
+- 0 を除いた有理数全体 Q* は乗法に関して可換群。
+- n次正則行列全体 GL_n(R) は行列の積に関して群（一般線型群）。n ≥ 2 なら非可換。</p>
+<p><strong>定義（部分群）</strong> 群 G の部分集合 H が、G の演算に関してそれ自身群になるとき、H を G の<strong>部分群</strong>と呼び、<code>H ≤ G</code> と書く。H が部分群であることは「H が空でなく、a, b ∈ H ⇒ a·b⁻¹ ∈ H」と同値である。</p>
+<h3 id="12-正規部分群と剰余群">1.2 正規部分群と剰余群</h3>
+<p><strong>定義（正規部分群）</strong> 部分群 H ≤ G が、任意の g ∈ G, h ∈ H に対して <code>g·h·g⁻¹ ∈ H</code> を満たすとき、H を<strong>正規部分群</strong>と呼び、<code>H ⊴ G</code> と書く。特に可換群のすべての部分群は正規部分群である。</p>
+<p><strong>定義（剰余類と剰余群）</strong> H ≤ G、g ∈ G に対し、<code>gH = { g·h | h ∈ H }</code> を H の（左）剰余類と呼ぶ。G を左剰余類に分解した集合を <code>G/H</code> と書く。H が正規部分群のとき、G/H は <code>(g₁H)·(g₂H) = (g₁·g₂)H</code> によって<strong>群</strong>になる。これを<strong>剰余群</strong>と呼ぶ。剰余類の個数 <code>|G/H|</code> を<strong>指数</strong>といい、<code>[G:H]</code> と書く。</p>
+<p><strong>定理（ラグランジュの定理）</strong> 有限群 G とその部分群 H に対して <code>|G| = |H| · [G:H]</code>。特に <code>|H|</code> は <code>|G|</code> を割り切る。</p>
+<h3 id="13-準同型と準同型定理">1.3 準同型と準同型定理</h3>
+<p><strong>定義（群準同型）</strong> 群 G₁, G₂ の間の写像 <code>f: G₁ → G₂</code> が、任意の a, b ∈ G₁ に対して <code>f(a·b) = f(a)·f(b)</code> を満たすとき、f を<strong>群準同型</strong>と呼ぶ。全単射な準同型を<strong>同型</strong>と呼び、同型 f が存在するとき G₁ ≅ G₂ と書く。</p>
+<ul>
+<li><strong>核</strong>: <code>Ker f = { a ∈ G₁ | f(a) = e₂ }</code> は G₁ の正規部分群。</li>
+<li><strong>像</strong>: <code>Im f = { f(a) | a ∈ G₁ }</code> は G₂ の部分群。</li>
+</ul>
+<p><strong>定理（準同型定理／第1同型定理）</strong> 準同型 f: G₁ → G₂ に対して</p>
+<pre><code>G₁ / Ker f  ≅  Im f
+</code></pre>
+<p>が成り立つ。</p>
+<p><strong>例 1.2</strong> <code>f: Z → Z/4Z</code>（剰余を取る写像）は全射準同型で Ker f = 4Z。準同型定理により <code>Z/4Z ≅ Z/4Z</code>（この場合は自明だが、Ker f が正規部分群で G/Ker f が構成できることの例になっている）。</p>
+<h3 id="14-環とイデアル">1.4 環とイデアル</h3>
+<p><strong>定義（環）</strong> 集合 R に2つの演算（加法 <code>+</code> と乗法 <code>·</code>）が定義され、次の条件を満たすとき (R, +, ·) を<strong>環</strong>と呼ぶ。</p>
+<ol>
+<li>(R, +) は可換群（単位元 0）。</li>
+<li>乗法は結合律を満たし、加法に対して分配律 <code>a·(b+c) = a·b + a·c</code> が成り立つ。</li>
+</ol>
+<p>さらに乗法が可換で、乗法単位元 1（≠ 0）を持つ環を<strong>可換環</strong>と呼ぶ。この本では特に断らない限り<strong>可換環</strong>を考える。</p>
+<p><strong>定義（イデアル）</strong> 可換環 R の部分集合 I が次の条件を満たすとき、<strong>イデアル</strong>と呼ぶ。</p>
+<ol>
+<li>(I, +) は (R, +) の部分群。</li>
+<li>任意の r ∈ R, a ∈ I に対して <code>r·a ∈ I</code>。</li>
+</ol>
+<p><strong>例 1.3</strong>
+- Z のイデアルは nZ = { n·k | k ∈ Z } のみ。
+- 体 K 上の多項式環 K[X] のイデアルは、ある多項式 f で生成された <code>(f) = { f·g | g ∈ K[X] }</code> のみ。</p>
+<p>イデアル I による剰余環 <code>R/I</code> は <code>(a+I)·(b+I) = (a·b)+I</code> で環になる。</p>
+<p><strong>定義（整域・極大イデアル）</strong>
+- <strong>整域</strong>: a·b = 0 なら a = 0 または b = 0 を満たす可換環（零因子を持たない可換環）。
+- <strong>極大イデアル</strong>: 真のイデアルで、それより大きい真のイデアルが存在しないもの。<strong>I が R の極大イデアル ⇔ R/I が体</strong> が成り立つ（重要）。</p>
+<h3 id="15-体の定義と例">1.5 体の定義と例</h3>
+<p><strong>定義（体）</strong> 可換環 K であって、0 以外のすべての元が乗法逆元を持つものを<strong>体</strong>と呼ぶ。</p>
+<p><strong>例 1.4</strong>
+- Q, R, C は体（標数 0）。
+- p を素数とするとき、剰余環 Z/pZ は体。これを <code>F_p</code> と書く（有限体の最も基本的な例）。
+- 複素有理関数体 C(X)、有理数体上の多項式環の商体 Q(X) も体。</p>
+<h3 id="16-標数と素体">1.6 標数と素体</h3>
+<p><strong>定義（標数）</strong> 体 K において、<code>1 + 1 + ⋯ + 1</code>（n個）が 0 になる最小の正の整数 n を<strong>標数</strong>と呼び、<code>char K</code> と書く。そのような n が存在しなければ標数 0 という。</p>
+<ul>
+<li>標数 0 の体は Q を含む（Q を素体として含む）。</li>
+<li>標数 p &gt; 0 の体は F_p を素体として含む（p は素数）。</li>
+<li>標数 p の体では二項定理の係数 pCi (1 ≤ i ≤ p−1) が p で割れることから、<strong>フロベニウス写像</strong> <code>φ: x ↦ x^p</code> が準同型になる（第5章で再登場）。</li>
+</ul>
+<p><strong>命題（標数の基本性質）</strong> 体の標数は 0 または素数である。</p>
+<p><strong>例 1.5</strong> <code>F_2 = Z/2Z</code> は標数 2 の体。<code>F_2</code> 上では <code>x^2 + 1 = (x + 1)^2</code> であり、標数の特殊性が現れる。</p>
+<h3 id="本章のまとめ">本章のまとめ</h3>
+<ul>
+<li>群は演算・単位元・逆元を持つ集合。正規部分群によって剰余群ができる。</li>
+<li>準同型定理 <code>G₁/Ker f ≅ Im f</code> は群論の最重要定理の一つ。</li>
+<li>可換環の極大イデアル I について R/I は体になる。</li>
+<li>体の標数は 0 または素数。</li>
+</ul>
+<h3 id="練習問題">練習問題</h3>
+<p><strong>練習問題 1.1</strong> 群 G と部分群 H に対し、ラグランジュの定理を述べよ。また、位数 6 の群の部分群の位数としてあり得る値をすべて挙げよ。</p>
+<p><strong>練習問題 1.2</strong> <code>f: Z → Z/4Z</code> を剰余を取る準同型とする。Ker f を求め、準同型定理によって得られる同型を書け。</p>
+<p><strong>練習問題 1.3</strong> 可換環 R のイデアル I について「R/I が体であるための必要十分条件は I が R の極大イデアルであること」を述べた。これを認めて、Z のイデアル nZ のうち、Z/nZ が体になるものをすべて答えよ。</p>
+<p><strong>練習問題 1.4</strong> 体 K の標数が p（素数）であるとき、<code>φ: K → K</code>，<code>x ↦ x^p</code> は体準同型であることを示せ。</p>
+<p><strong>練習問題 1.5</strong> 標数 2 の体では <code>a + a = 0</code> が任意の元 a で成り立つことを示し、<code>(a + b)^2 = a^2 + b^2</code> となることを確かめよ。</p>
+<hr />
+<h2 id="第2章-体の拡大と拡大次数">第2章 体の拡大と拡大次数</h2>
+<h3 id="学習目標-2">学習目標</h3>
+<ul>
+<li>体拡大の定義を理解し、拡大次数 [L:K] の意味をつかむ。</li>
+<li>拡大次数の連鎖律を使える。</li>
+<li>代数拡大と超越拡大の区別ができる。</li>
+</ul>
+<h3 id="21-体の拡大">2.1 体の拡大</h3>
+<p><strong>定義（体拡大）</strong> 体 K が体 L の部分集合で、K の演算が L の演算の制限になっているとき、<code>L/K</code> は<strong>体拡大</strong>であるといい、「L は K の拡大体」と呼ぶ。</p>
+<p><strong>例 2.1</strong>
+- <code>R/Q</code>，<code>C/R</code>，<code>C/Q</code> は体拡大。
+- F_p の有限拡大は有限体（第5章で詳述）。</p>
+<h3 id="22-拡大次数">2.2 拡大次数</h3>
+<p>体 L を体 K 上の<strong>線型空間</strong>とみなす。K 上の加法・スカラー倍が定義できているからである。</p>
+<p><strong>定義（拡大次数）</strong> K 上の線型空間としての L の次元を<strong>拡大次数</strong>と呼び、<code>[L:K]</code> と書く。<code>[L:K] &lt; ∞</code> のとき有限次拡大、そうでないとき無限次拡大という。</p>
+<p><strong>例 2.2</strong>
+- <code>[C:R] = 2</code>。実際、C = R + Ri で基底 {1, i}。
+- <code>[R:Q]</code> は無限。実際、R は Q 上の線型空間として無限次元である（Q の代数閉包ですら Q 上無限次拡大で、R はそれより大きい）。</p>
+<h3 id="23-拡大次数の連鎖律">2.3 拡大次数の連鎖律</h3>
+<p><strong>定理（拡大次数の連鎖律）</strong> 体の拡大の列 K ⊂ L ⊂ M について</p>
+<pre><code>[M:K] = [M:L] · [L:K]
+</code></pre>
+<p>が成り立つ（少なくとも一方の次数が無限なら、他方も（無限の意味で）等しいとみなす）。</p>
+<p><strong>証明（有限次の場合）</strong> L の K 上の基底を {v₁, …, v_m}、M の L 上の基底を {w₁, …, w_n} とする。このとき {v_i w_j} (i=1..m, j=1..n) が M の K 上の基底になることを示せばよい。任意の x ∈ M は x = Σ_j a_j w_j（a_j ∈ L）と書け、各 a_j は a_j = Σ_i b_ij v_i（b_ij ∈ K）と書けるから、x = Σ_{i,j} b_ij (v_i w_j) と書け、生成する。一次独立性も同様に示される。□</p>
+<p><strong>例 2.3</strong> <code>Q ⊂ Q(√2) ⊂ Q(√2, √3)</code> とすると <code>[Q(√2):Q] = 2</code>，<code>[Q(√2,√3):Q(√2)] = 2</code>，よって <code>[Q(√2,√3):Q] = 4</code>。</p>
+<h3 id="24-代数拡大と超越拡大">2.4 代数拡大と超越拡大</h3>
+<p><strong>定義（代数的元・超越的元）</strong> 体拡大 L/K と a ∈ L に対し、<code>f(a) = 0</code> となる 0 でない多項式 f ∈ K[X] が存在するとき、a は K 上<strong>代数的</strong>であるという。代数的でない元を<strong>超越的</strong>という。</p>
+<p><strong>定義（代数拡大）</strong> L のすべての元が K 上代数的であるとき、<code>L/K</code> は<strong>代数拡大</strong>であるという。</p>
+<p><strong>例 2.4</strong>
+- √2, i, <code>∛2</code> は Q 上代数的（それぞれ X²−2, X²+1, X³−2 の根）。
+- π, e は Q 上超越的（リンデマン、エルミートの定理）。
+- <code>R/Q</code> は代数拡大ではない（超越元を含む）。</p>
+<p><strong>命題</strong> 有限次拡大は代数拡大である。</p>
+<p><strong>証明</strong> <code>[L:K] = n</code> とする。任意の a ∈ L に対し、<code>1, a, a², …, aⁿ</code> は n+1 個の元だから K 上一次従属。よって <code>c₀ + c₁a + ⋯ + cₙaⁿ = 0</code>（すべては 0 でない係数）が存在し、a は代数的。□</p>
+<h3 id="25-有限次拡大の例">2.5 有限次拡大の例</h3>
+<p><strong>例 2.5</strong> <code>L = Q(∛2)</code> を考える。<code>[L:Q] = 3</code> で基底は <code>{1, ∛2, (∛2)²}</code>。実際、X³−2 は Q 上既約（アイゼンシュタインの判定法：素数 2 で条件を満たす）で、最小多項式が X³−2。</p>
+<p><strong>例 2.6</strong> 単拡大 <code>K(a)</code> は、K に a を添加して得られる K 上の最小の体で、K 上の多項式環 K[X] の元を a で評価して得られる像全体 <code>{ f(a) | f ∈ K[X] }</code> の商体として構成される。次章で詳しく扱う。</p>
+<h3 id="本章のまとめ-2">本章のまとめ</h3>
+<ul>
+<li><code>L/K</code> を K 上の線型空間とみなし、その次元が拡大次数 [L:K]。</li>
+<li>連鎖律 <code>[M:K] = [M:L][L:K]</code> は次数計算の基本。</li>
+<li>有限次拡大は自動的に代数拡大。</li>
+<li>代数的か超越的かは多項式の根になるかどうかで判定する。</li>
+</ul>
+<h3 id="練習問題-2">練習問題</h3>
+<p><strong>練習問題 2.1</strong> <code>[Q(√2):Q]</code> を求めよ。また <code>{1, √2}</code> が基底になることを示せ。</p>
+<p><strong>練習問題 2.2</strong> 連鎖律を用いて、<code>[Q(√2, √3, √5):Q]</code> を求めよ。</p>
+<p><strong>練習問題 2.3</strong> 標数 0 の体 K 上で、<code>[K(a):K]</code> が有限ならば a は K 上代数的であることを示せ。</p>
+<p><strong>練習問題 2.4</strong> 体拡大 <code>L/K</code> が代数拡大であるとき、<code>a, b ∈ L</code> の和 a+b、積 ab も K 上代数的であることを示せ。（ヒント: K(a) と K(b) を考える）</p>
+<p><strong>練習問題 2.5</strong> <code>Q(√2)</code> は Q の代数拡大であるが、<code>R/Q</code> は代数拡大でないことを例を挙げて示せ。</p>
+<hr />
+<h2 id="第3章-代数拡大と最小多項式">第3章 代数拡大と最小多項式</h2>
+<h3 id="学習目標-3">学習目標</h3>
+<ul>
+<li>最小多項式の定義と性質を理解する。</li>
+<li>単拡大 K(a) の構造（K[X]/(f(X)) との同型）を理解する。</li>
+<li>単拡大の拡大次数を計算できる。</li>
+</ul>
+<h3 id="31-代数的元と最小多項式">3.1 代数的元と最小多項式</h3>
+<p><strong>定義（最小多項式）</strong> L/K で a ∈ L が K 上代数的であるとする。<code>f(a) = 0</code> を満たす K[X] の多項式のうち、<strong>モニック</strong>（最高次の係数が 1）かつ次数最小のものを a の K 上の<strong>最小多項式</strong>と呼び、<code>irr(a, K)</code> と書く。</p>
+<p><strong>命題（最小多項式の性質）</strong> a の最小多項式 f(X) は K[X] において<strong>既約</strong>であり、<code>g(a) = 0</code> となる多項式 g(X) 全体はイデアル <code>(f(X))</code> に一致する。</p>
+<p><strong>証明</strong> <code>f = h·k</code> と因数分解されたとすると、f(a) = h(a)k(a) = 0 より h(a) = 0 または k(a) = 0。次数の最小性から一方は定数。よって既約。また、g(a) = 0 なる g に対して g を f で割った余り r（deg r &lt; deg f）を考えると r(a) = 0 だから最小性より r = 0。したがって g ∈ (f)。□</p>
+<h3 id="32-単拡大-Ka">3.2 単拡大 K(a)</h3>
+<p><strong>定義（単拡大）</strong> 体拡大 L/K と a ∈ L に対して、K と a を含む L の最小部分体を <code>K(a)</code> と書き、K に a を添加した体という。<code>L = K(a)</code> のとき L/K を<strong>単拡大</strong>と呼ぶ。</p>
+<p><strong>定理（単拡大の構造）</strong> a を K 上代数的とし、f(X) = irr(a, K)（deg f = n）とする。このとき</p>
+<ol>
+<li>写像 <code>ψ: K[X]/(f(X)) → K(a)</code>，<code>g(X) + (f(X)) ↦ g(a)</code> は同型。</li>
+<li><code>[K(a):K] = n</code> で、<code>{1, a, a², …, a^(n−1)}</code> は K 上の基底。</li>
+</ol>
+<p><strong>証明</strong> <code>ψ</code> が準同型であることは明らか。f が既約で K[X] は単項イデアル整域なので <code>(f(X))</code> は極大イデアル、よって K[X]/(f(X)) は体。ψ は体の準同型だから単射。一方、K(a) は K と a で生成される体で、ψ の像 <code>{g(a)}</code> は K と a を含み K[X]/(f) は体だから像自身が K(a) に一致する（像は体である）。よって全射。次数については <code>{1, a, …, a^(n−1)}</code> が生成し、一次独立性は最小多項式の最小次数性から従う。□</p>
+<p><strong>例 3.1</strong> <code>a = √2</code>，K = Q とすると irr(√2, Q) = X²−2。よって <code>Q(√2) ≅ Q[X]/(X²−2)</code>，<code>[Q(√2):Q] = 2</code>。</p>
+<p><strong>例 3.2</strong> <code>a = ∛2</code> では irr(∛2, Q) = X³−2（既約：アイゼンシュタイン）。<code>[Q(∛2):Q] = 3</code>，基底 {1, ∛2, (∛2)²}。</p>
+<h3 id="33-単拡大の同型と共役">3.3 単拡大の同型と共役</h3>
+<p><strong>命題（同型の延長）</strong> a, b を K 上代数的な元とし、<code>irr(a, K) = irr(b, K)</code> とすると、<code>K(a) ≅ K(b)</code>（a を b に写す K 上の同型が存在する）。</p>
+<p>これは上の同型 <code>K(a) ≅ K[X]/(f)</code>，<code>K(b) ≅ K[X]/(f)</code> を合成すればよい。同じ最小多項式の根のことを<strong>共役</strong>と呼ぶ。</p>
+<h3 id="34-拡大次数の計算技法">3.4 拡大次数の計算技法</h3>
+<p><strong>連鎖律の利用例</strong> <code>K ⊂ K(a) ⊂ K(a,b)</code> とみて <code>[K(a,b):K] = [K(a,b):K(a)]·[K(a):K]</code> を順に計算する。</p>
+<p><strong>例 3.3</strong> <code>L = Q(√2, √3)</code> を考える。<code>[Q(√2):Q] = 2</code>。<code>√3 ∉ Q(√2)</code> であること（仮に √3 = p + q√2 とすると両辺 2 乗して矛盾）から <code>[Q(√2,√3):Q(√2)] = 2</code>。よって <code>[L:Q] = 4</code>。</p>
+<p><strong>例 3.4</strong> <code>Q(∛2, ω)</code>（ω は 1 の原始3乗根）では <code>[Q(∛2, ω):Q] = 6</code>。実際 X³−2 の分解体で、ガロア群は S₃（第7章で詳述）。</p>
+<h3 id="35-代数拡大の推移性">3.5 代数拡大の推移性</h3>
+<p><strong>命題</strong> 体の列 K ⊂ L ⊂ M で、M/L が代数拡大かつ L/K が代数拡大ならば、M/K も代数拡大である。</p>
+<p><strong>証明</strong> a ∈ M とする。a は L 上代数的だから、ある多項式 <code>g(X) = c₀ + c₁X + ⋯ + cₙXⁿ</code>（c_i ∈ L）が存在して g(a) = 0。各 c_i は K 上代数的。<code>L' = K(c₀, …, cₙ)</code> は有限次拡大（各添加は代数的なので有限次、連鎖律より有限次）。a は L' 上代数的なので <code>[L'(a):L'] &lt; ∞</code>。連鎖律より <code>[L'(a):K] = [L'(a):L']·[L':K] &lt; ∞</code>。よって a は K 上代数的（有限次拡大は代数拡大）。□</p>
+<h3 id="本章のまとめ-3">本章のまとめ</h3>
+<ul>
+<li>最小多項式は既約で、それで割り切れるかどうかで「根になること」が判定できる。</li>
+<li>単拡大 <code>K(a) ≅ K[X]/(irr(a,K))</code> が基本。拡大次数は最小多項式の次数に等しい。</li>
+<li>同じ最小多項式を持つ元は同型（共役）。</li>
+<li>代数拡大の列は推移的。</li>
+</ul>
+<h3 id="練習問題-3">練習問題</h3>
+<p><strong>練習問題 3.1</strong> <code>a = √5</code> の Q 上の最小多項式を求め、<code>[Q(√5):Q]</code> を答えよ。</p>
+<p><strong>練習問題 3.2</strong> <code>a = √2 + √3</code> が Q 上代数的であることを示し、その最小多項式を求めよ。</p>
+<p><strong>練習問題 3.3</strong> <code>K = F_2</code>，<code>f(X) = X² + X + 1 ∈ K[X]</code> が既約であることを示し、<code>K[X]/(f)</code> が4元体であることを確かめよ。</p>
+<p><strong>練習問題 3.4</strong> <code>Q(∛2)</code> の元 <code>(∛2)² + ∛2</code> の逆元を求めよ。（ヒント: 最小多項式 X³−2 を用いて剰余を計算する）</p>
+<p><strong>練習問題 3.5</strong> 体拡大 <code>K(a)/K</code> で <code>[K(a):K]</code> が奇数ならば、<code>K(a²) = K(a)</code> を示せ。</p>
+<hr />
+<h2 id="第4章-分解体と代数閉包">第4章 分解体と代数閉包</h2>
+<h3 id="学習目標-4">学習目標</h3>
+<ul>
+<li>分解体の定義と、その存在・一意性を理解する。</li>
+<li>代数閉体・代数閉包の概念を理解する。</li>
+<li>具体的な多項式の分解体とその拡大次数を計算できる。</li>
+</ul>
+<h3 id="41-分解体の定義">4.1 分解体の定義</h3>
+<p><strong>定義（分解体）</strong> 体 K と多項式 f(X) ∈ K[X]（deg f ≥ 1）に対し、拡大体 L/K で次を満たすものを f の K 上の<strong>分解体</strong>と呼ぶ。</p>
+<ol>
+<li>f は L 上で一次式の積に完全に分解する。</li>
+<li>L は f の根全体で K 上生成される（最小性）。</li>
+</ol>
+<p><strong>例 4.1</strong> <code>f(X) = X³ − 2 ∈ Q[X]</code> の根は <code>∛2, ∛2ω, ∛2ω²</code>（ω は1の原始3乗根）。分解体は <code>L = Q(∛2, ω)</code> で、<code>[L:Q] = 6</code>。</p>
+<h3 id="42-分解体の存在と一意性">4.2 分解体の存在と一意性</h3>
+<p><strong>定理（分解体の存在）</strong> 任意の K[X] の多項式 f に対して、f の分解体が存在する。</p>
+<p><strong>証明（骨子）</strong> f の既約因子 g₁ を取る。<code>K₁ = K[X]/(g₁)</code> は体で、そこでは g₁ が根 α₁ を持つ。f を K₁ 上で因数分解し、同様の操作を根が全部現れるまで繰り返す。単拡大の構造定理により各ステップは正当化される。有限回で終わる。□</p>
+<p><strong>定理（分解体の一意性）</strong> f ∈ K[X] の2つの分解体 L₁, L₂ は K 上の同型を持つ（同型を除いて一意）。</p>
+<p><strong>証明（骨子）</strong> 既約因子ごとに「根の対応」を作る同型延長定理を反復適用する。K₁ ≅ K₂ の同型が f の根の対応によって延長されていくことが、単拡大の同型（3.3節）と帰納法で示される。□</p>
+<p><strong>例 4.2</strong> <code>X² + 1 ∈ Q[X]</code> の分解体は <code>Q(i)</code>，<code>[Q(i):Q] = 2</code>。</p>
+<p><strong>例 4.3</strong> <code>X⁴ − 5X² + 6 = (X²−2)(X²−3)</code> の分解体は <code>Q(√2, √3)</code>，次数 4。</p>
+<h3 id="43-代数閉体と代数閉包">4.3 代数閉体と代数閉包</h3>
+<p><strong>定義（代数閉体）</strong> 体 K の任意の非定数多項式が K 上に根を持つとき、K を<strong>代数閉体</strong>と呼ぶ。体 K の代数拡大体 Ω が代数閉体であるとき、Ω を K の<strong>代数閉包</strong>と呼び、<code>K̄</code>（または K^alg）と書く。</p>
+<p><strong>定理（代数閉包の存在と一意性）</strong> 任意の体 K に対して代数閉包 K̄ が存在し、K 上の同型を除いて一意である。また K̄ は K 上代数的な元全体に一致する。</p>
+<p><strong>例 4.4</strong> C は代数閉体（代数学の基本定理）。<code>Q̄</code> は Q 上代数的な複素数全体（代数的数体）。</p>
+<p><strong>注意</strong> 分解体は代数閉包の内部に構成できる。具体的には、f の分解体は <code>K̄</code> 内の f の根で生成される体である。</p>
+<h3 id="44-分解体の次数計算">4.4 分解体の次数計算</h3>
+<p><strong>例 4.5</strong> <code>f(X) = X⁴ − 2 ∈ Q[X]</code> の分解体を求める。根は <code>2^(1/4), i·2^(1/4), −2^(1/4), −i·2^(1/4)</code>。分解体は <code>L = Q(2^(1/4), i)</code>。<code>[Q(2^(1/4)):Q] = 4</code>（最小多項式 X⁴−2 は既約）で、i ∉ Q(2^(1/4))（実体）だから <code>[L:Q] = 8</code>。</p>
+<p><strong>例 4.6</strong> <code>X^n − 1 ∈ Q[X]</code> の分解体は円分体 <code>Q(ζ_n)</code>（ζ_n は1の原始n乗根）。<code>[Q(ζ_n):Q] = φ(n)</code>（オイラーのφ関数）。証明は第7章の円分体の節で与える。</p>
+<h3 id="本章のまとめ-4">本章のまとめ</h3>
+<ul>
+<li>分解体は「すべての根を添加した最小の体」で、存在し同型を除いて一意。</li>
+<li>代数閉包は代数拡大全体の行き先を与える普遍的な場。</li>
+<li>分解体の次数は、根の添加の連鎖律で順に計算する。</li>
+</ul>
+<h3 id="練習問題-4">練習問題</h3>
+<p><strong>練習問題 4.1</strong> <code>X³ − 2</code> の Q 上の分解体の拡大次数を求めよ。</p>
+<p><strong>練習問題 4.2</strong> <code>X⁴ − 2</code> の Q 上の分解体の拡大次数を求めよ。</p>
+<p><strong>練習問題 4.3</strong> <code>X³ + X + 1 ∈ F_2[X]</code> が既約であることを示し、その分解体の元の個数を求めよ。</p>
+<p><strong>練習問題 4.4</strong> <code>f(X) = X³ − 1 ∈ Q[X]</code> の分解体を求めよ（1の原始3乗根 ω を用いて）。</p>
+<p><strong>練習問題 4.5</strong> 代数閉体は有限体でないことを示せ。（ヒント: 有限体 F で、1 + ∏_{a∈F}(X − a) を考える）</p>
+<hr />
+<h2 id="第5章-分離拡大と有限体">第5章 分離拡大と有限体</h2>
+<h3 id="学習目標-5">学習目標</h3>
+<ul>
+<li>分離多項式の判定（微分による）を理解する。</li>
+<li>標数 0 の体ではすべての拡大が分離的であることを理解する。</li>
+<li>完全体の概念を理解する。</li>
+<li>有限体の構造（F_(p^n) の構成とガロア群）を理解する。</li>
+</ul>
+<h3 id="51-分離多項式と重根">5.1 分離多項式と重根</h3>
+<p><strong>定義（分離多項式）</strong> f(X) ∈ K[X] が、その分解体において<strong>重根を持たない</strong>とき、f は<strong>分離的</strong>であるという。</p>
+<p><strong>命題（微分による判定）</strong> f(X) が分離的であるための必要十分条件は</p>
+<pre><code>gcd(f(X), f'(X)) = 1
+</code></pre>
+<p>であること。ここで f' は形式微分。</p>
+<p><strong>証明</strong> α が f の分解体における重根 ⇔ α が f と f' の共通根（因数定理＋微分の定義による）。よって重根があれば gcd ≠ 1。逆も同様。□</p>
+<p><strong>系</strong> 標数 0 では、既約多項式は常に分離的である。</p>
+<p><strong>証明</strong> 既約 f が重根を持つなら f' と共通根を持ち、deg f' &lt; deg f かつ f' ≠ 0 より gcd(f, f') が非自明な因子になり、f の既約性に矛盾。標数 0 では非定数多項式の微分は 0 でない。□</p>
+<h3 id="52-分離拡大">5.2 分離拡大</h3>
+<p><strong>定義（分離拡大）</strong> 代数拡大 L/K で、L の<strong>すべての元</strong> a の最小多項式 irr(a, K) が分離的であるとき、分離拡大という。</p>
+<p><strong>例 5.1</strong> 標数 0 の体上の代数拡大はすべて分離拡大（上の系より）。</p>
+<p>標数 p &gt; 0 では分離的でない拡大が存在する。</p>
+<p><strong>例 5.2</strong> <code>K = F_p(t)</code>（有理関数体）、<code>L = K(t^(1/p))</code> を考える。<code>t^(1/p)</code> の最小多項式は <code>X^p − t</code>。分解体で <code>X^p − t = (X − t^(1/p))^p</code> となり重根を持つ。よって L/K は<strong>非分離拡大</strong>。ここで X^p − t の微分は pX^(p−1) = 0（標数 p）。</p>
+<p><strong>定義（純非分離拡大）</strong> 代数拡大 L/K で、すべての元の最小多項式が <code>X^(p^n) − a</code> の形（重根を持つ）のとき、純非分離拡大という。任意の代数拡大は分離拡大と純非分離拡大の塔として分解できる（基本的な分解定理）。</p>
+<h3 id="53-完全体">5.3 完全体</h3>
+<p><strong>定義（完全体）</strong> 体 K が次の同値な条件を満たすとき、<strong>完全体</strong>と呼ぶ。</p>
+<ol>
+<li>K 上のすべての既約多項式が分離的である。</li>
+<li>標数 0、または標数 p でフロベニウス写像 <code>φ: x ↦ x^p</code> が全射。</li>
+</ol>
+<p><strong>例 5.3</strong> 標数 0 の体（Q, R, C）はすべて完全体。有限体はすべて完全体（フロベニウス写像は単射、有限なら全射）。<code>F_p(t)</code> は完全体でない。</p>
+<h3 id="54-有限体の構成">5.4 有限体の構成</h3>
+<p><strong>定理（有限体の構造）</strong> p を素数、n ≥ 1 とする。<code>x^(p^n) − x</code> の F_p 上の分解体は <code>p^n</code> 個の元からなる体 <code>F_(p^n)</code> であり、逆に任意の有限体はある <code>F_(p^n)</code> に同型である。また <code>F_(p^m) ⊂ F_(p^n)</code> が成り立つのは <code>m | n</code> のときかつそのときに限る。</p>
+<p><strong>証明の骨子</strong> <code>S = { a ∈ K̄ | a^(p^n) = a }</code> は部分体である（フロベニウスの冪が準同型であることから）。<code>X^(p^n) − X</code> は微分が −1 で分離的、S はちょうどその根全体で |S| = p^n。逆に、位数 p^n の有限体 F では F<em> が位数 p^n − 1 の乗法群だから、任意の a ∈ F</em> で a^(p^n−1) = 1、よって a^(p^n) = a。0 でも成り立つから、F の元はすべて X^(p^n) − X の根。従って F ⊂ F_(p^n) かつ個数が等しいので一致。□</p>
+<h3 id="55-有限体のガロア拡大とフロベニウス写像">5.5 有限体のガロア拡大とフロベニウス写像</h3>
+<p><strong>定理</strong> <code>F_(p^n)/F_p</code> のガロア群は位数 n の巡回群で、<strong>フロベニウス写像</strong> <code>φ: x ↦ x^p</code> が生成元である。</p>
+<p><strong>証明の骨子</strong> <code>F_(p^n)</code> の元のうち <code>x^p = x</code> を満たすのは F_p の元のみ（X^p − X の根はちょうど F_p の元）。よって固定体は F_p。第7章で示すアルティンの定理 <code>[L:L^G] = |G|</code> により、<code>|Gal(F_(p^n)/F_p)| = [F_(p^n):F_p] = n</code>。φ は位数 n の自己同型（x^(p^n) = x より φ^n = id、x^(p^k) = x の解は F_(p^k) の元のみで、k &lt; n なら真部分体だから φ^k ≠ id）。よって Gal = ⟨φ⟩。□</p>
+<h3 id="本章のまとめ-5">本章のまとめ</h3>
+<ul>
+<li>分離的 ⇔ gcd(f, f') = 1。標数 0 では既約多項式はすべて分離的。</li>
+<li>完全体 = すべての既約多項式が分離的（標数 p ではフロベニウスの全射性）。</li>
+<li>有限体は <code>F_(p^n)</code> で、ガロア群はフロベニウス写像が生成する巡回群。</li>
+<li>非分離拡大は標数 p &gt; 0 の特殊事情（例：<code>F_p(t^(1/p))/F_p(t)</code>）。</li>
+</ul>
+<h3 id="練習問題-5">練習問題</h3>
+<p><strong>練習問題 5.1</strong> <code>f(X) = X³ + X + 1 ∈ F_2[X]</code> が分離的であることを示せ。</p>
+<p><strong>練習問題 5.2</strong> <code>X^p − t ∈ F_p(t)[X]</code>（p素数）の既約性と分離性を判定せよ。</p>
+<p><strong>練習問題 5.3</strong> <code>F_4</code> の乗法群の構造を説明し、<code>F_4 = F_2[X]/(X²+X+1)</code> の元をすべて書き下せ。</p>
+<p><strong>練習問題 5.4</strong> <code>F_8 = F_2[X]/(X³+X+1)</code> とする。フロベニウス写像の位数を求め、<code>Gal(F_8/F_2)</code> の構造を答えよ。</p>
+<p><strong>練習問題 5.5</strong> 有限体 <code>F_q</code> の任意の元 a について <code>a^q = a</code> となることを示せ。</p>
+<hr />
+<h2 id="第6章-正規拡大">第6章 正規拡大</h2>
+<h3 id="学習目標-6">学習目標</h3>
+<ul>
+<li>正規拡大の定義と同値条件を理解する。</li>
+<li>正規拡大の例・非正規拡大の例を挙げられる。</li>
+<li>正規閉包の概念を理解する。</li>
+</ul>
+<h3 id="61-正規拡大の定義">6.1 正規拡大の定義</h3>
+<p><strong>定義（正規拡大）</strong> 代数拡大 L/K が次の条件を満たすとき、<strong>正規拡大</strong>と呼ぶ。</p>
+<blockquote>
+<p>K 上既約な多項式 f ∈ K[X] が L に根を一つ持てば、f は L 上で一次式の積に完全に分解する。</p>
+</blockquote>
+<p>直感的には「既約多項式の根の1つを取り込んだら、そのすべての共役も取り込まれている」ことを意味する。</p>
+<h3 id="62-正規拡大の同値条件">6.2 正規拡大の同値条件</h3>
+<p><strong>定理（正規拡大の同値条件）</strong> 有限次代数拡大 L/K に対して、次は同値。</p>
+<ol>
+<li>L/K は正規拡大。</li>
+<li>ある f ∈ K[X] の分解体になっている（L が K 上のある多項式の分解体）。</li>
+<li>K 上の埋め込み <code>σ: L → K̄</code>（K の各元を固定する体準同型）を任意に取ると、<code>σ(L) = L</code> が成り立つ。</li>
+</ol>
+<p><strong>証明（3 ⇒ 1）</strong> f ∈ K[X] 既約で、根 α ∈ L を持つとする。f の別の根 β ∈ K̄ を取る。<strong>同型延長定理</strong>（代数的拡大の同型は、共役の対応で代数閉包上の同型へ延長できる）により、<code>K(α) ≅ K(β)</code>（α ↦ β）が延長されて埋め込み <code>σ: L → K̄</code> が存在する。条件3より σ(L) = L、よって β = σ(α) ∈ L。すなわちすべての根は L に含まれる。□</p>
+<p><strong>1 ⇒ 2</strong> L = K(a₁, …, aₙ)（有限生成）とする。各 a_i の最小多項式 f_i の積 f の分解体は、正規性により L に含まれ、かつ L の生成元を含むから L に一致する。□</p>
+<p><strong>2 ⇒ 3</strong> L を f の分解体とし、σ: L → K̄ を同型とする。σ は f の根を f の根に写す。L は f の根で生成されるから σ(L) ⊂ L。両辺の次数が等しい（σ は単射なので [σ(L):K] = [L:K]）から σ(L) = L。□</p>
+<p><strong>例 6.1</strong> <code>Q(√2)/Q</code> は正規拡大（X²−2 の分解体）。</p>
+<p><strong>例 6.2</strong> <code>Q(∛2)/Q</code> は正規拡大でない。X³−2 は既約で、∛2 ∈ Q(∛2) だが他の根 <code>∛2ω, ∛2ω²</code> は実数でないから Q(∛2) に含まれない。</p>
+<h3 id="63-正規閉包">6.3 正規閉包</h3>
+<p><strong>定義（正規閉包）</strong> 代数拡大 L/K に対して、L を含む K の代数拡大 N で、N/K が正規であり、かつ L/K の「最小の」正規拡大であるものを L の K 上の<strong>正規閉包</strong>と呼ぶ。具体的には、L の K 上の生成元 a₁, …, aₙ の各最小多項式の積の分解体として得られる。</p>
+<p><strong>例 6.3</strong> <code>Q(∛2)/Q</code> の正規閉包は <code>Q(∛2, ω)</code>（X³−2 の分解体）。</p>
+<h3 id="本章のまとめ-6">本章のまとめ</h3>
+<ul>
+<li>正規拡大は「既約多項式の1根があれば全根ある」拡大。</li>
+<li>有限次正規拡大はある多項式の分解体と同値。</li>
+<li><code>Q(∛2)/Q</code> が正規でないのが典型的な反例。</li>
+<li>正規閉包は最小多項式の積の分解体として常に存在する。</li>
+</ul>
+<h3 id="練習問題-6">練習問題</h3>
+<p><strong>練習問題 6.1</strong> <code>Q(√2, √3)/Q</code> が正規拡大であることを示せ。</p>
+<p><strong>練習問題 6.2</strong> <code>Q(√2)/Q</code> は正規拡大であるが、<code>Q(√2)/Q</code> の部分拡大 <code>Q/ Q</code> を考え、なぜ <code>Q(√2)</code> が正規で <code>Q(∛2)</code> が正規でないのかを根の共役の観点から説明せよ。</p>
+<p><strong>練習問題 6.3</strong> <code>Q(2^(1/4))/Q</code> は正規拡大か。判定せよ。</p>
+<p><strong>練習問題 6.4</strong> <code>Q(∛2)/Q</code> の正規閉包を求めよ。</p>
+<p><strong>練習問題 6.5</strong> 有限次拡大 L/K が正規拡大ならば、任意の既約多項式 f ∈ K[X] に対して、f が L に根を持てば f は L 上で一次式の積に分解することを示せ。</p>
+<hr />
+<h2 id="第7章-ガロア拡大とガロア群">第7章 ガロア拡大とガロア群</h2>
+<h3 id="学習目標-7">学習目標</h3>
+<ul>
+<li>ガロア群 Gal(L/K) の定義を理解する。</li>
+<li>ガロア拡大の定義（正規かつ分離、次数＝ガロア群の位数）を理解する。</li>
+<li>固定体の概念とアルティンの定理を理解する。</li>
+<li>2次・3次拡大、円分体のガロア群を計算できる。</li>
+</ul>
+<h3 id="71-ガロア群の定義">7.1 ガロア群の定義</h3>
+<p><strong>定義（K 自己同型）</strong> 体 L の自己同型 σ: L → L で、K のすべての元を固定するもの（σ(k) = k for all k ∈ K）を L の <strong>K 自己同型</strong>と呼ぶ。K 自己同型全体の集合は写像の合成に関して群になる。</p>
+<p><strong>定義（ガロア群）</strong> L/K を体拡大とするとき、L の K 自己同型全体のなす群を<strong>ガロア群</strong>と呼び、<code>Gal(L/K)</code> と書く。</p>
+<p><strong>例 7.1</strong> <code>Gal(Q(√2)/Q) = { id, σ }</code>。ここで σ は <code>√2 ↦ −√2</code>（および Q の元を固定）で定義される。位数 2 の群なので <code>Gal(Q(√2)/Q) ≅ Z/2Z</code>。</p>
+<p><strong>例 7.2</strong> <code>Gal(C/R) = { id, 複素共役 } ≅ Z/2Z</code>。</p>
+<h3 id="72-固定体">7.2 固定体</h3>
+<p><strong>定義（固定体）</strong> Gal(L/K) の部分群 H に対して、H のすべての元で固定される L の元の集合</p>
+<pre><code>L^H = { x ∈ L | σ(x) = x for all σ ∈ H }
+</code></pre>
+<p>は L の部分体になる。これを H の<strong>固定体</strong>と呼ぶ。特に H = Gal(L/K) のとき、<code>L^H = K</code> であるかどうかが重要になる。</p>
+<h3 id="73-ガロア拡大の定義">7.3 ガロア拡大の定義</h3>
+<p><strong>定義（ガロア拡大）</strong> 代数拡大 L/K が<strong>正規かつ分離</strong>であるとき、ガロア拡大と呼ぶ。</p>
+<p>次の定理が、次数とガロア群の位数を結びつける。</p>
+<p><strong>定理（アルティンの定理）</strong> 体 L の自己同型の有限群 G に対し、<code>[L : L^G] = |G|</code> が成り立つ。</p>
+<p><strong>証明（骨子）</strong> <code>G = { σ₁ = id, σ₂, …, σₙ }</code>，K = L^G とする。任意の x ∈ L を取る。<code>x, σ₂(x), …, σₙ(x)</code> を根とする多項式 <code>f_X(T) = ∏_{σ∈G}(T − σ(x))</code> を考える。σ を f_X の係数に作用させると根が置換されるだけだから係数は K に属し、x は f_X の根。よって x は K 上代数的で <code>[K(x):K] ≤ n</code>。x を L の各元に対して適用し、K(x) 全体の拡大を考えると <code>[L:K] ≤ n</code>。一方、G の元が「K 上一次独立な線型写像」であること（σ₁(x), …, σₙ(x) の線型関係は連立一次方程式を解くと自明解しかない）から <code>[L:K] ≥ n</code> も示され、結局 <code>[L:K] = n</code>。□</p>
+<p><strong>系（ガロア拡大の基本性質）</strong> L/K が有限次ガロア拡大のとき</p>
+<pre><code>[L:K] = |Gal(L/K)|
+</code></pre>
+<p>が成り立つ。また <code>L^(Gal(L/K)) = K</code>。</p>
+<p><strong>例 7.3</strong> <code>L = Q(√2, √3)</code>，<code>Gal(L/Q)</code> の元は、√2 ↦ ±√2，√3 ↦ ±√3 の組み合わせで4つ。よって <code>Gal(L/Q) ≅ Z/2Z × Z/2Z</code>（クラインの四元群）で、<code>[L:Q] = 4</code> と一致。</p>
+<h3 id="74-円分体と巡回群">7.4 円分体と巡回群</h3>
+<p><strong>定理（円分体のガロア群）</strong> <code>ζ_n</code> を 1 の原始 n 乗根とする。円分体 <code>Q(ζ_n)/Q</code> はガロア拡大で、</p>
+<pre><code>Gal(Q(ζ_n)/Q) ≅ (Z/nZ)*
+</code></pre>
+<p>が成り立つ。特に <code>[Q(ζ_n):Q] = φ(n)</code>。</p>
+<p><strong>証明の骨子</strong> <code>X^n − 1</code> の分解体だから正規。分離的（標数0）だからガロア。自己同型 σ は ζ_n を 1 の n 乗根に写す。σ(ζ_n) が原始 n 乗根であることから <code>σ(ζ_n) = ζ_n^k</code>（gcd(k, n) = 1）と表せ、対応 <code>σ ↦ k mod n</code> が群同型 <code>Gal → (Z/nZ)*</code> を与える。単射性は生成元の行き先で決まることから、全射性と位数 φ(n) が従う。□</p>
+<p><strong>例 7.4</strong> <code>Gal(Q(ζ_3)/Q) ≅ (Z/3Z)* ≅ Z/2Z</code>。<code>Q(ζ_3) = Q(√−3)</code> とも書ける。</p>
+<p><strong>例 7.5</strong> <code>Gal(Q(ζ_5)/Q) ≅ (Z/5Z)* ≅ Z/4Z</code>（巡回群）。</p>
+<p><strong>例 7.6</strong> <code>Gal(Q(ζ_8)/Q) ≅ (Z/8Z)* ≅ Z/2Z × Z/2Z</code>（非巡回）。</p>
+<h3 id="75-有限体のガロア群再掲">7.5 有限体のガロア群（再掲）</h3>
+<p>第5章で見た通り、<code>F_(p^n)/F_p</code> はガロア拡大で <code>Gal(F_(p^n)/F_p) ≅ Z/nZ</code>（フロベニウス写像が生成）。</p>
+<h3 id="本章のまとめ-7">本章のまとめ</h3>
+<ul>
+<li>ガロア群は K を固定する L の自己同型群。</li>
+<li>ガロア拡大（正規かつ分離）では <code>[L:K] = |Gal(L/K)|</code>，固定体は K。</li>
+<li>アルティンの定理はこの次数一致の核心。</li>
+<li>円分体のガロア群は <code>(Z/nZ)*</code>。有限体では巡回群。</li>
+</ul>
+<h3 id="練習問題-7">練習問題</h3>
+<p><strong>練習問題 7.1</strong> <code>Gal(Q(√2, √3)/Q)</code> の元を具体的に書き、<code>[Q(√2,√3):Q]</code> と比較せよ。</p>
+<p><strong>練習問題 7.2</strong> <code>Gal(Q(√2, √3, √5)/Q)</code> の位数と構造を求めよ。</p>
+<p><strong>練習問題 7.3</strong> <code>Gal(Q(ζ_5)/Q)</code> の生成元を求め、位数を確認せよ。</p>
+<p><strong>練習問題 7.4</strong> <code>Gal(F_16/F_2)</code> の構造を求めよ。</p>
+<p><strong>練習問題 7.5</strong> 有限次拡大 L/K がガロア拡大であるための必要十分条件を述べよ。また、<code>Q(∛2)/Q</code> がガロア拡大でないことを示せ。</p>
+<hr />
+<h2 id="第8章-ガロア理論の基本定理">第8章 ガロア理論の基本定理</h2>
+<h3 id="学習目標-8">学習目標</h3>
+<ul>
+<li>ガロア理論の基本定理（中間体と部分群の対応）を正確に述べられる。</li>
+<li>対応が順序を反転すること、中間体と部分群の拡大次数の関係を理解する。</li>
+<li>基本定理を具体的な例（Q(√2,√3) など）で使いこなせる。</li>
+</ul>
+<h3 id="81-基本定理の主張">8.1 基本定理の主張</h3>
+<p><strong>定理（ガロア理論の基本定理）</strong> <code>L/K</code> を有限次ガロア拡大，G = Gal(L/K) とする。このとき次の2つの写像</p>
+<pre><code>Φ: { 中間体 F | K ⊂ F ⊂ L }  →  { 部分群 H | H ≤ G }
+   F  ↦  Gal(L/F)
+
+Ψ: { 部分群 H | H ≤ G }  →  { 中間体 F | K ⊂ F ⊂ L }
+   H  ↦  L^H
+</code></pre>
+<p>は互いに逆写像であり、<strong>全単射</strong>を与える。さらに次が成り立つ。</p>
+<ol>
+<li><strong>順序反転</strong>: <code>F₁ ⊂ F₂ ⇔ Gal(L/F₁) ⊃ Gal(L/F₂)</code>。</li>
+<li><strong>次数の対応</strong>: <code>[L:F] = |Gal(L/F)|</code>，<code>[F:K] = [G : Gal(L/F)]</code>（指数）。</li>
+<li>F が K 上のガロア拡大であるための必要十分条件は <code>Gal(L/F) ⊴ G</code>（正規部分群）であること。そのとき <code>Gal(F/K) ≅ G / Gal(L/F)</code>。</li>
+</ol>
+<p>つまり「中間体」と「ガロア群の部分群」は一対一に対応し、大きい中間体ほど小さい部分群に対応する。</p>
+<h3 id="82-基本定理の証明">8.2 基本定理の証明</h3>
+<p><strong>証明の流れ</strong> 次の3つの性質から従う。</p>
+<p><strong>(a) 単調性</strong>: <code>F₁ ⊂ F₂ ⇒ Gal(L/F₁) ⊃ Gal(L/F₂)</code>（定義から明らか）。逆に <code>H₁ ⊂ H₂ ⇒ L^(H₁) ⊃ L^(H₂)</code>（定義から明らか）。</p>
+<p><strong>(b) 合成が恒等になること</strong>: <code>F ⊂ L^(Gal(L/F))</code> は常に成り立つ。ガロア拡大 L/F はガロア拡大だから、第7章の系より <code>L^(Gal(L/F)) = F</code>。</p>
+<p><strong>(c) 逆方向の合成</strong>: <code>H ⊂ Gal(L/L^H)</code> は常に成り立つ。アルティンの定理を L と H に適用すると <code>[L:L^H] = |H|</code>。一方、L/L^H はガロア拡大だから <code>[L:L^H] = |Gal(L/L^H)|</code>。よって <code>|H| = |Gal(L/L^H)|</code> であり、H ⊂ Gal(L/L^H) と合わせて <code>H = Gal(L/L^H)</code>。</p>
+<p>以上より Φ と Ψ は互いに逆。次数の対応はアルティンの定理（あるいはガロア拡大の次数公式）から従う。正規部分群の対応は、剰余群による作用の議論で示される（詳細は発展）。□</p>
+<h3 id="83-例Q2-3">8.3 例：Q(√2, √3)</h3>
+<p><code>L = Q(√2, √3)</code>，<code>G = Gal(L/Q) ≅ Z/2Z × Z/2Z = { id, σ, τ, στ }</code>。ここで σ は √2 ↦ −√2，τ は √3 ↦ −√3 と定義する。</p>
+<p>G の部分群と中間体の対応は次の通り。</p>
+<table>
+<thead>
+<tr>
+<th>部分群 H</th>
+<th>位数</th>
+<th>中間体 L^H</th>
+<th>[中間体:Q]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{id}</td>
+<td>1</td>
+<td>Q(√2, √3)</td>
+<td>4</td>
+</tr>
+<tr>
+<td>{id, σ}</td>
+<td>2</td>
+<td>Q(√3)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>{id, τ}</td>
+<td>2</td>
+<td>Q(√2)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>{id, στ}</td>
+<td>2</td>
+<td>Q(√6)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>G</td>
+<td>4</td>
+<td>Q</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>中間体のうち、Q 上ガロア拡大に対応するのは<strong>正規部分群</strong>である。G ≅ Z/2Z × Z/2Z は可換群だからすべての部分群が正規であり、Q(√2), Q(√3), Q(√6) はすべて Q 上ガロア拡大である（2次拡大は自動的にガロア拡大）。</p>
+<h3 id="84-ガロア対応の使い方">8.4 ガロア対応の使い方</h3>
+<p>ガロア理論の基本定理の威力は、<strong>体の問題を群の問題に翻訳できる</strong>点にある。</p>
+<ul>
+<li>「中間体をすべて求めよ」→「ガロア群の部分群をすべて求めよ」（部分群は計算しやすい）。</li>
+<li>「中間体が何個あるか」→「部分群の個数」。</li>
+<li>「その中間体がガロア拡大かどうか」→「対応する部分群が正規部分群かどうか」。</li>
+</ul>
+<p><strong>例 8.1</strong> <code>L = Q(∛2, ω)</code>（X³−2 の分解体）。<code>Gal(L/Q) ≅ S₃</code>（位数6）。S₃ の部分群は {id}，位数2の部分群（3個），位数3の部分群 A₃（1個），S₃ 自身。よって中間体は 6 個で、<strong>2次の中間体が1個（Q(ω)）</strong>，<strong>3次の中間体が3個（Q(∛2), Q(∛2ω), Q(∛2ω²)）</strong>となる。</p>
+<h3 id="本章のまとめ-8">本章のまとめ</h3>
+<ul>
+<li>ガロア理論の基本定理: 中間体 ⇔ ガロア群の部分群 の全単射（順序反転）。</li>
+<li><code>[L:F] = |Gal(L/F)|</code>，<code>[F:K] = [G : Gal(L/F)]</code>。</li>
+<li>F/K がガロア拡大 ⇔ Gal(L/F) ⊴ G。そのとき Gal(F/K) ≅ G/Gal(L/F)。</li>
+<li>証明の核心はアルティンの定理とガロア拡大の次数公式。</li>
+</ul>
+<h3 id="練習問題-8">練習問題</h3>
+<p><strong>練習問題 8.1</strong> <code>L = Q(√2, √3, √5)</code> のガロア群の構造を求め、部分群と中間体の対応をすべて書き下せ。</p>
+<p><strong>練習問題 8.2</strong> <code>Gal(Q(∛2, ω)/Q) ≅ S₃</code> を用いて、Q(∛2, ω) の中間体をすべて求めよ。</p>
+<p><strong>練習問題 8.3</strong> ガロア理論の基本定理を述べよ。</p>
+<p><strong>練習問題 8.4</strong> <code>Q(√2, √3)/Q</code> の部分拡大 <code>Q(√6)</code> に対応する部分群を求め、その部分群が正規であることを示せ。</p>
+<p><strong>練習問題 8.5</strong> <code>L/K</code> を有限次ガロア拡大とする。中間体 F が <code>[F:K] = 2</code> を満たすとき、Gal(L/F) は G の正規部分群で指数 2 であることを示せ。</p>
+<hr />
+<h2 id="第9章-応用作図問題と方程式の可解性">第9章 応用：作図問題と方程式の可解性</h2>
+<h3 id="学習目標-9">学習目標</h3>
+<ul>
+<li>定規とコンパスによる作図可能性を体拡大の問題に翻訳できる。</li>
+<li>有名な作図不可能問題（立方体倍積・角の3等分・円積）を説明できる。</li>
+<li>冪根拡大と可解群の定義を理解する。</li>
+<li>「冪根で解ける ⇔ ガロア群が可解群」を理解する。</li>
+<li><strong>一般5次方程式が四則演算と冪根だけでは解けないことを証明できる</strong>。</li>
+</ul>
+<h3 id="91-作図問題と体の理論">9.1 作図問題と体の理論</h3>
+<p>平面を複素平面と同一視する。<strong>作図可能な数</strong>を次のように再帰的に定義する。</p>
+<p><strong>定義（作図可能な数）</strong> 複素数 z が次を満たすとき、z は（0と1から始めて定規とコンパスで）<strong>作図可能</strong>であるという。</p>
+<ul>
+<li>2点 0, 1 から始めて、定規（直線を引く）とコンパス（円を描く）の操作を有限回繰り返して得られる交点の座標として表される。</li>
+</ul>
+<p><strong>定理（作図可能性と体の対応）</strong> 作図可能な複素数全体の集合 F は C の部分体であり、作図可能な数 z に対して <code>[Q(z):Q]</code> は <strong>2 の冪</strong>になる。より精密には、z が作図可能ならば、体の列</p>
+<pre><code>Q = F₀ ⊂ F₁ ⊂ ⋯ ⊂ F_m
+</code></pre>
+<p>で <code>[F_i : F_{i-1}] = 2</code>（各拡大は2次拡大）かつ <code>z ∈ F_m</code> となるものが存在する。</p>
+<p><strong>証明の骨子</strong> 作図操作は「2つの直線の交点」「直線と円の交点」「2つの円の交点」に帰着し、いずれも既知の作図可能数と係数が Q の方程式の解として表され、座標は2次方程式の解として得られる。新たに得られる点は高々2次の拡大で生成され、この操作を繰り返す。□</p>
+<h3 id="92-作図不可能な古典的問題">9.2 作図不可能な古典的問題</h3>
+<p><strong>定理（立方体倍積の不可能性）</strong> 与えられた立方体の2倍の体積を持つ立方体の辺の長さは作図できない。</p>
+<p><strong>証明</strong> 体積を2倍にするには辺を <code>∛2</code> 倍する必要がある。もし <code>∛2</code> が作図可能なら <code>[Q(∛2):Q]</code> は2の冪でなければならないが、実際は <code>[Q(∛2):Q] = 3</code> で、3 は 2 の冪でない。矛盾。□</p>
+<p><strong>定理（角の3等分の不可能性）</strong> 一般の角は定規とコンパスでは3等分できない。特に 60° の角は3等分できない。</p>
+<p><strong>証明</strong> 60° の3等分は cos20° の作図に帰着する。<code>cos3θ = 4cos³θ − 3cosθ</code> に θ=20° を代入すると <code>4x³ − 3x = 1/2</code>，すなわち <code>8x³ − 6x − 1 = 0</code>。この3次多項式は Q 上既約（有理根 1/2 などをチェックするが、有理根の候補 ±1, ±1/2, ±1/4, ±1/8 のどれも根でない）で、<code>[Q(cos20°):Q] = 3</code>。2の冪でないので作図不可能。□</p>
+<p><strong>定理（円積問題）</strong> 半径1の円と同じ面積の正方形を作図することはできない。</p>
+<p><strong>証明</strong> 面積 π の正方形の辺は <code>√π</code>。もし作図可能なら √π は代数的数だが、π は超越数（リンデマンの定理）なので √π も超越数。代数的でないから作図可能でない。□</p>
+<h3 id="93-冪根拡大">9.3 冪根拡大</h3>
+<p>方程式が「四則演算と冪根だけで解ける」ことを、体拡大の言葉で正確に定義する。</p>
+<p><strong>定義（冪根拡大）</strong> 体の列</p>
+<pre><code>K = K₀ ⊂ K₁ ⊂ ⋯ ⊂ K_m = L
+</code></pre>
+<p>が存在し、各 i について <code>K_i = K_{i-1}(α_i)</code> で、ある自然数 n_i に対して <code>α_i^(n_i) ∈ K_{i-1}</code> が成り立つとき、L は K 上<strong>冪根拡大</strong>（根号拡大）であるという。つまり各段階で「ある数の n 乗根」を添加している。</p>
+<p><strong>定義（冪根で解ける方程式）</strong> f(X) ∈ K[X] の分解体 L が、K の上のある冪根拡大に含まれるとき、f は K 上<strong>冪根で解ける</strong>（代数的に解ける）という。</p>
+<p><strong>注意</strong> ここで「冪根で解ける」は「解の公式が四則演算と n 乗根（√, ∛, …）だけで書ける」ことの定式化である。</p>
+<h3 id="94-可解群">9.4 可解群</h3>
+<p><strong>定義（可解群）</strong> 有限群 G が次の条件を満たすとき、<strong>可解群</strong>と呼ぶ。</p>
+<blockquote>
+<p>部分群の列（正規列）
+<code>{e} = G₀ ⊂ G₁ ⊂ ⋯ ⊂ G_m = G</code>
+が存在して、各 i について <code>G_{i-1} ⊴ G_i</code> かつ剰余群 <code>G_i / G_{i-1}</code> が<strong>アーベル群</strong>である。</p>
+</blockquote>
+<p><strong>例 9.1</strong>
+- すべてのアーベル群は可解群。
+- S₃ は可解群：<code>{e} ⊴ A₃ ⊴ S₃</code>，剰余は A₃ ≅ Z/3Z，S₃/A₃ ≅ Z/2Z（いずれもアーベル）。
+- S₄ は可解群（<code>{e} ⊴ V₄ ⊴ A₄ ⊴ S₄</code> など）。</p>
+<p><strong>命題（可解群の性質）</strong> 可解群の部分群・剰余群は可解群。群 G が可解群 ⇔ 正規部分群 N ⊴ G について N と G/N がともに可解群。</p>
+<h3 id="95-ガロア群と冪根可解性">9.5 ガロア群と冪根可解性</h3>
+<p><strong>定理（冪根拡大とガロア群）</strong> K を標数 0 の体とする。既約多項式 f ∈ K[X] の分解体を L とする。このとき</p>
+<pre><code>f が冪根で解ける ⇔ Gal(L/K) が可解群
+</code></pre>
+<p><strong>証明（骨子）</strong>
+（⇒）L が K の冪根拡大 M に含まれるとする。M を正規閉包で取り直し、L ⊂ M、M/K がガロア拡大としてよい。ガロア理論の基本定理により M の中間体の列は Gal(M/K) の部分群の列に対応する。冪根拡大の各段階は「1の冪根を添加（巡回群）」「n乗根を添加（可換群）」の組み合わせで、対応する剰余群がアーベル群になる。よって Gal(M/K) は可解群。部分群 Gal(L/K) ≅ Gal(M/K)/Gal(M/L) も可解群（可解群の部分群・剰余群は可解群）。
+（⇐）逆に Gal(L/K) が可解群なら、正規列の各段階のアーベル剰余群に対応して、1の冪根と n 乗根の添加によって中間体の塔を実現できる（ラグランジュの分解式による古典的構成）。よって冪根で解ける。□</p>
+<p><strong>例 9.2</strong> <code>f(X) = X³ − 2 ∈ Q[X]</code>。分解体のガロア群は S₃。S₃ は可解群なので、X³−2 は冪根で解ける。実際、3次方程式はカルダノの公式で解ける。</p>
+<p><strong>例 9.3</strong> <code>f(X) = X² − 2</code>。ガロア群は Z/2Z（可解）。解は ±√2。</p>
+<h3 id="96-対称群の可解性">9.6 対称群の可解性</h3>
+<p><strong>定理（Sₙ の可解性）</strong> n ≥ 5 に対して、n次対称群 Sₙ は<strong>可解群ではない</strong>。</p>
+<p><strong>証明の骨子</strong> 交代群 Aₙ（n ≥ 5）が<strong>単純群</strong>であること（交代群の単純性）と、<strong>「単純群が可解群ならばアーベル群である」</strong>という補題を認める。実際、単純群 A が可解群なら正規列 <code>{e} ⊂ G₁ ⊂ ⋯ ⊂ A</code> の最初の非自明な項 G₁ は A の正規部分群だから G₁ = A であり、剰余列 <code>{e} ⊂ A</code> の唯一の剰余群 A がアーベルでなければならない。よって単純な可解群はアーベル群である。Aₙ（n ≥ 4）は非アーベル（例えば3-サイクルの交換子が恒等でない）だから可解でない。Aₙ ⊴ Sₙ であり、可解群の部分群は可解群だから、Sₙ（n ≥ 5）も非可解。□</p>
+<p>特に S₅ は非可解である。これは以下で一般5次方程式の可解性を否定する鍵となる。</p>
+<h3 id="97-一般5次方程式のガロア群は-S₅">9.7 一般5次方程式のガロア群は S₅</h3>
+<p><strong>定義（一般 n 次方程式）</strong> <code>x₁, …, xₙ</code> を不定元とし、体 <code>K₀ = Q(x₁, …, xₙ)</code> を考え、<code>F = Q(e₁, …, eₙ)</code> を基本対称式 e_i で生成される部分体とする。ここで</p>
+<pre><code>e₁ = x₁ + ⋯ + xₙ
+e₂ = ∑_{i&lt;j} x_i x_j
+⋮
+eₙ = x₁ x₂ ⋯ xₙ
+</code></pre>
+<p>である。このとき</p>
+<pre><code>f(T) = ∏_{i=1}^{n} (T − x_i)
+     = Tⁿ − e₁Tⁿ⁻¹ + e₂Tⁿ⁻² − ⋯ + (−1)ⁿeₙ
+</code></pre>
+<p>は F 上の多項式である。これを F 上の<strong>一般 n 次方程式</strong>と呼ぶ。その解（根）は x₁, …, xₙ である。</p>
+<p><strong>定理（一般 n 次方程式のガロア群）</strong> 一般 n 次方程式 f(T) ∈ F[T] の分解体は K₀ = F(x₁, …, xₙ) であり、ガロア群は</p>
+<pre><code>Gal(K₀/F) ≅ Sₙ
+</code></pre>
+<p>が成り立つ（Sₙ は x₁, …, xₙ の置換によって作用する）。</p>
+<p><strong>証明の骨子</strong> 対称式の基本定理により、<code>K₀^(Sₙ) = F</code>（Sₙ で不変な有理関数は基本対称式の有理関数）。したがってアルティンの定理（あるいはガロア拡大の定義）より <code>Gal(K₀/F) = Sₙ</code>。□</p>
+<p><strong>注意</strong> この定理は「文字係数の一般 n 次方程式のガロア群は Sₙ」という事実を確立する。特殊な n 次方程式（係数に特別な関係があるもの）はガロア群が Sₙ より小さくなり得るが、<strong>一般の</strong> n 次方程式ではちょうど Sₙ になる。</p>
+<h3 id="98-アーベルルフィニの定理5次方程式の代数解法の不存在">9.8 アーベル–ルフィニの定理：5次方程式の代数解法の不存在</h3>
+<p><strong>定理（アーベル–ルフィニ）</strong> 一般の5次以上の代数方程式は、四則演算と冪根のみでは解くことができない。</p>
+<p><strong>証明</strong> n ≥ 5 とする。一般 n 次方程式 f(T) ∈ F[T] を考える。9.7節の定理により <code>Gal(K₀/F) ≅ Sₙ</code>。n ≥ 5 だから、9.6節の定理により Sₙ は<strong>可解群ではない</strong>。よって 9.5節の定理（冪根可解性 ⇔ 可解群）により、一般 n 次方程式は<strong>冪根で解けない</strong>。□</p>
+<p><strong>この証明のエッセンス</strong> ガロア理論の力は、この命題を「ガロア群 Sₙ が可解でない」という群論の事実に帰着させたところにある。方程式の複雑さは、根の入れ替え（対称性）の複雑さとして現れ、それを測るのがガロア群なのである。</p>
+<p><strong>例 9.4（実例）</strong> 具体的な「解けない5次方程式」の例として <code>X⁵ − X − 1 ∈ Q[X]</code> がある。この5次多項式のガロア群は S₅ であり、したがってその根は四則演算と冪根だけでは表せない（ガロア群が S₅ であることは、既約性と「mod p での分解型からサイクル型（2,3）の元と5-サイクルがガロア群に含まれる」というデデキントの定理を用いて示せる。証明は発展の話題とする）。</p>
+<p><strong>補足（歴史的ノート）</strong> ルフィニ（P. Ruffini, 1799）が一般5次方程式の非可解性の証明を試みたが不完全で、アーベル（N. H. Abel, 1824）が完全な証明を与えた。ガロア（É. Galois, 1830年に提出・1831年却下）がガロア群の考えで統一的な理論を築き、その論文は死後の1846年にリュービルによって刊行された。ガロアが測ったのは「方程式の対称性」である。</p>
+<h3 id="本章のまとめ-9">本章のまとめ</h3>
+<ul>
+<li>作図可能な数 z は <code>[Q(z):Q]</code> が2の冪。立方体倍積（∛2）、角の3等分（3次既約）、円積（超越数）は作図不可能。</li>
+<li>冪根で解ける ⇔ ガロア群が可解群。</li>
+<li>n ≥ 5 で Sₙ は非可解（Aₙ の単純性）。</li>
+<li>一般 n 次方程式のガロア群は Sₙ。よって一般5次以上は冪根で解けない（アーベル–ルフィニ）。</li>
+<li>これが本書のゴールである。</li>
+</ul>
+<h3 id="練習問題-9">練習問題</h3>
+<p><strong>練習問題 9.1</strong> <code>∛2</code> が作図可能でないことを、体拡大の次数を用いて示せ。</p>
+<p><strong>練習問題 9.2</strong> S₃ が可解群であることを正規列を明示して示せ。</p>
+<p><strong>練習問題 9.3</strong> 交代群 A₄ は可解群であることを示せ。（ヒント: <code>V₄ = { id, (12)(34), (13)(24), (14)(23) }</code> が正規部分群）</p>
+<p><strong>練習問題 9.4</strong> 一般4次方程式のガロア群 S₄ は可解群であり、したがって4次方程式は冪根で解けることを説明せよ。</p>
+<p><strong>練習問題 9.5</strong> アーベル–ルフィニの定理を、ガロア理論の言葉（ガロア群、可解群、S₅）を用いて説明せよ。</p>
+<hr />
+<h2 id="第10章-総まとめと演習">第10章 総まとめと演習</h2>
+<h3 id="学習目標-10">学習目標</h3>
+<ul>
+<li>第1〜9章の流れを俯瞰し、概念同士のつながりを再確認する。</li>
+<li>院試レベルの総合演習を解いて、総合的な理解を確認する。</li>
+</ul>
+<h3 id="101-全体の流れ">10.1 全体の流れ</h3>
+<p>本書の論理の流れは以下のようになっている。</p>
+<pre><code>群・環・体の基礎（第1章）
+      ↓
+体の拡大と拡大次数（第2章）
+      ↓
+代数拡大・最小多項式・単拡大（第3章）
+      ↓
+分解体・代数閉包（第4章）
+      ↓
+分離拡大・有限体（第5章）
+      ↓
+正規拡大（第6章）
+      ↓
+ガロア拡大・ガロア群（第7章）   ← 正規＋分離，[L:K] = |Gal(L/K)|
+      ↓
+ガロア理論の基本定理（第8章）   ← 中間体 ⇔ 部分群
+      ↓
+作図問題・方程式の可解性（第9章）← 5次方程式の代数解法の不存在
+</code></pre>
+<h3 id="102-重要定理の一覧">10.2 重要定理の一覧</h3>
+<ul>
+<li><strong>ラグランジュの定理</strong>: 有限群 G と部分群 H で |G| = |H|·[G:H]。</li>
+<li><strong>準同型定理</strong>: G₁/Ker f ≅ Im f。</li>
+<li><strong>単拡大の構造</strong>: K(a) ≅ K[X]/(irr(a,K))，[K(a):K] = deg irr(a,K)。</li>
+<li><strong>分解体の存在と一意性</strong>: 任意の f ∈ K[X] に分解体が存在し、同型を除いて一意。</li>
+<li><strong>アルティンの定理</strong>: [L : L^G] = |G|。</li>
+<li><strong>ガロア拡大の基本性質</strong>: [L:K] = |Gal(L/K)|。</li>
+<li><strong>ガロア理論の基本定理</strong>: 中間体 ⇔ 部分群（順序反転）。F/K ガロア ⇔ Gal(L/F) ⊴ G。</li>
+<li><strong>円分体</strong>: Gal(Q(ζ_n)/Q) ≅ (Z/nZ)*。</li>
+<li><strong>有限体</strong>: Gal(F_(p^n)/F_p) ≅ Z/nZ。</li>
+<li><strong>冪根可解性定理</strong>: f が冪根で解ける ⇔ Gal(分解体/K) が可解群。</li>
+<li><strong>Sₙ（n≥5）の非可解性</strong>: Aₙ の単純性より。</li>
+<li><strong>アーベル–ルフィニ</strong>: 一般5次以上は冪根で解けない。</li>
+</ul>
+<h3 id="103-総合演習">10.3 総合演習</h3>
+<p><strong>演習 1</strong> <code>L = Q(√2, √3)</code> のガロア群を求め、その部分群の個数を求めよ。また中間体をすべて挙げよ。</p>
+<p><strong>演習 2</strong> <code>F_8</code> を <code>F_2[X]/(X³+X+1)</code> と表したとき、<code>Gal(F_8/F_2)</code> の生成元と位数を求めよ。</p>
+<p><strong>演習 3</strong> <code>f(X) = X⁴ + X + 1 ∈ F_2[X]</code> の既約性と分離性を調べよ。</p>
+<p><strong>演習 4</strong> <code>Q(ζ_7)/Q</code> のガロア群の構造を求めよ（(Z/7Z)* の構造を調べる）。</p>
+<p><strong>演習 5</strong> 正規拡大ではない有限次代数拡大の例を挙げ、なぜ正規でないかを説明せよ。</p>
+<p><strong>演習 6</strong> 「作図可能な数 z に対して [Q(z):Q] は 2 の冪」という定理を述べ、これを立方体倍積問題に適用せよ。</p>
+<p><strong>演習 7</strong> 一般の5次方程式が冪根で解けないことを示す手順を、用いる定理（ガロア理論の基本定理、冪根可解性定理、S₅ の非可解性）に分けて説明せよ。</p>
+<p><strong>演習 8</strong> 位数 8 の群は可解群であることを説明せよ。（ヒント: 有限p群は可解群である）</p>
+<p><strong>演習 9</strong> K を標数 0 の体とし、K が 1 の原始 p 乗根 ζ_p（p 素数）を含むとする。<code>X^p − a ∈ K[X]</code> が既約なら、その分解体のガロア群は位数 p の巡回群であることを示せ。（クンマー拡大）</p>
+<p><strong>演習 10</strong> ガロア理論の基本定理を正確に述べ、その証明の要点を3点に整理せよ。</p>
+<hr />
+<h2 id="付録A-練習問題の解答">付録A 練習問題の解答</h2>
+<h3 id="第1章">第1章</h3>
+<p><strong>練習問題 1.1</strong> 解答: ラグランジュの定理は「有限群 G と部分群 H に対し |G| = |H|·[G:H]」。位数6の群の部分群の位数は 1, 2, 3, 6（6の約数）。</p>
+<p><strong>練習問題 1.2</strong> 解答: Ker f = { n ∈ Z | n ≡ 0 mod 4 } = 4Z。準同型定理より Z/4Z ≅ Im f = Z/4Z（f は全射）。</p>
+<p><strong>練習問題 1.3</strong> 解答: Z/nZ が体になるのは n が素数のとき。すなわち nZ が極大イデアル ⇔ n は素数。</p>
+<p><strong>練習問題 1.4</strong> 解答: <code>(ab)^p = a^p b^p</code> は二項定理と、標数 p より中間の係数 pCi が 0 になることから従う。<code>(a+b)^p = a^p + b^p</code> も同様。加法・乗法・単位元の対応を確かめれば体準同型。</p>
+<p><strong>練習問題 1.5</strong> 解答: 標数 2 なら <code>1 + 1 = 0</code>。任意の a で <code>a + a = a(1+1) = 0</code>。よって <code>(a+b)² = a² + ab + ba + b² = a² + 2ab + b² = a² + 0 + b²</code>（ab=ba は可換）。</p>
+<h3 id="第2章">第2章</h3>
+<p><strong>練習問題 2.1</strong> 解答: <code>[Q(√2):Q] = 2</code>。Q(√2) = { a + b√2 | a,b ∈ Q } だから {1, √2} は生成系。a + b√2 = 0 とすると b = 0 なら a = 0；b ≠ 0 なら √2 = −a/b ∈ Q となり矛盾。よって一次独立で基底。</p>
+<p><strong>練習問題 2.2</strong> 解答: <code>[Q(√2):Q] = 2</code>，<code>[Q(√2,√3):Q(√2)] = 2</code>（√3 ∉ Q(√2)），<code>[Q(√2,√3,√5):Q(√2,√3)] = 2</code>（√5 ∉ Q(√2,√3)）。よって連鎖律で 2·2·2 = 8。</p>
+<p><strong>練習問題 2.3</strong> 解答: <code>[K(a):K] = n &lt; ∞</code> ならば、1, a, …, aⁿ は n+1 個の元で一次従属。よって <code>c₀ + c₁a + ⋯ + cₙaⁿ = 0</code>（0でない係数）が存在し、a は代数的。</p>
+<p><strong>練習問題 2.4</strong> 解答: K(a), K(b) は代数拡大。K(a) の K 上の有限生成性と連鎖律より K(a,b) は K 上有限次拡大。有限次拡大は代数拡大だから a+b, ab ∈ K(a,b) は K 上代数的。</p>
+<p><strong>練習問題 2.5</strong> 解答: Q(√2) は代数拡大（√2 は代数的、Q(√2) の任意の元 a+b√2 は X²−2aX+(a²−2b²) の根）。R/Q は π ∈ R が超越的だから代数拡大でない。</p>
+<h3 id="第3章">第3章</h3>
+<p><strong>練習問題 3.1</strong> 解答: irr(√5, Q) = X²−5。<code>[Q(√5):Q] = 2</code>。</p>
+<p><strong>練習問題 3.2</strong> 解答: <code>a = √2 + √3</code> とする。<code>(a²−5)² = (2√6)² = 24</code> より <code>a⁴ − 10a² + 1 = 0</code>。最小多項式は X⁴ − 10X² + 1（既約。もし2次以下の既約因子があれば Q(√2) か Q(√3) か Q(√6) に a が含まれねばならないが、a ∉ Q(√2), Q(√3) を確認できる）。<code>[Q(a):Q] = 4</code>。</p>
+<p><strong>練習問題 3.3</strong> 解答: f(X) = X²+X+1 は F_2 上で f(0) = 1, f(1) = 1 だから根を持たず、2次なので既約。K[X]/(f) は体で、元は {0, 1, x, x+1}（x = X mod f）の4個。x² = x+1 に注意（f(x)=0 より）。</p>
+<p><strong>練習問題 3.4</strong> 解答: <code>a = ∛2</code> とおく（a³ = 2, a⁴ = 2a）。<code>u = a² + a</code> の逆元を <code>v = b + ca + da²</code>（b, c, d ∈ Q）とおく。展開すると
+<code>u·v = (2c + 2d) + (b + 2d)a + (b + c)a²</code>。これが 1 になるように連立方程式 <code>b + 2d = 0, b + c = 0, 2c + 2d = 1</code> を解くと <code>b = −1/3, c = 1/3, d = 1/6</code>。よって逆元は <code>−1/3 + (1/3)a + (1/6)a² = (a² + 2a − 2)/6</code>。</p>
+<p><strong>練習問題 3.5</strong> 解答: <code>[K(a):K]</code> を奇数 n とする。a² ∈ K(a) だから K(a²) ⊂ K(a)。<code>[K(a):K(a²)] ≤ 2</code>（a は X² − a² の根）。よって <code>n = [K(a):K(a²)]·[K(a²):K]</code> で n は奇数なので <code>[K(a):K(a²)]</code> は奇数、よって 1。したがって K(a) = K(a²)。</p>
+<h3 id="第4章">第4章</h3>
+<p><strong>練習問題 4.1</strong> 解答: 根は ∛2, ∛2ω, ∛2ω²。分解体 L = Q(∛2, ω)。<code>[Q(∛2):Q] = 3</code>。ω は X²+X+1 の根で、ω ∉ Q(∛2)（実体は実数）より <code>[Q(∛2,ω):Q(∛2)] = 2</code>。よって <code>[L:Q] = 6</code>。</p>
+<p><strong>練習問題 4.2</strong> 解答: 根は ±2^(1/4), ±i·2^(1/4)。分解体 L = Q(2^(1/4), i)。<code>[Q(2^(1/4)):Q] = 4</code>（X⁴−2 は既約）。i ∉ Q(2^(1/4)) だから <code>[L:Q] = 8</code>。</p>
+<p><strong>練習問題 4.3</strong> 解答: <code>f(X) = X³+X+1</code> は f(0)=1, f(1)=1 より根なし、3次なので既約。分解体は F_8（8元体）。元の個数 8。</p>
+<p><strong>練習問題 4.4</strong> 解答: <code>X³−1 = (X−1)(X²+X+1)</code>。分解体は Q(ω)（ω は X²+X+1 の根，1の原始3乗根）。<code>[Q(ω):Q] = 2</code>。</p>
+<p><strong>練習問題 4.5</strong> 解答: F を有限体で代数閉体とする。<code>g(X) = 1 + ∏_{a∈F}(X−a)</code> を考える。g は F 上で根を持たない（各 a ∈ F で g(a) = 1）。しかし非定数多項式は根を持つ（代数閉体の定義）から矛盾。よって有限代数閉体は存在しない。</p>
+<h3 id="第5章">第5章</h3>
+<p><strong>練習問題 5.1</strong> 解答: <code>f'(X) = 3X²+1 = X²+1</code>（標数2）。ユークリッド互除法: <code>X³+X+1 = X·(X²+1) + 1</code>。よって <code>gcd(f, f') = gcd(X²+1, 1) = 1</code>。したがって f は分離的。</p>
+<p><strong>練習問題 5.2</strong> 解答: <code>X^p − t ∈ F_p(t)[X]</code>。アイゼンシュタインの判定法を F_p[t] の素元 t について適用すると既約。分解体で <code>X^p − t = (X − t^(1/p))^p</code> と重根を持つから非分離。</p>
+<p><strong>練習問題 5.3</strong> 解答: F_4 = {0, 1, x, x+1}，x² = x+1。F_4<em> = {1, x, x+1} は位数3の巡回群で、x は生成元（x² = x+1, x³ = x·(x+1) = x²+x = 1）。よって F_4</em> ≅ Z/3Z。</p>
+<p><strong>練習問題 5.4</strong> 解答: <code>φ: a ↦ a²</code>。φ³ = id（a^8 = a）。φ ≠ id（X²−X の根は F_2 のみ）なので位数 3。よって Gal(F_8/F_2) ≅ Z/3Z。</p>
+<p><strong>練習問題 5.5</strong> 解答: F_q<em> は位数 q−1 の群だから、a ∈ F_q</em> で a^(q−1) = 1，よって a^q = a。a = 0 でも成立。</p>
+<h3 id="第6章">第6章</h3>
+<p><strong>練習問題 6.1</strong> 解答: Q(√2,√3) は (X²−2)(X²−3) の分解体なので正規。</p>
+<p><strong>練習問題 6.2</strong> 解答: 既約多項式 X²−2 の根 √2, −√2 はどちらも Q(√2) に含まれるから正規。X³−2 は既約だが、根 ∛2 の共役 ∛2ω は Q(∛2)（実数の部分体）に含まれないから Q(∛2)/Q は正規でない。</p>
+<p><strong>練習問題 6.3</strong> 解答: 正規でない。X⁴−2 の根 2^(1/4) の共役 i·2^(1/4) が Q(2^(1/4))（実体）に含まれない。</p>
+<p><strong>練習問題 6.4</strong> 解答: 正規閉包は X³−2 の分解体 Q(∛2, ω)。</p>
+<p><strong>練習問題 6.5</strong> 解答: 正規拡大の定義そのもの。f が L に根 α を持てば、f は既約なので α の最小多項式は f。定義により f は L 上で一次式の積に分解する。</p>
+<h3 id="第7章">第7章</h3>
+<p><strong>練習問題 7.1</strong> 解答: Gal(L/Q) = { id, σ, τ, στ }，σ(√2)=−√2, τ(√3)=−√3。|Gal(L/Q)| = 4 = [L:Q]。</p>
+<p><strong>練習問題 7.2</strong> 解答: 各 √2, √3, √5 の符号の反転で 2³ = 8 個。Gal ≅ (Z/2Z)³。位数 8。</p>
+<p><strong>練習問題 7.3</strong> 解答: Gal(Q(ζ_5)/Q) ≅ (Z/5Z)* ≅ Z/4Z。生成元は「2 に対応する自己同型」σ₂: ζ ↦ ζ²。位数 4。</p>
+<p><strong>練習問題 7.4</strong> 解答: Gal(F_16/F_2) ≅ Z/4Z（フロベニウス a ↦ a² が生成元，位数 4）。</p>
+<p><strong>練習問題 7.5</strong> 解答: 必要十分条件は「L/K が正規かつ分離（=ガロア拡大）」、あるいは <code>[L:K] = |Gal(L/K)|</code>。Q(∛2)/Q は正規でないからガロア拡大でない（分離的ではあるが）。</p>
+<h3 id="第8章">第8章</h3>
+<p><strong>練習問題 8.1</strong> 解答: Gal ≅ (Z/2Z)³。部分群は16個：位数 1:1個，位数 2:7個，位数 4:7個，位数 8:1個（合計16）。中間体も同数。2次拡大の中間体は Q(√2), Q(√3), Q(√5), Q(√6), Q(√10), Q(√15), Q(√30) の7個、4次拡大の中間体が7個（√2,√3,√5 から2つ選んで生成した体）、8次拡大が1個（L自身）、1次拡大が1個（Q）。</p>
+<p><strong>練習問題 8.2</strong> 解答: S₃ の部分群: {id}, ⟨(12)⟩, ⟨(13)⟩, ⟨(23)⟩（位数2，各々正規でない）, A₃ = ⟨(123)⟩（位数3，正規）, S₃。よって中間体: L（=Q(∛2,ω)）; 3つの3次中間体（位数2の部分群に対応，例 Q(∛2), Q(∛2ω), Q(∛2ω²)）; Q(ω)（A₃ に対応，Q 上ガロアで次数2）; Q。正規でない中間体は Q(∛2) など。</p>
+<p><strong>練習問題 8.3</strong> 解答: 8.1節の基本定理を正確に記述すること（全単射、順序反転、次数の対応、正規部分群とガロア拡大の対応）。</p>
+<p><strong>練習問題 8.4</strong> 解答: Q(√6) は √6 を固定する部分群に対応。Gal(L/Q) = {id, σ, τ, στ} のうち、Q(√6) = L^⟨στ⟩（στ は √2 ↦ −√2, √3 ↦ −√3 で √6 を固定）。⟨στ⟩ は可換群 Z/2Z×Z/2Z の部分群なので正規。</p>
+<p><strong>練習問題 8.5</strong> 解答: <code>[F:K] = 2</code> と基本定理より <code>[G:Gal(L/F)] = 2</code>。指数2の部分群は常に正規部分群（gH = Hg を示す）。よって Gal(L/F) ⊴ G かつ指数 2。</p>
+<h3 id="第9章">第9章</h3>
+<p><strong>練習問題 9.1</strong> 解答: ∛2 が作図可能なら [Q(∛2):Q] は2の冪。しかし [Q(∛2):Q] = 3 は2の冪でない。矛盾。よって ∛2 は作図不可能（立方体倍積の不可能性）。</p>
+<p><strong>練習問題 9.2</strong> 解答: <code>{e} ⊴ A₃ ⊴ S₃</code>。A₃ = {id, (123), (132)} ≅ Z/3Z（アーベル），S₃/A₃ ≅ Z/2Z（アーベル）。よって S₃ は可解群。</p>
+<p><strong>練習問題 9.3</strong> 解答: A₄ の可解性を示す。V₄ = {id, (12)(34), (13)(24), (14)(23)} は A₄ の正規部分群（A₄ の共役類はサイクル型で決まり、V₄ は共役で閉じる）。V₄ ≅ Z/2Z×Z/2Z（アーベル），A₄/V₄ ≅ Z/3Z（アーベル）。よって A₄ は可解群。</p>
+<p><strong>練習問題 9.4</strong> 解答: S₄ は <code>{e} ⊴ V₄ ⊴ A₄ ⊴ S₄</code> で剰余がアーベル（V₄ アーベル，A₄/V₄ ≅ Z/3Z，S₄/A₄ ≅ Z/2Z）だから可解群。ガロア群が可解群 ⇔ 冪根で解けるから、一般4次方程式は冪根で解ける（フェラリの解法が存在する事実と整合）。</p>
+<p><strong>練習問題 9.5</strong> 解答: 一般5次方程式のガロア群は S₅。S₅ は可解群でない（A₅ が単純群）。冪根可解性定理により、ガロア群が可解でない方程式は冪根で解けない。よって一般5次方程式は四則演算と冪根だけでは解けない。</p>
+<h3 id="第10章">第10章</h3>
+<p><strong>演習 1</strong> 解答: Gal ≅ (Z/2Z)³，部分群は 1 + 7 + 7 + 1 = 16 個。中間体も16個。位数2の部分群7個（各々 Z/2Z）に対応する2次中間体が7個、位数4の部分群7個（各々 Z/2Z×Z/2Z）に対応する4次中間体が7個、{id} に対応する L と G に対応する Q。</p>
+<p><strong>演習 2</strong> 解答: フロベニウス φ: a ↦ a² が生成元。位数 3（a^8=a で φ³ = id，φ ≠ id）。よって Gal(F_8/F_2) ≅ Z/3Z。</p>
+<p><strong>演習 3</strong> 解答: 既約性: f(0) = 1, f(1) = 1 で1次因子はない。F_2 上の既約2次多項式は X²+X+1 のみで、その根を α（α² = α+1, α³ = 1）とすると f(α) = α⁴+α+1 = α·α³+α+1 = α+α+1 = 1 ≠ 0 だから割り切れない。よって既約。分離性: f'(X) = 4X³+1 = 1（標数2）で gcd(f, 1) = 1 だから分離。</p>
+<p><strong>演習 4</strong> 解答: Gal(Q(ζ_7)/Q) ≅ (Z/7Z)<em>。Z/7Z は体だから (Z/7Z)</em> は位数6の巡回群 ≅ Z/6Z。よってガロア群は位数6の巡回群。</p>
+<p><strong>演習 5</strong> 解答: Q(∛2)/Q。X³−2 が既約で、根 ∛2 の共役 ∛2ω が Q(∛2) に含まれないから正規でない。</p>
+<p><strong>演習 6</strong> 解答: 定理を述べ、∛2 は [Q(∛2):Q] = 3 で2の冪でないから作図不可能。</p>
+<p><strong>演習 7</strong> 解答: (1) 一般5次方程式のガロア群 = S₅（対称式の基本定理）。(2) S₅ は非可解（A₅ の単純性）。(3) 冪根可解性定理「冪根で解ける ⇔ ガロア群が可解群」。(4) 以上より一般5次方程式は冪根で解けない。</p>
+<p><strong>演習 8</strong> 解答: 有限p群は中心が非自明（類等式）で、中心を取って剰余を繰り返すとアーベル群の正規列ができる。よって可解群。位数8の群は2群だから可解。</p>
+<p><strong>演習 9</strong> 解答: K は ζ_p を含むとする。<code>α = a^(1/p)</code> とおくと、分解体 L = K(α)。任意の σ ∈ Gal(L/K) は σ(α) = ζ_p^k·α（k ∈ Z/pZ）の形で決まり、対応 <code>σ ↦ k mod p</code> は単射準同型 <code>Gal(L/K) → Z/pZ</code> を与える（σ(α) は X^p − a の根だから）。よって |Gal(L/K)| は p の約数。X^p − a が既約なら <code>[L:K] = p</code>（最小多項式の次数）で、ガロア拡大の次数公式より <code>|Gal(L/K)| = p</code>。ゆえに <code>Gal(L/K) ≅ Z/pZ</code>（位数 p の巡回群）。これがクンマー拡大の基本形である。※ ζ_p ∉ K の場合は一般には (Z/pZ) と (Z/pZ)* の半直積の部分群になる（例: X³−2 のガロア群は S₃）。</p>
+<p><strong>演習 10</strong> 解答: 8.1節を参照。証明の要点: (1) 単調性 (2) L^(Gal(L/F)) = F（ガロア拡大の次数公式）(3) アルティンの定理 [L:L^H] = |H|。</p>
+<hr />
+<h2 id="付録B-用語集">付録B 用語集</h2>
+<ul>
+<li><strong>アーベル群</strong>: 演算が可換な群（可換群）。</li>
+<li><strong>アルティンの定理</strong>: 体 L の自己同型の有限群 G について [L:L^G] = |G|。</li>
+<li><strong>一般 n 次方程式</strong>: 基本対称式を係数に持つ文字係数の n 次方程式。そのガロア群は Sₙ。</li>
+<li><strong>イデアル</strong>: 可換環 R の部分群で、R の任意の元を掛けても自身に留まる集合。</li>
+<li><strong>因数分解</strong>: 本項では多項式を一次式や既約因子の積に分解すること。</li>
+<li><strong>可解群</strong>: 正規列で各剰余群がアーベル群になる群。</li>
+<li><strong>拡大次数</strong>: 体拡大 L/K で、K 上の線型空間としての L の次元。記号 [L:K]。</li>
+<li><strong>ガロア群</strong>: 体拡大 L/K に対し、K を固定する L の自己同型全体のなす群。記号 Gal(L/K)。</li>
+<li><strong>ガロア拡大</strong>: 正規かつ分離な代数拡大。[L:K] = |Gal(L/K)|。</li>
+<li><strong>ガロア理論の基本定理</strong>: 有限次ガロア拡大 L/K の中間体と Gal(L/K) の部分群の対応が全単射。</li>
+<li><strong>共役</strong>: 同じ最小多項式を持つ2つの元（K 上）。</li>
+<li><strong>剰余群</strong>: 正規部分群による剰余類全体のなす群。記号 G/H。</li>
+<li><strong>剰余類</strong>: 部分群 H による aH = { ah | h ∈ H } の形の集合。</li>
+<li><strong>準同型</strong>: 群・環・体の構造を保つ写像。</li>
+<li><strong>準同型定理</strong>: G₁/Ker f ≅ Im f。</li>
+<li><strong>純非分離拡大</strong>: すべての元の最小多項式が X^(p^n) − a の形になる拡大。</li>
+<li><strong>正規拡大</strong>: 既約多項式の1根が含まれれば全根含まれる拡大。</li>
+<li><strong>正規閉包</strong>: 拡大 L/K を包む最小の正規拡大。</li>
+<li><strong>最小多項式</strong>: 元 a を根に持つモニック既約多項式で次数最小のもの。記号 irr(a, K)。</li>
+<li><strong>作図可能</strong>: 定規とコンパスで有限回の操作で作れる点（数）。</li>
+<li><strong>固定体</strong>: Gal(L/K) の部分群 H で不変な L の元全体。記号 L^H。</li>
+<li><strong>完全体</strong>: すべての既約多項式が分離的な体（標数0またはフロベニウス全射）。</li>
+<li><strong>有限体</strong>: 元の個数が有限の体。F_q（q = p^n）の形。</li>
+<li><strong>標数</strong>: 1 を n 回足して 0 になる最小の n（なければ 0）。記号 char K。</li>
+<li><strong>分解体</strong>: 多項式 f のすべての根を添加した最小の体。</li>
+<li><strong>分離拡大</strong>: すべての元の最小多項式が分離的な代数拡大。</li>
+<li><strong>分離多項式</strong>: 重根を持たない多項式（gcd(f, f') = 1）。</li>
+<li><strong>フロベニウス写像</strong>: 標数 p の体の写像 x ↦ x^p。有限体のガロア群の生成元。</li>
+<li><strong>円分体</strong>: 1 の冪根で生成される体 Q(ζ_n)。</li>
+<li><strong>アーベル–ルフィニの定理</strong>: 一般の5次以上の方程式は冪根だけでは解けない。</li>
+</ul>
+<h2 id="付録C-記号表">付録C 記号表</h2>
+<table>
+<thead>
+<tr>
+<th>記号</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Z, Q, R, C</td>
+<td>整数環、有理数体、実数体、複素数体</td>
+</tr>
+<tr>
+<td>F_p</td>
+<td>p元体（= Z/pZ，p素数）</td>
+</tr>
+<tr>
+<td>F_q</td>
+<td>q元有限体（q = p^n）</td>
+</tr>
+<tr>
+<td>char K</td>
+<td>体 K の標数</td>
+</tr>
+<tr>
+<td>K[X]</td>
+<td>K 上の多項式環</td>
+</tr>
+<tr>
+<td>K(X)</td>
+<td>K 上の有理関数体</td>
+</tr>
+<tr>
+<td>L/K</td>
+<td>体拡大（L は K の拡大体）</td>
+</tr>
+<tr>
+<td>[L:K]</td>
+<td>拡大次数</td>
+</tr>
+<tr>
+<td>K(a)</td>
+<td>K に a を添加した体</td>
+</tr>
+<tr>
+<td>irr(a, K)</td>
+<td>a の K 上の最小多項式</td>
+</tr>
+<tr>
+<td>K̄</td>
+<td>K の代数閉包</td>
+</tr>
+<tr>
+<td>K^G, L^H</td>
+<td>群 G（H）で不変な体の元全体（固定体）</td>
+</tr>
+<tr>
+<td>Gal(L/K)</td>
+<td>ガロア群</td>
+</tr>
+<tr>
+<td>H ⊴ G</td>
+<td>H は G の正規部分群</td>
+</tr>
+<tr>
+<td>Sₙ</td>
+<td>n次対称群</td>
+</tr>
+<tr>
+<td>Aₙ</td>
+<td>n次交代群</td>
+</tr>
+<tr>
+<td>ζ_n</td>
+<td>1の原始 n 乗根</td>
+</tr>
+<tr>
+<td>φ(n)</td>
+<td>オイラーのφ関数</td>
+</tr>
+<tr>
+<td>(Z/nZ)*</td>
+<td>nと互いに素な剰余類のなす乗法群</td>
+</tr>
+</tbody>
+</table>
+
+<script>
+(function(){
+  function escapeHtml(s){
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function numOf(text){
+    var m = text.match(/(?:练习问题|練習問題)\s*(\d+)[.\s](\d+)/);
+    return m ? m[1] + '.' + m[2] : null;
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    var answerMap = {};
+    var heads = document.querySelectorAll('h3');
+    heads.forEach(function(h){
+      var key = numOf(h.textContent);
+      if(!key) return;
+      var p = h.nextElementSibling;
+      if(p && p.tagName === 'P'){
+        var tipText = p.textContent.replace(/^解答[：:]\s*\d+\s*[—\-]?\s*/, '').trim();
+        answerMap[key] = tipText;
+        var body = document.createElement('div');
+        body.className = 'answer-body';
+        body.hidden = true;
+        body.innerHTML = p.innerHTML;
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'answer-btn';
+        btn.textContent = '解答を表示';
+        btn.addEventListener('click', function(){ body.hidden = !body.hidden; });
+        var wrap = document.createElement('div');
+        wrap.className = 'answer-item';
+        wrap.id = 'answer-' + key.replace('.', '-');
+        wrap.appendChild(btn);
+        wrap.appendChild(body);
+        h.parentNode.insertBefore(wrap, p);
+        h.parentNode.removeChild(p);
+      }
+    });
+    var ps = document.querySelectorAll('p');
+    ps.forEach(function(p){
+      if(p.querySelector('.answer-tip')) return;
+      var key = numOf(p.textContent);
+      if(!key) return;
+      if(answerMap[key] === undefined) return;
+      p.classList.add('has-answer');
+      p.setAttribute('data-answer-key', key);
+      var tip = document.createElement('span');
+      tip.className = 'answer-tip';
+      tip.innerHTML = '<b>回答</b> ' + escapeHtml(answerMap[key]);
+      p.appendChild(tip);
+      p.addEventListener('click', function(ev){
+        if(ev.target.tagName === 'A') return;
+        tip.classList.toggle('open');
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
