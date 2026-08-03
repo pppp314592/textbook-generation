@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教科書生成</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+          background: #f7f8fa; color: #222; line-height: 1.7; padding: 2rem 1rem; }
+  .container { max-width: 900px; margin: 0 auto; }
+  header { text-align: center; padding: 2rem 0 2.5rem; }
+  header h1 { font-size: 2rem; margin-bottom: .5rem; }
+  header p { color: #555; }
+  .date { display: block; margin-top: 1rem; color: #888; font-size: .85rem; }
+  .card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px;
+          padding: 1.5rem; margin-bottom: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .card h2 { font-size: 1.25rem; margin-bottom: .5rem; }
+  .card h2 a { color: #1a5fb4; text-decoration: none; }
+  .card h2 a:hover { text-decoration: underline; }
+  .meta { margin-bottom: .75rem; }
+  .meta-item { display: inline-block; background: #f1f3f5; border-radius: 4px;
+                padding: 2px 8px; margin: 2px 4px 2px 0; font-size: .85rem; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .link-btn { display: inline-block; border: 1px solid #1a5fb4; color: #1a5fb4;
+               border-radius: 5px; padding: 4px 12px; font-size: .9rem; text-decoration: none; }
+  .link-btn:hover { background: #1a5fb4; color: #fff; }
+  .no-link { color: #999; font-size: .9rem; }
+  footer { text-align: center; margin-top: 2.5rem; color: #999; font-size: .85rem; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>教科書生成</h1>
+    <p>作成した教科書の一覧とダウンロードリンク</p>
+    <span class="date">作成日: 2026-08-03</span>
+  </header>
+
+  <main>
+        <section class="card">
+      <h2><a href="G検定/印刷用/教科書-印刷版.html">G検定</a></h2>
+      <div class="meta"><span class="meta-item"><b>レベル</b>: 初級〜中級</span><span class="meta-item"><b>想定学習時間</b>: 30〜50時間</span></div>
+      <div class="links"><a class="link-btn" href="G検定/印刷用/教科書.pdf">PDF</a><a class="link-btn" href="G検定/印刷用/教科書-印刷版.html">印刷用HTML</a></div>
+    </section>
+    <section class="card">
+      <h2><a href="Makefile/印刷用/教科書-印刷版.html">Makefile</a></h2>
+      <div class="meta"><span class="meta-item"><b>対象読者</b>: 中級者（Makefileを触ったことがあるが、より高度な活用法を学びたい方）</span><span class="meta-item"><b>レベル</b>: 中級</span><span class="meta-item"><b>想定学習時間</b>: 10〜15時間（1章あたり1〜2時間＋練習問題）</span><span class="meta-item"><b>進行状況</b>: 検証済み・PDF化済み（PDF 40ページ）</span></div>
+      <div class="links"><a class="link-btn" href="Makefile/印刷用/教科書.pdf">PDF</a><a class="link-btn" href="Makefile/印刷用/教科書-印刷版.html">印刷用HTML</a></div>
+    </section>
+    <section class="card">
+      <h2><a href="ガロア理論/印刷用/教科書-印刷版.html">ガロア理論</a></h2>
+      <div class="meta"><span class="meta-item"><b>対象読者</b>: 大学3〜4年生、大学院入試対策</span><span class="meta-item"><b>レベル</b>: 上級（大学3〜4年・院入試）</span><span class="meta-item"><b>想定学習時間</b>: 40〜60時間</span><span class="meta-item"><b>進行状況</b>: 検証済み・PDF化済み（PDF 32ページ）</span></div>
+      <div class="links"><a class="link-btn" href="ガロア理論/印刷用/教科書.pdf">PDF</a><a class="link-btn" href="ガロア理論/印刷用/教科書-印刷版.html">印刷用HTML</a></div>
+    </section>
+    <section class="card">
+      <h2><a href="ベイズ統計/印刷用/教科書-印刷版.html">ベイズ統計</a></h2>
+      <div class="meta"><span class="meta-item"><b>対象読者</b>: 理工系大学生・初学者</span><span class="meta-item"><b>レベル</b>: 初〜中級</span><span class="meta-item"><b>想定学習時間</b>: 40〜60時間</span><span class="meta-item"><b>進行状況</b>: PDF化済み（PDF 41ページ、ヘッダ・フッタなし、リンク検証0欠落、2026-08-02）</span></div>
+      <div class="links"><a class="link-btn" href="ベイズ統計/印刷用/教科書.pdf">PDF</a><a class="link-btn" href="ベイズ統計/印刷用/教科書-印刷版.html">印刷用HTML</a></div>
+    </section>
+    <section class="card">
+      <h2><a href="特殊相対論/印刷用/教科書-印刷版.html">特殊相対論</a></h2>
+      <div class="meta"><span class="meta-item"><b>対象読者</b>: 理工系大学生・初学者</span><span class="meta-item"><b>レベル</b>: 初〜中級</span><span class="meta-item"><b>想定学習時間</b>: 40〜60時間</span></div>
+      <div class="links"><a class="link-btn" href="特殊相対論/印刷用/教科書.pdf">PDF</a><a class="link-btn" href="特殊相対論/印刷用/教科書-印刷版.html">印刷用HTML</a></div>
+    </section>
+    <section class="card">
+      <h2><a href="素粒子論/印刷用/教科書-印刷版.html">素粒子論</a></h2>
+      <div class="meta"><span class="meta-item"><b>対象読者</b>: 理工系大学生・初学者</span><span class="meta-item"><b>レベル</b>: 初〜中級</span><span class="meta-item"><b>想定学習時間</b>: 40〜60時間</span></div>
+      <div class="links"><a class="link-btn" href="素粒子論/印刷用/教科書.pdf">PDF</a><a class="link-btn" href="素粒子論/印刷用/教科書-印刷版.html">印刷用HTML</a></div>
+    </section>
+    <section class="card">
+      <h2><a href="量子力学/印刷用/教科書-印刷版.html">量子力学</a></h2>
+      <div class="meta"><span class="meta-item"><b>対象読者</b>: 理工系大学生（初〜中級）</span><span class="meta-item"><b>レベル</b>: 初〜中級（大学2〜3年）</span><span class="meta-item"><b>想定学習時間</b>: 40〜60時間</span><span class="meta-item"><b>進行状況</b>: 検証済み・PDF化済み（PDF 43ページ）（2026-08-02 最新情報調査完了: `調査/最新情報メモ.md` 参照）</span></div>
+      <div class="links"><a class="link-btn" href="量子力学/印刷用/教科書.pdf">PDF</a><a class="link-btn" href="量子力学/印刷用/教科書-印刷版.html">印刷用HTML</a></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>本サイトは GitHub Pages で公開されています。</p>
+  </footer>
+</div>
+</body>
+</html>
