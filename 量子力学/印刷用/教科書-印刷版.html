@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>量子力学</title>
+<title>量子力学 教科書</title>
 <style>
 @page {
   size: A4;
@@ -21,6 +21,7 @@
   pre { border: 1px solid #999; padding: 8px; page-break-inside: avoid; }
   .pagebreak { page-break-after: always; }
   a { color: #000; text-decoration: none; }
+  .back-to-index { display: none !important; }
   .answer-btn { display: none !important; }
   .answer-body, .answer-body[hidden] { display: block !important; }
   .answer-tip { display: none !important; }
@@ -39,10 +40,14 @@
   .has-answer { position: relative; cursor: pointer; }
   .answer-tip { display: none; position: absolute; left: 0; top: 100%; z-index: 10; background: #fffbe6; border: 1px solid #bbb; padding: 6px 10px; margin-top: 4px; font-size: 10pt; line-height: 1.5; box-shadow: 0 2px 6px rgba(0,0,0,.2); }
   .has-answer:hover .answer-tip, .answer-tip.open { display: block; }
+  .back-to-index { margin-bottom: 14px; font-size: 11pt; }
+  .back-to-index a { color: #2563eb; text-decoration: underline; border: 1px solid #2563eb; padding: 4px 14px; border-radius: 4px; display: inline-block; }
+  .back-to-index a:hover { background: #eef2ff; }
 }
 </style>
 </head>
 <body>
+<div class="back-to-index"><a href="../../index.html">← 全体のページ（目次）へ戻る</a></div>
 <h1 id="量子力学">量子力学</h1>
 <ul>
 <li>対象読者: 理工系大学生（初〜中級）</li>
@@ -1282,6 +1287,5 @@ Y₁±₁ = ∓√(3/8π) sin θ e^(±iφ)
   });
 })();
 </script>
-
 </body>
 </html>
