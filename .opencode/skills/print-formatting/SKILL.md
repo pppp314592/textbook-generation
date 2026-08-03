@@ -37,6 +37,7 @@ description: 作成した教科書をA4印刷に適した形式に変換する�
      2. **練習問題のインタラクティブ化**: 付録の「練習問題の解答」を、画面上ではクリック（またはマウスオーバー）で解答を表示・非表示できるボタン付き要素に変換する。各章の練習問題本文にもマウスオーバーで解答がポップアップ表示される
      3. **A4印刷CSSの埋め込み**: ヘッダ・フッタに日時・URL・ページ番号を出さない印刷設定（下記参照）
      4. **Web画像のダウンロード**: Markdown内の `![...](https://...)` 形式の画像URLを `{テーマ名}/assets/` へダウンロードし、参照を相対パス（`assets/img-....png`）に置き換える。ローカル画像やdata URIはそのまま
+     5. **全体ページへ戻るリンク**: HTML冒頭に、作業ディレクトリ直下の `index.html`（全体の目次ページ）へ戻るリンクを自動付与する。パスは出力位置（`{テーマ名}/印刷用/`）から解決できる相対パス（例: `../../index.html`）を計算するため、ローカル・GitHub Pagesどちらでも機能する。`index.html` が存在しないときはリンクを出さない
    - スクリプトがない環境やPythonが無い場合は、Markdownを読み込んで手動で単一の自己完結型HTML（`{テーマ名}/印刷用/教科書-印刷版.html`）に変換する。
    - 手動変換の場合も以下の要件を満たすこと:
      - スタイルは `<style>` に埋め込み、外部ファイル・外部リソース（画像を除く）に依存させない
@@ -66,6 +67,8 @@ description: 作成した教科書をA4印刷に適した形式に変換する�
   pre { border: 1px solid #999; padding: 8px; page-break-inside: avoid; }
   .pagebreak { page-break-after: always; }
   a { color: #000; text-decoration: none; }
+  /* 全体ページへ戻るリンク: 印刷時は非表示 */
+  .back-to-index { display: none !important; }
   /* 練習問題: 印刷時は解答を常時表示する */
   .answer-btn { display: none !important; }
   .answer-body, .answer-body[hidden] { display: block !important; }
@@ -82,6 +85,10 @@ description: 作成した教科書をA4印刷に適した形式に変換する�
   .has-answer { position: relative; cursor: pointer; }
   .answer-tip { display: none; position: absolute; left: 0; top: 100%; z-index: 10; background: #fffbe6; border: 1px solid #bbb; padding: 6px 10px; margin-top: 4px; font-size: 10pt; line-height: 1.5; box-shadow: 0 2px 6px rgba(0,0,0,.2); }
   .has-answer:hover .answer-tip, .answer-tip.open { display: block; }
+  /* 全体ページへ戻るリンク: 画面表示時のみ */
+  .back-to-index { margin-bottom: 14px; font-size: 11pt; }
+  .back-to-index a { color: #2563eb; text-decoration: underline; border: 1px solid #2563eb; padding: 4px 14px; border-radius: 4px; display: inline-block; }
+  .back-to-index a:hover { background: #eef2ff; }
 }
 ```
 
@@ -127,6 +134,7 @@ description: 作成した教科書をA4印刷に適した形式に変換する�
    - **目次リンクが全て機能することを確認する**（HTMLをブラウザで開き、目次の各リンクをクリックして該当見出しへ移動するか確認。あるいは `href="#"` と `id="` の突き合わせで全件検証）。
    - **練習問題の解答が画面上で開閉できることを確認する**（HTMLをブラウザで開き、解答ボタンのクリックとマウスオーバーで解答が表示されるか確認。PDF側では解答が常時表示されていることを確認）。
    - **画像が表示されることを確認する**（HTMLをブラウザで開き、画像が表示されるか、`{テーマ名}/assets/` に画像ファイルが存在するかを確認。ダウンロード失敗の警告が出た画像URLは差し替える）。
+   - **全体ページへ戻るリンクが機能することを確認する**（HTMLをブラウザで開き、冒頭の「← 全体のページ（目次）へ戻る」リンクから `index.html` へ移動できるか確認。リンク先の相対パスが `index.html` の場所を正しく指していること。PDF（印刷時）にはこのリンクが出ないことを確認）。
    - `README.md` の進行状況を「PDF化済み」に更新する。
 
 ## 注意

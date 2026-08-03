@@ -131,6 +131,7 @@ CSS = """
   pre { border: 1px solid #999; padding: 8px; page-break-inside: avoid; }
   .pagebreak { page-break-after: always; }
   a { color: #000; text-decoration: none; }
+  .back-to-index { display: none !important; }
   .answer-btn { display: none !important; }
   .answer-body, .answer-body[hidden] { display: block !important; }
   .answer-tip { display: none !important; }
@@ -149,6 +150,9 @@ CSS = """
   .has-answer { position: relative; cursor: pointer; }
   .answer-tip { display: none; position: absolute; left: 0; top: 100%; z-index: 10; background: #fffbe6; border: 1px solid #bbb; padding: 6px 10px; margin-top: 4px; font-size: 10pt; line-height: 1.5; box-shadow: 0 2px 6px rgba(0,0,0,.2); }
   .has-answer:hover .answer-tip, .answer-tip.open { display: block; }
+  .back-to-index { margin-bottom: 14px; font-size: 11pt; }
+  .back-to-index a { color: #2563eb; text-decoration: underline; border: 1px solid #2563eb; padding: 4px 14px; border-radius: 4px; display: inline-block; }
+  .back-to-index a:hover { background: #eef2ff; }
 }
 """
 
@@ -241,6 +245,24 @@ JS = """
 </script>
 """
 
+def build_back_link(html_path):
+    """全体ページ(index.html)への戻りリンクHTMLを生成する。
+
+    印刷用HTMLは `{テーマ}/印刷用/*.html` に置かれることを前提とし、
+    作業ディレクトリ直下の index.html への相対パスを計算する。
+    ローカル・gh-pages どちらでも同じ相対構造で機能する。
+    index.html が存在しない場合は空文字を返す（リンク無しで生成）。
+    """
+    html_dir = os.path.dirname(os.path.abspath(html_path))
+    theme_dir = os.path.dirname(html_dir)
+    root_dir = os.path.dirname(theme_dir)
+    index_path = os.path.join(root_dir, 'index.html')
+    if not os.path.exists(index_path):
+        return ''
+    rel = os.path.relpath(index_path, html_dir).replace('\\', '/')
+    return ('<div class="back-to-index"><a href="%s">← 全体のページ（目次）へ戻る</a></div>'
+            % rel)
+
 def fix_image_src(html, md_path, html_path):
     """生成したHTML内の <img src="..."> を、HTML出力位置から解決できる相対パスへ変換する。
 
@@ -291,6 +313,7 @@ def main():
         extensions=['tables', 'fenced_code', 'attr_list'],
     )
 
+    html_items = ['%s' % build_back_link(html_path), html_body, JS]
     html = (
         '<!DOCTYPE html>\n'
         '<html lang="ja">\n'
@@ -299,9 +322,9 @@ def main():
         '<title>%s</title>\n'
         '<style>%s</style>\n'
         '</head>\n'
-        '<body>\n%s\n%s\n</body>\n'
+        '<body>\n%s</body>\n'
         '</html>\n'
-    ) % (title, CSS, html_body, JS)
+    ) % (title, CSS, '\n'.join(html_items))
 
     html = fix_image_src(html, md_path, html_path)
 
