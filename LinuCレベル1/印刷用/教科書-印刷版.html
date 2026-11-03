@@ -1,0 +1,3913 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LinuC レベル1 教科書</title>
+<style>
+@page {
+  size: A4;
+  margin: 18mm 15mm 18mm 15mm;
+}
+@media print {
+  body { font-family: "Yu Mincho", "MS Mincho", "Noto Serif JP", serif; font-size: 10.5pt; line-height: 1.7; color: #000; background: #fff; }
+  h1 { page-break-before: always; font-size: 20pt; border-bottom: 2px solid #000; padding-bottom: 6px; }
+  h1:first-of-type { page-break-before: avoid; }
+  h2 { page-break-after: avoid; font-size: 15pt; }
+  h2.chapter { page-break-before: always; }
+  h3 { page-break-after: avoid; font-size: 12.5pt; }
+  table { border-collapse: collapse; width: 100%; page-break-inside: auto; }
+  tr { page-break-inside: avoid; }
+  th, td { border: 1px solid #000; padding: 4px 8px; font-size: 9.5pt; vertical-align: top; }
+  th { background: #eee; }
+  pre, code { font-family: Consolas, "Courier New", monospace; font-size: 9pt; white-space: pre-wrap; }
+  pre { border: 1px solid #999; padding: 8px; page-break-inside: avoid; background: #fafafa; }
+  .pagebreak { page-break-after: always; }
+  a { color: #000; text-decoration: none; }
+  .back-to-index { display: none !important; }
+  .answer-btn { display: none !important; }
+  .answer-body, .answer-body[hidden] { display: block !important; padding: 0 !important; border-left: 0 !important; margin: 0 !important; }
+  .answer-tip { display: none !important; }
+  .answer-item { margin: 4px 0; }
+  img { max-width: 100%; page-break-inside: avoid; }
+}
+@media screen {
+  body { font-family: "Yu Mincho", "MS Mincho", "Noto Serif JP", serif; font-size: 12pt; line-height: 1.8; max-width: 210mm; margin: 24px auto; padding: 0 24px; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid #000; padding: 4px 8px; vertical-align: top; }
+  th { background: #eee; }
+  pre { border: 1px solid #999; padding: 8px; background: #fafafa; overflow-x: auto; }
+  code { font-family: Consolas, "Courier New", monospace; }
+  .answer-item { margin: 8px 0; }
+  .answer-btn { cursor: pointer; border: 1px solid #555; background: #eee; padding: 2px 10px; border-radius: 4px; font-size: 9pt; }
+  .answer-body { padding: 6px 10px; border-left: 3px solid #888; margin-top: 4px; }
+  .answer-body[hidden] { display: none; }
+  .has-answer { position: relative; cursor: pointer; }
+  .has-answer:hover { background: #fffbe6; }
+  .answer-tip { display: none; position: absolute; left: 0; top: 100%; z-index: 10; background: #fffbe6; border: 1px solid #bbb; padding: 6px 10px; margin-top: 4px; font-size: 10pt; line-height: 1.5; box-shadow: 0 2px 6px rgba(0,0,0,.2); max-width: 90%; }
+  .answer-tip.open { display: block; }
+  .back-to-index { margin-bottom: 14px; font-size: 11pt; }
+  .back-to-index a { color: #2563eb; text-decoration: underline; border: 1px solid #2563eb; padding: 4px 14px; border-radius: 4px; display: inline-block; }
+  .back-to-index a:hover { background: #eef2ff; }
+}
+</style>
+</head>
+<body>
+<div class="back-to-index"><a href="../../index.html">← 全体のページ（目次）へ戻る</a></div>
+<h1 id="linuc-1-version-100">LinuC レベル1 試験対策教科書 — Version 10.0 対応</h1>
+<ul>
+<li>対象読者: Linux をこれから学ぶ方、および実務1年目までのエンジニア</li>
+<li>レベル: 初級〜中級</li>
+<li>想定学習時間: 40〜60時間（1章あたり2〜4時間＋練習問題）</li>
+<li>基準: LinuC-1 Version 10.0（2026年時点の公式出題範囲に準拠）</li>
+<li>試験: 101試験／102試験（両方の合格で LinuC レベル1 認定）</li>
+</ul>
+<h2 id="_1">はじめに</h2>
+<p>LinuC レベル1は、Linux システムの構築・運用・管理に必要な「基本操作」と「基礎知識」を問う認定試験です。難解な理論を暗記する試験ではなく、<strong>実際のコマンド操作と設定ファイルの意味を理解しているか</strong>が問われます。本書は、101試験と102試験の公式出題範囲（Version 10.0）を1冊にまとめ、試験直前の確認にも使える構成にしました。</p>
+<p>本書の特徴は次の3点です。</p>
+<ol>
+<li><strong>公式出題範囲の主題番号（1.01〜1.11）に沿った構成</strong>。試験範囲の抜け漏れを防ぎます。</li>
+<li><strong>コマンド例と設定ファイル例を豊富に掲載</strong>。暗記ではなく「なぜそうなるか」を理解できます。</li>
+<li><strong>各章末の練習問題と巻末の解答・解説</strong>。知識の定着と本番形式の確認ができます。</li>
+</ol>
+<blockquote>
+<p>試験制度・出題範囲は改訂されることがあります。受験前には必ず <a href="https://linuc.org/linuc1/">LinuC 公式サイト</a> の最新情報を確認してください。本書は2026年時点の Version 10.0 を基準にしています。</p>
+</blockquote>
+<h2 id="_2">学習目標</h2>
+<p>本書を読み終えたとき、次のことができる状態を目指します。</p>
+<ul>
+<li>Linux のインストール、起動・停止、仮想マシン・コンテナの基本操作ができる。</li>
+<li>ファイル・ディレクトリの操作、パーミッション、リンク、検索を理解して実行できる。</li>
+<li>パイプ・リダイレクト・正規表現・テキスト処理を使いこなせる。</li>
+<li>apt／yum と dpkg／rpm の違いを理解し、パッケージを管理できる。</li>
+<li>ディスク、パーティション、ファイルシステム、LVM の基本を理解している。</li>
+<li>Bash の環境設定と、条件分岐・ループ・引数処理を含むスクリプトを書ける。</li>
+<li>TCP/IP の基礎と、Linux のネットワーク設定・トラブルシューティングができる。</li>
+<li>ユーザー管理、cron／at、ログ、時刻同期、メール配送の基本を理解している。</li>
+<li>セキュリティ管理、SSH、GPG、クラウドセキュリティの基礎を理解している。</li>
+<li>オープンソースの定義と主要ライセンスの違いを説明できる。</li>
+</ul>
+<h2 id="linuc">LinuC とは</h2>
+<p>LinuC（リナック）は、LPI-Japan が実施する Linux 技術者認定試験です。特定のディストリビューションやベンダーに依存せず、Linux の共通技術を問う点が特徴です。レベル1は「Linux システムの構築・運用・管理の専門家」の入口に位置づけられ、すべての IT 技術者の基礎となる知識を証明します。</p>
+<table>
+<thead>
+<tr>
+<th>レベル</th>
+<th>試験</th>
+<th>対象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>レベル1</td>
+<td>101、102</td>
+<td>Linux の基本操作・システム管理</td>
+</tr>
+<tr>
+<td>レベル2</td>
+<td>201、202</td>
+<td>ネットワーク・サーバー構築を含む応用管理</td>
+</tr>
+<tr>
+<td>レベル3</td>
+<td>300番台</td>
+<td>大規模・高信頼システムの設計運用</td>
+</tr>
+<tr>
+<td>レベル4</td>
+<td>システムアーキテクト</td>
+<td>システム全体のアーキテクチャ設計</td>
+</tr>
+</tbody>
+</table>
+<p>レベル1の認定には、<strong>101試験と102試験の両方に合格</strong>する必要があります。受験順は自由ですが、2試験は5年以内に合格しなければなりません。認定後も「有意性の期限」があり、認定日から5年以内の再認定または上位レベル取得が求められます。</p>
+<h2 id="2026">試験概要（2026年時点）</h2>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正式名称</td>
+<td>101試験: LinuC Level1 Exam 101／102試験: LinuC Level1 Exam 102</td>
+</tr>
+<tr>
+<td>出題範囲</td>
+<td>LinuC-1 Version 10.0</td>
+</tr>
+<tr>
+<td>試験方式</td>
+<td>CBT（コンピュータベーストテスト）。選択式が中心で、キーボード入力問題も一部あり</td>
+</tr>
+<tr>
+<td>問題数</td>
+<td>1試験あたり約60問</td>
+</tr>
+<tr>
+<td>試験時間</td>
+<td>90分（冒頭のアンケート等を除くと実質約85分）</td>
+</tr>
+<tr>
+<td>受験費用</td>
+<td>1試験あたり16,500円（税込）</td>
+</tr>
+<tr>
+<td>合格基準</td>
+<td>非公開。各分野をバランスよく得点することが重要</td>
+</tr>
+<tr>
+<td>認定要件</td>
+<td>101試験と102試験の両方に合格（5年以内）</td>
+</tr>
+<tr>
+<td>学習期間の目安</td>
+<td>1〜3か月</td>
+</tr>
+</tbody>
+</table>
+<p>CBT では、後から見直したい問題にフラグを付けられます。1問あたり約1分30秒が目安です。分からない問題で止まらず、<strong>1周目で解ける問題を確実に取り、2周目で迷った問題を見直す</strong>のが定石です。</p>
+<h3 id="101102">101試験と102試験の違い</h3>
+<table>
+<thead>
+<tr>
+<th>試験</th>
+<th>主な内容</th>
+<th>公式主題</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>101</td>
+<td>インストール、ファイル操作、コマンド、パッケージ、ディスク、ハードウェア</td>
+<td>1.01〜1.05</td>
+</tr>
+<tr>
+<td>102</td>
+<td>シェルスクリプト、ネットワーク、システム管理、サービス、セキュリティ、OSS文化</td>
+<td>1.06〜1.11</td>
+</tr>
+</tbody>
+</table>
+<p>101は「Linux の基本的な使い方と管理」、102は「ネットワーク・サービス・セキュリティを含む運用」と捉えると整理しやすくなります。</p>
+<h2 id="_3">本書の使い方</h2>
+<ol>
+<li><strong>まず各章の「学習目標」を読む</strong>。何を覚えるべきかが分かります。</li>
+<li><strong>本文を読み、コマンド例を実際に手元で試す</strong>。LinuC は暗記より体験が大切です。</li>
+<li><strong>章末の練習問題を解く</strong>。間違えた問題は本文に戻って確認します。</li>
+<li><strong>巻末の「コマンド早見表」で最終確認</strong>。試験前日はここを繰り返し見るのがおすすめです。</li>
+</ol>
+<p>学習環境は、VirtualBox／VMware／WSL2／クラウドのいずれでも構いません。Ubuntu 系と Rocky Linux（または AlmaLinux）系の両方に触れておくと、apt と yum、Debian 系と Red Hat 系の違いが理解しやすくなります。</p>
+<h3 id="_4">学習プランの例</h3>
+<table>
+<thead>
+<tr>
+<th>期間</th>
+<th>進め方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2週間（集中）</td>
+<td>1日2章＋練習問題。土日で総復習と模擬問題</td>
+</tr>
+<tr>
+<td>1か月（標準）</td>
+<td>平日1章、週末に復習。101→102の順に進める</td>
+</tr>
+<tr>
+<td>3か月（じっくり）</td>
+<td>週2章。実際に仮想マシンを構築し、サーバー設定を練習</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_5">目次</h2>
+<div class="toc">
+<ul>
+<li><a href="#_1">はじめに</a></li>
+<li><a href="#_2">学習目標</a></li>
+<li><a href="#linuc">LinuC とは</a></li>
+<li><a href="#2026">試験概要（2026年時点）</a><ul>
+<li><a href="#101102">101試験と102試験の違い</a></li>
+</ul>
+</li>
+<li><a href="#_3">本書の使い方</a><ul>
+<li><a href="#_4">学習プランの例</a></li>
+</ul>
+</li>
+<li><a href="#_5">目次</a></li>
+<li><a href="#1-linux">第1章 Linuxのインストールと仮想マシン・コンテナの利用</a><ul>
+<li><a href="#_6">この章で学ぶこと</a></li>
+<li><a href="#11-linux">1.1 Linux のインストール</a></li>
+<li><a href="#12-ssh">1.2 起動・停止と SSH 接続</a></li>
+<li><a href="#13">1.3 仮想マシンとコンテナ</a></li>
+<li><a href="#14-systemd">1.4 ブートプロセスと systemd</a></li>
+<li><a href="#15">1.5 プロセスの生成・監視・終了</a></li>
+<li><a href="#16-x-window-system">1.6 デスクトップ環境（X Window System）</a></li>
+<li><a href="#_15">本章のまとめ</a></li>
+<li><a href="#_16">練習問題</a></li>
+</ul>
+</li>
+<li><a href="#2">第2章 ファイル・ディレクトリの操作と管理</a><ul>
+<li><a href="#_17">この章で学ぶこと</a></li>
+<li><a href="#21">2.1 パーミッションと所有者</a></li>
+<li><a href="#22">2.2 基本的なファイル管理</a></li>
+<li><a href="#23">2.3 ハードリンクとシンボリックリンク</a></li>
+<li><a href="#24-fhs">2.4 FHS とファイル検索</a></li>
+<li><a href="#_22">本章のまとめ</a></li>
+<li><a href="#_23">練習問題</a></li>
+</ul>
+</li>
+<li><a href="#3-gnuunix">第3章 GNUとUnixのコマンド</a><ul>
+<li><a href="#_24">この章で学ぶこと</a></li>
+<li><a href="#31">3.1 コマンドラインの操作</a></li>
+<li><a href="#32">3.2 フィルタによるテキスト処理</a></li>
+<li><a href="#33">3.3 ストリーム・パイプ・リダイレクト</a></li>
+<li><a href="#34-grepsed">3.4 正規表現と grep／sed</a></li>
+<li><a href="#35-vi">3.5 vi エディタ</a></li>
+<li><a href="#_28">本章のまとめ</a></li>
+<li><a href="#_29">練習問題</a></li>
+</ul>
+</li>
+<li><a href="#4">第4章 リポジトリとパッケージ管理</a><ul>
+<li><a href="#_30">この章で学ぶこと</a></li>
+<li><a href="#41">4.1 パッケージ管理の基礎</a></li>
+<li><a href="#42-apt">4.2 apt によるパッケージ管理</a></li>
+<li><a href="#43-dpkg-debian">4.3 dpkg による Debian パッケージ管理</a></li>
+<li><a href="#44-yum">4.4 yum によるパッケージ管理</a></li>
+<li><a href="#45-rpm-rpm">4.5 rpm による RPM パッケージ管理</a></li>
+<li><a href="#46">4.6 どちらを使うべきか</a></li>
+<li><a href="#_31">本章のまとめ</a></li>
+<li><a href="#_32">練習問題</a></li>
+</ul>
+</li>
+<li><a href="#5">第5章 ハードウェア、ディスク、パーティション、ファイルシステム</a><ul>
+<li><a href="#_33">この章で学ぶこと</a></li>
+<li><a href="#51">5.1 ハードウェアの基礎</a></li>
+<li><a href="#52">5.2 パーティションとディスクレイアウト</a></li>
+<li><a href="#53-lvm">5.3 LVM</a></li>
+<li><a href="#54">5.4 ファイルシステムの作成とマウント</a></li>
+<li><a href="#_41">本章のまとめ</a></li>
+<li><a href="#_42">練習問題</a></li>
+</ul>
+</li>
+<li><a href="#6">第6章 シェルおよびスクリプト</a><ul>
+<li><a href="#_43">この章で学ぶこと</a></li>
+<li><a href="#61">6.1 シェル環境のカスタマイズ</a></li>
+<li><a href="#62-bash">6.2 Bash スクリプトの基本</a></li>
+<li><a href="#_53">本章のまとめ</a></li>
+<li><a href="#_54">練習問題</a></li>
+</ul>
+</li>
+<li><a href="#7">第7章 ネットワークの基礎</a><ul>
+<li><a href="#_55">この章で学ぶこと</a></li>
+<li><a href="#71">7.1 インターネットプロトコルの基礎</a></li>
+<li><a href="#72">7.2 ネットワーク設定</a></li>
+<li><a href="#73">7.3 ネットワークの問題解決</a></li>
+<li><a href="#74-dns">7.4 クライアント側の DNS 設定</a></li>
+<li><a href="#_57">本章のまとめ</a></li>
+<li><a href="#_58">練習問題</a></li>
+</ul>
+</li>
+<li><a href="#8">第8章 システム管理</a><ul>
+<li><a href="#_59">この章で学ぶこと</a></li>
+<li><a href="#81">8.1 アカウント管理</a></li>
+<li><a href="#82">8.2 ジョブスケジューリング</a></li>
+<li><a href="#83">8.3 ローカライゼーションと国際化</a></li>
+<li><a href="#_67">本章のまとめ</a></li>
+<li><a href="#_68">練習問題</a></li>
+</ul>
+</li>
+<li><a href="#9">第9章 重要なシステムサービス</a><ul>
+<li><a href="#_69">この章で学ぶこと</a></li>
+<li><a href="#91">9.1 システム時刻の管理</a></li>
+<li><a href="#92">9.2 システムのログ</a></li>
+<li><a href="#93-mta">9.3 メール配送エージェント（MTA）</a></li>
+<li><a href="#_74">本章のまとめ</a></li>
+<li><a href="#_75">練習問題</a></li>
+</ul>
+</li>
+<li><a href="#10">第10章 セキュリティ</a><ul>
+<li><a href="#_76">この章で学ぶこと</a></li>
+<li><a href="#101">10.1 セキュリティ管理業務</a></li>
+<li><a href="#102">10.2 ホストのセキュリティ設定</a></li>
+<li><a href="#103">10.3 暗号化によるデータの保護</a></li>
+<li><a href="#104">10.4 クラウドセキュリティの基礎</a></li>
+<li><a href="#_88">本章のまとめ</a></li>
+<li><a href="#_89">練習問題</a></li>
+</ul>
+</li>
+<li><a href="#11">第11章 オープンソースの文化</a><ul>
+<li><a href="#_90">この章で学ぶこと</a></li>
+<li><a href="#111">11.1 オープンソースの概念</a></li>
+<li><a href="#112">11.2 主要なライセンス</a></li>
+<li><a href="#113">11.3 コミュニティとエコシステム</a></li>
+<li><a href="#_93">本章のまとめ</a></li>
+<li><a href="#_94">練習問題</a></li>
+</ul>
+</li>
+<li><a href="#12">第12章 総まとめと合格戦略</a><ul>
+<li><a href="#_95">この章で学ぶこと</a></li>
+<li><a href="#121">12.1 出題範囲の全体像</a></li>
+<li><a href="#122">12.2 頻出テーマの最終確認</a></li>
+<li><a href="#123">12.3 本番の解き方</a></li>
+<li><a href="#124">12.4 学習チェックリスト</a></li>
+<li><a href="#125">12.5 総仕上げ問題</a></li>
+</ul>
+</li>
+<li><a href="#a">付録A 練習問題の解答</a><ul>
+<li><a href="#1">第1章</a></li>
+<li><a href="#2_1">第2章</a></li>
+<li><a href="#3">第3章</a></li>
+<li><a href="#4_1">第4章</a></li>
+<li><a href="#5_1">第5章</a></li>
+<li><a href="#6_1">第6章</a></li>
+<li><a href="#7_1">第7章</a></li>
+<li><a href="#8_1">第8章</a></li>
+<li><a href="#9_1">第9章</a></li>
+<li><a href="#10_1">第10章</a></li>
+<li><a href="#11_1">第11章</a></li>
+<li><a href="#12_1">第12章</a></li>
+</ul>
+</li>
+<li><a href="#b">付録B コマンド早見表</a><ul>
+<li><a href="#_96">ファイル・ディレクトリ</a></li>
+<li><a href="#_97">テキスト処理</a></li>
+<li><a href="#_98">プロセス・システム</a></li>
+<li><a href="#_99">ネットワーク</a></li>
+<li><a href="#_100">パッケージ・ストレージ</a></li>
+<li><a href="#_101">セキュリティ</a></li>
+</ul>
+</li>
+<li><a href="#c">付録C 用語集</a></li>
+<li><a href="#d">付録D 参考情報</a><ul>
+<li><a href="#_102">公式情報</a></li>
+<li><a href="#_103">学習に役立つ情報</a></li>
+<li><a href="#_104">免責</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 class="chapter" id="1-linux">第1章 Linuxのインストールと仮想マシン・コンテナの利用</h2>
+<h3 id="_6">この章で学ぶこと</h3>
+<ul>
+<li>Linux のインストール手順と、UEFI/BIOS のブート設定</li>
+<li>システムの起動・停止と、SSH による接続・切断</li>
+<li>ハイパーバイザーとコンテナの違い、仮想マシン／コンテナの操作</li>
+<li>systemd のブートターゲットとブートプロセス</li>
+<li>プロセスの生成・監視・終了、ジョブ管理</li>
+<li>X Window System の基本構成</li>
+</ul>
+<h3 id="11-linux">1.1 Linux のインストール</h3>
+<p>Linux のインストールは、大きく次の流れで進みます。</p>
+<ol>
+<li>インストールメディア（DVD/USB）または ISO イメージを用意する。</li>
+<li>UEFI/BIOS の設定で、ブートメディアの優先順位を変更する。</li>
+<li>インストーラを起動し、言語・タイムゾーン・キーボードを設定する。</li>
+<li>ディスクのパーティションを構成する。</li>
+<li>パッケージグループ（最小構成／GUI 付きなど）を選択する。</li>
+<li>root パスワードと一般ユーザーを作成する。</li>
+<li>インストールを実行し、再起動する。</li>
+</ol>
+<h4 id="uefi-bios">UEFI と BIOS</h4>
+<p>最近の PC は <strong>UEFI</strong> が主流です。UEFI は従来の BIOS より大きなディスクを扱え、<strong>GPT</strong> パーティションテーブルと組み合わせて使われます。UEFI でブートするには、ディスク上に <strong>ESP（EFI System Partition）</strong> が必要です。ESP は FAT32 でフォーマットされ、通常 <code>/boot/efi</code> にマウントされます。</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>BIOS（レガシー）</th>
+<th>UEFI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>パーティションテーブル</td>
+<td>MBR が中心</td>
+<td>GPT が中心</td>
+</tr>
+<tr>
+<td>ブートローダ</td>
+<td>MBR に格納</td>
+<td>ESP 内の EFI アプリケーション</td>
+</tr>
+<tr>
+<td>ディスク容量の制限</td>
+<td>MBR は2TBまで</td>
+<td>大容量ディスクに対応</td>
+</tr>
+<tr>
+<td>セキュアブート</td>
+<td>なし</td>
+<td>対応（Secure Boot）</td>
+</tr>
+</tbody>
+</table>
+<p>インストール時には、ブートメディアの優先順位を一時的に変更します。UEFI の画面では「Boot Order」「Boot Priority」などの項目を探します。</p>
+<h4 id="_7">パッケージグループとタイムゾーン</h4>
+<p>インストーラでは、用途に応じてパッケージグループを選びます。</p>
+<ul>
+<li><strong>最小構成（Minimal）</strong>: サーバー用途。必要なパッケージだけを入れる。</li>
+<li><strong>GUI 付き</strong>: デスクトップ環境を含む。</li>
+<li><strong>開発ツール</strong>: コンパイラやライブラリを含む。</li>
+</ul>
+<p>タイムゾーンは <code>Asia/Tokyo</code> を選びます。GUI か CUI かは、用途と運用方針で決めます。サーバーでは CUI が一般的です。</p>
+<h3 id="12-ssh">1.2 起動・停止と SSH 接続</h3>
+<h4 id="_8">起動と停止</h4>
+<p>Linux の起動・停止には、次のコマンドを使います。</p>
+<pre><code class="language-bash">shutdown -h now      # 今すぐ停止（halt）
+shutdown -r now      # 今すぐ再起動（reboot）
+shutdown -h +10      # 10分後に停止
+shutdown -c          # 予定されたシャットダウンを取消
+reboot               # 再起動
+halt                 # 停止
+poweroff             # 電源オフ
+</code></pre>
+<p><code>shutdown</code> はシステムを安全に停止します。<code>halt</code> と <code>poweroff</code> の違いは、電源管理の動作にあります。試験では「システムを停止するコマンド」として <code>shutdown -h now</code>、<code>halt</code>、<code>poweroff</code> が選べることを覚えておきましょう。</p>
+<h4 id="ssh">SSH による接続</h4>
+<p>遠隔から Linux に接続するには SSH を使います。</p>
+<pre><code class="language-bash">ssh user@192.168.1.10
+ssh -p 2222 user@server.example.com
+exit        # または logout、Ctrl-D
+</code></pre>
+<p>初回接続時には、サーバーのホスト鍵が <code>~/.ssh/known_hosts</code> に保存されます。指紋の確認を求められたら、管理者から提示された値と照合します。</p>
+<p>公開鍵認証を使う場合、クライアントで鍵ペアを作成します。</p>
+<pre><code class="language-bash">ssh-keygen -t ed25519 -C &quot;user@example.com&quot;
+# ~/.ssh/id_ed25519      （秘密鍵。600）
+# ~/.ssh/id_ed25519.pub  （公開鍵。644）
+ssh-copy-id user@server  # 公開鍵をサーバーの authorized_keys に登録
+</code></pre>
+<p>サーバー側では、<code>~/.ssh/authorized_keys</code> に公開鍵を登録します。パーミッションが緩いと SSH が鍵を拒否するため、次の権限を守ります。</p>
+<pre><code class="language-bash">chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/id_ed25519
+</code></pre>
+<p>試験では <code>id_rsa</code>／<code>id_rsa.pub</code> という従来の RSA 鍵の名前も出題されます。現在は Ed25519 が推奨ですが、名称は覚えておきましょう。</p>
+<h3 id="13">1.3 仮想マシンとコンテナ</h3>
+<h4 id="_9">ハイパーバイザー</h4>
+<p>仮想マシン（VM）は、<strong>ハイパーバイザー</strong>と呼ばれるソフトウェアがハードウェアを仮想化し、その上でゲスト OS を動かします。</p>
+<table>
+<thead>
+<tr>
+<th>種類</th>
+<th>説明</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>タイプ1（ベアメタル）</td>
+<td>ハードウェア上で直接動作</td>
+<td>KVM、VMware ESXi、Hyper-V</td>
+</tr>
+<tr>
+<td>タイプ2（ホスト型）</td>
+<td>ホスト OS 上で動作</td>
+<td>VirtualBox、VMware Workstation</td>
+</tr>
+</tbody>
+</table>
+<p>Linux の KVM はカーネルモジュールとして仮想化機能を提供し、<code>libvirt</code> と <code>virsh</code> で管理できます。CPU の仮想化支援機能（Intel VT-x／AMD-V）が有効になっている必要があります。</p>
+<pre><code class="language-bash">virsh list --all          # 仮想マシン一覧
+virsh start web01         # 起動
+virsh shutdown web01      # 正常停止
+virsh destroy web01       # 強制停止
+virsh console web01       # コンソール接続
+</code></pre>
+<h4 id="_10">コンテナ</h4>
+<p>コンテナは、ホスト OS のカーネルを共有し、<strong>名前空間（namespaces）</strong>と<strong>cgroups</strong>によってプロセスを隔離します。仮想マシンのようにゲスト OS を持たないため、起動が速く、リソース消費が少ないのが特徴です。</p>
+<table>
+<thead>
+<tr>
+<th>観点</th>
+<th>仮想マシン</th>
+<th>コンテナ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>カーネル</td>
+<td>ゲストごとに持つ</td>
+<td>ホストと共有</td>
+</tr>
+<tr>
+<td>起動時間</td>
+<td>比較的遅い</td>
+<td>非常に速い</td>
+</tr>
+<tr>
+<td>隔離レベル</td>
+<td>強い</td>
+<td>ホストカーネルを共有するため比較的弱い</td>
+</tr>
+<tr>
+<td>リソース消費</td>
+<td>大きい</td>
+<td>小さい</td>
+</tr>
+<tr>
+<td>用途</td>
+<td>異なる OS、強い隔離</td>
+<td>アプリケーションの軽量な実行環境</td>
+</tr>
+</tbody>
+</table>
+<p>Docker の基本操作は次のとおりです。</p>
+<pre><code class="language-bash">docker run -d --name web -p 8080:80 nginx  # イメージからコンテナを起動
+docker ps                                   # 実行中コンテナ一覧
+docker ps -a                                # 停止中も含めて表示
+docker exec -it web bash                    # コンテナ内でシェルを実行
+docker stop web                             # 停止
+docker start web                            # 起動
+docker rm web                               # 削除
+docker images                               # イメージ一覧
+</code></pre>
+<p><code>-p 8080:80</code> は「ホストの8080番ポートをコンテナの80番ポートに転送する」という意味です。</p>
+<h3 id="14-systemd">1.4 ブートプロセスと systemd</h3>
+<p>Linux の起動は、おおまかに次の順序で進みます。</p>
+<ol>
+<li>UEFI/BIOS が起動し、ブートデバイスを探す。</li>
+<li>ブートローダ（GRUB2 など）がカーネルと initramfs を読み込む。</li>
+<li>カーネルが初期化され、initramfs から必要なドライバを読み込む。</li>
+<li>カーネルが PID 1 として <strong>systemd</strong> を起動する。</li>
+<li>systemd がデフォルトのターゲットまでサービスを起動する。</li>
+</ol>
+<h4 id="_11">ブートターゲット</h4>
+<p>systemd では、従来のランレベルに代えて<strong>ターゲット</strong>を使います。</p>
+<table>
+<thead>
+<tr>
+<th>ターゲット</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>poweroff.target</code></td>
+<td>停止</td>
+</tr>
+<tr>
+<td><code>rescue.target</code></td>
+<td>シングルユーザーモード相当（最小限の修復環境）</td>
+</tr>
+<tr>
+<td><code>multi-user.target</code></td>
+<td>複数ユーザー・CUI（サーバーの標準）</td>
+</tr>
+<tr>
+<td><code>graphical.target</code></td>
+<td>GUI を含むマルチユーザー</td>
+</tr>
+<tr>
+<td><code>reboot.target</code></td>
+<td>再起動</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash">systemctl get-default                    # 現在のデフォルトターゲット
+systemctl set-default multi-user.target  # デフォルトを CUI に変更
+systemctl isolate rescue.target          # 一時的に rescue へ切り替え
+systemctl reboot                         # 再起動
+systemctl poweroff                       # 停止
+</code></pre>
+<p><code>isolate</code> は現在のターゲットを即座に切り替えます。試験では <code>systemctl set-default</code> と <code>systemctl isolate</code> の違いが問われます。</p>
+<h3 id="15">1.5 プロセスの生成・監視・終了</h3>
+<h4 id="_12">プロセスの表示</h4>
+<pre><code class="language-bash">ps aux          # すべてのプロセスを詳細表示
+ps -ef          # 親子関係を含む形式
+ps -ef --forest # プロセスの木構造
+top             # リアルタイム監視
+pstree -p       # プロセスツリーと PID
+uptime          # 稼働時間・負荷平均
+pgrep -u user   # ユーザー user のプロセスを PID で検索
+</code></pre>
+<p><code>ps aux</code> の主な列は、USER（実行ユーザー）、PID（プロセス ID）、%CPU、%MEM、VSZ（仮想メモリ）、RSS（物理メモリ）、STAT（状態）、COMMAND です。STAT の <code>R</code> は実行中、<code>S</code> は待機中、<code>Z</code> はゾンビ、<code>T</code> は停止を表します。</p>
+<h4 id="_13">ジョブ管理</h4>
+<pre><code class="language-bash">sleep 300 &amp;     # バックグラウンドで実行
+jobs            # ジョブ一覧
+fg %1           # ジョブ1をフォアグラウンドへ
+bg %1           # ジョブ1をバックグラウンドで再開
+</code></pre>
+<p>ログアウト後も処理を続けたい場合は、<code>nohup</code> や <code>screen</code>、<code>tmux</code> を使います。</p>
+<pre><code class="language-bash">nohup long_task.sh &gt; out.log 2&gt;&amp;1 &amp;
+screen -S work
+tmux new -s work
+</code></pre>
+<h4 id="_14">シグナル</h4>
+<pre><code class="language-bash">kill 1234          # PID 1234 に TERM（15）を送る
+kill -9 1234       # KILL（強制終了）
+kill -HUP 1234     # HUP（設定再読み込みなど）
+pkill -f httpd     # コマンド名や引数で一致するプロセスに送信
+killall httpd      # 名前が一致する全プロセスに送信
+</code></pre>
+<p><code>SIGTERM</code>（15）は正常終了を促すシグナル、<code>SIGKILL</code>（9）は強制終了で捕捉できません。まず TERM を送り、応答がない場合に KILL を使うのが基本です。</p>
+<h3 id="16-x-window-system">1.6 デスクトップ環境（X Window System）</h3>
+<p>X Window System（X11）は、GUI を実現するための基本的な仕組みです。</p>
+<table>
+<thead>
+<tr>
+<th>構成要素</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X サーバー</td>
+<td>画面・キーボード・マウスなどの入出力を管理</td>
+</tr>
+<tr>
+<td>X クライアント</td>
+<td>アプリケーション。X サーバーに描画を依頼</td>
+</tr>
+<tr>
+<td>ディスプレイマネージャ</td>
+<td>ログイン画面を提供（GDM、LightDM など）</td>
+</tr>
+<tr>
+<td>ウィンドウマネージャ</td>
+<td>ウィンドウの枠・配置・移動を管理</td>
+</tr>
+<tr>
+<td>統合デスクトップ環境</td>
+<td>GNOME、KDE Plasma、Xfce など</td>
+</tr>
+</tbody>
+</table>
+<p><code>DISPLAY</code> 環境変数は、接続先の X サーバーを指定します（例: <code>:0</code>、<code>localhost:10.0</code>）。<code>xauth</code> は X サーバーへのアクセス認証を管理します。SSH の X11 転送を使うと、リモートの GUI アプリを手元に表示できます。</p>
+<pre><code class="language-bash">ssh -X user@server    # X11 転送を有効にして接続
+ssh -Y user@server    # 信頼された X11 転送
+echo $DISPLAY
+startx                # X を手動で起動（環境による）
+</code></pre>
+<h3 id="_15">本章のまとめ</h3>
+<ul>
+<li>インストールでは UEFI/BIOS、パーティション、パッケージグループ、タイムゾーンを確認する。</li>
+<li>停止は <code>shutdown -h now</code>、再起動は <code>shutdown -r now</code>／<code>reboot</code>。</li>
+<li>SSH の鍵は <code>ssh-keygen</code> で作り、<code>authorized_keys</code> と <code>known_hosts</code> の役割を区別する。</li>
+<li>仮想マシンはゲスト OS を持ち、コンテナはホストのカーネルを共有する。</li>
+<li>systemd のターゲットは <code>multi-user.target</code> と <code>graphical.target</code> を中心に覚える。</li>
+<li>プロセスは <code>ps</code>／<code>top</code>、ジョブは <code>jobs</code>／<code>fg</code>／<code>bg</code>、終了は <code>kill</code> を使う。</li>
+</ul>
+<h3 id="_16">練習問題</h3>
+<p><strong>練習問題 1.1</strong>　UEFI 環境で Linux を起動するために必要なパーティションはどれか。</p>
+<p>(a) <code>/home</code>　(b) ESP（EFI System Partition）　(c) スワップ　(d) <code>/var</code></p>
+<p><strong>練習問題 1.2</strong>　10分後にシステムを停止するコマンドとして正しいものはどれか。</p>
+<p>(a) <code>shutdown -r +10</code>　(b) <code>shutdown -h +10</code>　(c) <code>halt +10</code>　(d) <code>reboot 10</code></p>
+<p><strong>練習問題 1.3</strong>　コンテナの説明として最も適切なものはどれか。</p>
+<p>(a) ゲスト OS ごとに独立したカーネルを持つ　(b) ホスト OS のカーネルを共有し、名前空間で隔離する　(c) 必ず GUI が必要である　(d) 仮想マシンより起動に時間がかかる</p>
+<p><strong>練習問題 1.4</strong>　デフォルトのブートターゲットを CUI のマルチユーザーモードに変更するコマンドはどれか。</p>
+<p>(a) <code>systemctl isolate multi-user.target</code>　(b) <code>systemctl set-default multi-user.target</code>　(c) <code>systemctl enable multi-user.target</code>　(d) <code>systemctl start rescue.target</code></p>
+<p><strong>練習問題 1.5</strong>　実行中のプロセスに強制終了のシグナルを送るコマンドはどれか。</p>
+<p>(a) <code>kill -9 PID</code>　(b) <code>kill -15 PID</code>　(c) <code>kill -1 PID</code>　(d) <code>kill -0 PID</code></p>
+<h2 class="chapter" id="2">第2章 ファイル・ディレクトリの操作と管理</h2>
+<h3 id="_17">この章で学ぶこと</h3>
+<ul>
+<li>Linux のパーミッションと所有者の考え方</li>
+<li><code>chmod</code>／<code>chown</code>／<code>chgrp</code>／<code>umask</code> の使い方</li>
+<li>ファイル・ディレクトリの基本操作とアーカイブ</li>
+<li>ハードリンクとシンボリックリンクの違い</li>
+<li>FHS（ファイルシステム階層標準）とファイル検索</li>
+</ul>
+<h3 id="21">2.1 パーミッションと所有者</h3>
+<p><code>ls -l</code> の出力は、次のような構造です。</p>
+<pre><code class="language-text">-rw-r--r-- 1 user group  1234 Apr  1 10:00 report.txt
+drwxr-xr-x 2 user group  4096 Apr  1 10:00 docs/
+</code></pre>
+<p>先頭の10文字のうち、1文字目はファイル種別（<code>-</code> 通常ファイル、<code>d</code> ディレクトリ、<code>l</code> シンボリックリンク、<code>c</code> キャラクタデバイス、<code>b</code> ブロックデバイス）、残り9文字は3文字ずつ「所有者」「グループ」「その他」の権限を表します。</p>
+<table>
+<thead>
+<tr>
+<th>記号</th>
+<th>意味</th>
+<th>数値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>r</code></td>
+<td>読み取り</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td>書き込み</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>実行（ディレクトリでは移動・中身の参照）</td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>権限なし</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>たとえば <code>rwxr-xr--</code> は、所有者が 7、グループが 5、その他が 4 で、<strong>754</strong> と表せます。</p>
+<pre><code class="language-bash">chmod 754 report.txt
+chmod u+x script.sh          # 所有者に実行権を追加
+chmod g-w,o-r report.txt     # グループの書き込みとその他の読み取りを削除
+chmod -R 755 public_html     # 再帰的に変更
+chown user:group report.txt  # 所有者とグループを変更
+chgrp developers report.txt  # グループだけ変更
+</code></pre>
+<h4 id="_18">特殊なパーミッション</h4>
+<table>
+<thead>
+<tr>
+<th>ビット</th>
+<th>数値</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SUID</td>
+<td>4000</td>
+<td>実行時にファイル所有者の権限で動く（例: <code>/usr/bin/passwd</code>）</td>
+</tr>
+<tr>
+<td>SGID</td>
+<td>2000</td>
+<td>実行時にグループの権限で動く。ディレクトリでは新規ファイルが親ディレクトリのグループを継承</td>
+</tr>
+<tr>
+<td>スティッキービット</td>
+<td>1000</td>
+<td>ディレクトリ内のファイルを所有者以外が削除できない（例: <code>/tmp</code>）</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash">chmod 4755 /usr/local/bin/tool   # SUID
+chmod 2775 /shared               # SGID
+chmod 1777 /tmp                  # スティッキービット
+ls -ld /tmp                      # drwxrwxrwt ...
+</code></pre>
+<p>SUID が設定されたファイルは、セキュリティ監査の対象になります。<code>find / -perm -4000 -type f 2&gt;/dev/null</code> で検索できます。</p>
+<h4 id="umask">umask</h4>
+<p><code>umask</code> は、新規ファイル・ディレクトリ作成時に<strong>剥奪する権限</strong>を指定します。ファイルの基準は 666、ディレクトリの基準は 777 です。</p>
+<pre><code class="language-bash">umask          # 例: 0022
+umask 027      # グループの書き込み、その他の全権限を剥奪
+</code></pre>
+<p><code>umask 022</code> の場合、ファイルは <code>666 - 022 = 644</code>、ディレクトリは <code>777 - 022 = 755</code> になります。<code>umask 027</code> ならファイルは 640、ディレクトリは 750 です。</p>
+<h3 id="22">2.2 基本的なファイル管理</h3>
+<pre><code class="language-bash">ls -la                 # 隠しファイルを含めて詳細表示
+touch newfile          # 空ファイルを作成／タイムスタンプ更新
+cp file1 file2         # コピー
+cp -r dir1 dir2        # ディレクトリを再帰コピー
+mv file1 dir/          # 移動
+mv oldname newname     # 名前変更
+rm file                # 削除
+rm -r dir              # ディレクトリを再帰削除
+rmdir emptydir         # 空ディレクトリを削除
+mkdir -p a/b/c         # 親ディレクトリもまとめて作成
+file report.txt        # ファイル種別を判定
+</code></pre>
+<h4 id="_19">ワイルドカード</h4>
+<table>
+<thead>
+<tr>
+<th>記号</th>
+<th>意味</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td>0文字以上の任意文字</td>
+<td><code>*.txt</code></td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>任意の1文字</td>
+<td><code>file?.log</code></td>
+</tr>
+<tr>
+<td><code>[abc]</code></td>
+<td>a、b、c のいずれか</td>
+<td><code>file[123].txt</code></td>
+</tr>
+<tr>
+<td><code>[a-z]</code></td>
+<td>範囲</td>
+<td><code>[a-z]*.conf</code></td>
+</tr>
+<tr>
+<td><code>[!abc]</code></td>
+<td>指定以外</td>
+<td><code>[!0-9]*</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="_20">アーカイブと圧縮</h4>
+<pre><code class="language-bash">tar -cvf archive.tar dir/          # アーカイブ作成
+tar -xvf archive.tar               # 展開
+tar -tvf archive.tar               # 内容一覧
+tar -czvf archive.tar.gz dir/      # gzip 圧縮
+tar -xzvf archive.tar.gz           # gzip 展開
+tar -cjvf archive.tar.bz2 dir/     # bzip2
+tar -cJvf archive.tar.xz dir/      # xz
+gzip file                          # file.gz を作成（元ファイルは削除）
+gunzip file.gz                     # 展開
+xz -9 file                         # 高圧縮
+dd if=/dev/zero of=file bs=1M count=100  # 100MB のゼロファイル
+</code></pre>
+<p><code>tar</code> のオプションは、<code>c</code>（作成）、<code>x</code>（展開）、<code>t</code>（一覧）、<code>v</code>（詳細）、<code>f</code>（ファイル指定）、<code>z</code>（gzip）、<code>j</code>（bzip2）、<code>J</code>（xz）を組み合わせます。</p>
+<h3 id="23">2.3 ハードリンクとシンボリックリンク</h3>
+<p>Linux のファイルは、<strong>inode</strong> と呼ばれる管理情報で識別されます。ファイル名は inode への参照です。</p>
+<ul>
+<li><strong>ハードリンク</strong>: 同じ inode を指す別の名前。元ファイルを削除しても、リンクが残っていればデータは残る。異なるファイルシステム間では作成できない。ディレクトリには作成できない（通常）。</li>
+<li><strong>シンボリックリンク</strong>: リンク先のパス名を保持する特別なファイル。異なるファイルシステム間でも作成できる。リンク先が削除されると壊れたリンクになる。</li>
+</ul>
+<pre><code class="language-bash">ln original hardlink        # ハードリンク
+ln -s /var/www/html link    # シンボリックリンク
+ls -li                      # inode 番号も表示
+ls -l                       # シンボリックリンクは l で始まり、-&gt; でリンク先を表示
+readlink link               # リンク先を表示
+</code></pre>
+<p>ハードリンクは inode 番号が元ファイルと同じになります。シンボリックリンクは別の inode を持ち、リンク先のパスを内容として保持します。</p>
+<h3 id="24-fhs">2.4 FHS とファイル検索</h3>
+<p>FHS（Filesystem Hierarchy Standard）は、Linux のディレクトリ構造の標準です。試験では「どのファイルがどこにあるか」がよく問われます。</p>
+<table>
+<thead>
+<tr>
+<th>ディレクトリ</th>
+<th>主な内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/</code></td>
+<td>ルート。すべての起点</td>
+</tr>
+<tr>
+<td><code>/bin</code></td>
+<td>基本コマンド（最近は <code>/usr/bin</code> へのリンクが多い）</td>
+</tr>
+<tr>
+<td><code>/sbin</code></td>
+<td>システム管理用コマンド</td>
+</tr>
+<tr>
+<td><code>/etc</code></td>
+<td>システム設定ファイル</td>
+</tr>
+<tr>
+<td><code>/home</code></td>
+<td>ユーザーのホームディレクトリ</td>
+</tr>
+<tr>
+<td><code>/root</code></td>
+<td>root のホームディレクトリ</td>
+</tr>
+<tr>
+<td><code>/var</code></td>
+<td>可変データ（ログ、スプール、キャッシュ）</td>
+</tr>
+<tr>
+<td><code>/tmp</code></td>
+<td>一時ファイル。再起動で消えることが多い</td>
+</tr>
+<tr>
+<td><code>/usr</code></td>
+<td>ユーザー向けのプログラム・ライブラリ・共有データ</td>
+</tr>
+<tr>
+<td><code>/usr/local</code></td>
+<td>管理者が独自にインストールしたソフトウェア</td>
+</tr>
+<tr>
+<td><code>/opt</code></td>
+<td>追加パッケージ</td>
+</tr>
+<tr>
+<td><code>/boot</code></td>
+<td>カーネル、initramfs、GRUB の設定</td>
+</tr>
+<tr>
+<td><code>/dev</code></td>
+<td>デバイスファイル</td>
+</tr>
+<tr>
+<td><code>/proc</code></td>
+<td>カーネル・プロセスの情報（仮想ファイルシステム）</td>
+</tr>
+<tr>
+<td><code>/sys</code></td>
+<td>カーネル・デバイスの情報（sysfs）</td>
+</tr>
+<tr>
+<td><code>/run</code></td>
+<td>実行時の一時データ</td>
+</tr>
+<tr>
+<td><code>/media</code></td>
+<td>リムーバブルメディアの自動マウント先</td>
+</tr>
+<tr>
+<td><code>/mnt</code></td>
+<td>手動マウントの一時的な場所</td>
+</tr>
+<tr>
+<td><code>/srv</code></td>
+<td>サービス提供用データ</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_21">ファイル検索</h4>
+<pre><code class="language-bash">find /var/log -name &quot;*.log&quot;          # 名前で検索
+find /home -type f -size +10M        # 10MB 超の通常ファイル
+find / -user alice -mtime -7         # alice 所有で7日以内に更新
+find /tmp -type f -delete            # 検索して削除
+locate httpd.conf                    # データベースから高速検索
+sudo updatedb                        # locate のデータベース更新
+which ls                             # PATH 上の実行ファイルを表示
+whereis ls                           # バイナリ・マニュアル等の場所
+type cd                              # コマンドの種類（組み込みか等）
+</code></pre>
+<p><code>find</code> は実際のファイルシステムを走査するため時間がかかりますが、常に最新の結果を返します。<code>locate</code> は事前に作ったデータベースを使うため高速ですが、<code>updatedb</code> を実行するまで新規ファイルは反映されません。</p>
+<h3 id="_22">本章のまとめ</h3>
+<ul>
+<li>パーミッションは <code>rwx</code> と数値（4・2・1）の両方で理解する。</li>
+<li>SUID・SGID・スティッキービットは用途と代表例を覚える。</li>
+<li><code>umask</code> は「剥奪する権限」であり、ファイル666／ディレクトリ777から引く。</li>
+<li>ハードリンクは inode を共有し、シンボリックリンクはパスを保持する。</li>
+<li><code>find</code> は条件指定が豊富。<code>locate</code> は高速だがデータベース依存。</li>
+<li>FHS の主要ディレクトリの役割を表で整理する。</li>
+</ul>
+<h3 id="_23">練習問題</h3>
+<p><strong>練習問題 2.1</strong>　<code>umask</code> が 027 のとき、新規に作成される通常ファイルの権限はどれか。</p>
+<p>(a) 640　(b) 644　(c) 750　(d) 755</p>
+<p><strong>練習問題 2.2</strong>　スティッキービットが設定されたディレクトリとして代表的なものはどれか。</p>
+<p>(a) <code>/etc</code>　(b) <code>/tmp</code>　(c) <code>/boot</code>　(d) <code>/root</code></p>
+<p><strong>練習問題 2.3</strong>　ハードリンクについて正しい説明はどれか。</p>
+<p>(a) 異なるファイルシステム間でも作成できる　(b) 元ファイルと同じ inode を共有する　(c) リンク先のパス名を内容として持つ　(d) ディレクトリにのみ作成できる</p>
+<p><strong>練習問題 2.4</strong>　<code>/var/log</code> 以下から7日以内に更新された通常ファイルを検索するコマンドはどれか。</p>
+<p>(a) <code>find /var/log -type f -mtime -7</code>　(b) <code>find /var/log -type d -mtime 7</code>　(c) <code>locate /var/log -mtime -7</code>　(d) <code>grep -r -mtime -7 /var/log</code></p>
+<p><strong>練習問題 2.5</strong>　システム設定ファイルが置かれる標準的なディレクトリはどれか。</p>
+<p>(a) <code>/var</code>　(b) <code>/usr</code>　(c) <code>/etc</code>　(d) <code>/opt</code></p>
+<h2 class="chapter" id="3-gnuunix">第3章 GNUとUnixのコマンド</h2>
+<h3 id="_24">この章で学ぶこと</h3>
+<ul>
+<li>シェル変数・環境変数とコマンドラインの基本操作</li>
+<li>テキストストリームを処理するフィルタコマンド</li>
+<li>標準入力・標準出力・標準エラー出力とリダイレクト</li>
+<li>パイプ、<code>xargs</code>、<code>tee</code> の使い方</li>
+<li>正規表現と <code>grep</code>／<code>sed</code></li>
+<li><code>vi</code> の基本操作</li>
+</ul>
+<h3 id="31">3.1 コマンドラインの操作</h3>
+<h4 id="_25">変数</h4>
+<p>シェル変数は現在のシェルだけで有効、環境変数は子プロセスにも引き継がれます。</p>
+<pre><code class="language-bash">name=Alice          # シェル変数（= の前後に空白を入れない）
+echo &quot;$name&quot;
+export name         # 環境変数にする
+env                 # 環境変数の一覧
+set                 # シェル変数を含む一覧
+unset name          # 変数を削除
+echo $PATH
+export PATH=&quot;$PATH:/usr/local/bin&quot;
+</code></pre>
+<h4 id="_26">引用符</h4>
+<table>
+<thead>
+<tr>
+<th>記号</th>
+<th>動作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>'...'</code></td>
+<td>中身をすべて文字どおり扱う</td>
+</tr>
+<tr>
+<td><code>"..."</code></td>
+<td><code>$変数</code>、<code>$(コマンド)</code>、<code>`コマンド`</code> を展開する</td>
+</tr>
+<tr>
+<td><code>\</code></td>
+<td>次の1文字をエスケープする</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash">echo '$HOME'   # $HOME と表示
+echo &quot;$HOME&quot;   # /home/user などと表示
+</code></pre>
+<h4 id="_27">コマンド置換と履歴</h4>
+<pre><code class="language-bash">today=$(date +%F)
+echo &quot;Today is $today&quot;
+history            # コマンド履歴
+!123               # 履歴番号123を実行
+!!                 # 直前のコマンド
+man ls             # マニュアル表示
+man 5 passwd       # セクション5（設定ファイル）を表示
+</code></pre>
+<p><code>~/.bash_history</code> に履歴が保存されます。<code>HISTSIZE</code> や <code>HISTFILESIZE</code> で件数を制御できます。</p>
+<h3 id="32">3.2 フィルタによるテキスト処理</h3>
+<table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>主な用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cat</code></td>
+<td>ファイル内容を表示・連結</td>
+</tr>
+<tr>
+<td><code>head</code> / <code>tail</code></td>
+<td>先頭／末尾の行を表示（<code>-n</code>、<code>tail -f</code>）</td>
+</tr>
+<tr>
+<td><code>cut</code></td>
+<td>列を切り出す（<code>-d</code> 区切り、<code>-f</code> フィールド）</td>
+</tr>
+<tr>
+<td><code>sort</code></td>
+<td>並べ替え（<code>-n</code> 数値、<code>-r</code> 逆順、<code>-k</code> キー）</td>
+</tr>
+<tr>
+<td><code>uniq</code></td>
+<td>連続する重複行を除去（<code>-c</code> 件数、<code>-d</code> 重複のみ）</td>
+</tr>
+<tr>
+<td><code>wc</code></td>
+<td>行数・単語数・バイト数（<code>-l</code>、<code>-w</code>、<code>-c</code>）</td>
+</tr>
+<tr>
+<td><code>tr</code></td>
+<td>文字の置換・削除</td>
+</tr>
+<tr>
+<td><code>sed</code></td>
+<td>ストリームエディタ。置換・削除・抽出</td>
+</tr>
+<tr>
+<td><code>nl</code></td>
+<td>行番号を付ける</td>
+</tr>
+<tr>
+<td><code>od</code></td>
+<td>バイナリ・8進・16進で表示</td>
+</tr>
+<tr>
+<td><code>paste</code></td>
+<td>ファイルを横に結合</td>
+</tr>
+<tr>
+<td><code>join</code></td>
+<td>共通キーでファイルを結合</td>
+</tr>
+<tr>
+<td><code>split</code></td>
+<td>ファイルを分割</td>
+</tr>
+<tr>
+<td><code>expand</code> / <code>unexpand</code></td>
+<td>タブと空白の変換</td>
+</tr>
+<tr>
+<td><code>fmt</code></td>
+<td>テキストの折り返し</td>
+</tr>
+<tr>
+<td><code>pr</code></td>
+<td>印刷用に整形</td>
+</tr>
+<tr>
+<td><code>less</code></td>
+<td>ページャ（<code>/</code> 検索、<code>q</code> 終了）</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash">head -n 20 access.log
+tail -n 50 access.log
+tail -f /var/log/syslog
+cut -d: -f1 /etc/passwd              # ユーザー名だけ
+sort -t: -k3 -n /etc/passwd          # UID で数値ソート
+uniq -c sorted.txt                   # 重複件数
+wc -l file.txt
+tr 'a-z' 'A-Z' &lt; file.txt
+</code></pre>
+<h3 id="33">3.3 ストリーム・パイプ・リダイレクト</h3>
+<p>Linux のプロセスには、標準入力（fd 0）、標準出力（fd 1）、標準エラー出力（fd 2）があります。</p>
+<table>
+<thead>
+<tr>
+<th>記法</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&gt;</code></td>
+<td>標準出力をファイルに上書き</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code></td>
+<td>標準出力をファイルに追記</td>
+</tr>
+<tr>
+<td><code>2&gt;</code></td>
+<td>標準エラー出力をファイルにリダイレクト</td>
+</tr>
+<tr>
+<td><code>2&gt;&amp;1</code></td>
+<td>標準エラー出力を標準出力に合流</td>
+</tr>
+<tr>
+<td><code>&amp;&gt;</code></td>
+<td>標準出力と標準エラー出力の両方をファイルへ（Bash）</td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>標準入力をファイルから受け取る</td>
+</tr>
+<tr>
+<td><code>&lt;&lt;</code></td>
+<td>ヒアドキュメント</td>
+</tr>
+<tr>
+<td><code>\|</code></td>
+<td>パイプ。前の出力を次の入力へ</td>
+</tr>
+<tr>
+<td><code>tee</code></td>
+<td>出力を画面とファイルの両方へ</td>
+</tr>
+<tr>
+<td><code>xargs</code></td>
+<td>標準入力をコマンドの引数に変換</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash">command &gt; out.txt 2&gt; err.txt
+command &gt; out.txt 2&gt;&amp;1
+command &amp;&gt; all.txt
+cat &lt;&lt;EOF &gt; config.txt
+server=example.com
+port=80
+EOF
+ps aux | grep sshd
+find . -name &quot;*.tmp&quot; -print0 | xargs -0 rm -f
+command | tee log.txt
+</code></pre>
+<p><code>2&gt;&amp;1</code> は「ファイルディスクリプタ2を、現在のファイルディスクリプタ1の指す先へ複製する」という意味です。順序が重要で、<code>command 2&gt;&amp;1 &gt; out.txt</code> と <code>command &gt; out.txt 2&gt;&amp;1</code> では結果が異なります。</p>
+<h3 id="34-grepsed">3.4 正規表現と grep／sed</h3>
+<h4 id="bre">基本正規表現（BRE）</h4>
+<table>
+<thead>
+<tr>
+<th>記号</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.</code></td>
+<td>任意の1文字</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>直前の文字の0回以上の繰り返し</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>行頭</td>
+</tr>
+<tr>
+<td><code>$</code></td>
+<td>行末</td>
+</tr>
+<tr>
+<td><code>[abc]</code></td>
+<td>a、b、c のいずれか</td>
+</tr>
+<tr>
+<td><code>[^abc]</code></td>
+<td>a、b、c 以外</td>
+</tr>
+<tr>
+<td><code>[a-z]</code></td>
+<td>範囲</td>
+</tr>
+<tr>
+<td><code>\</code></td>
+<td>メタ文字のエスケープ</td>
+</tr>
+</tbody>
+</table>
+<p>拡張正規表現（ERE）では、<code>+</code>（1回以上）、<code>?</code>（0回または1回）、<code>|</code>（OR）、<code>()</code>（グループ）、<code>{n,m}</code>（回数）が使えます。</p>
+<pre><code class="language-bash">grep 'error' /var/log/syslog
+grep -i 'error' log.txt          # 大文字小文字を無視
+grep -v '^#' config.txt          # コメント行以外
+grep -n 'root' /etc/passwd       # 行番号付き
+grep -r 'Listen' /etc/httpd/     # 再帰検索
+grep -E 'error|warning' log.txt  # 拡張正規表現
+grep -c 'Failed' auth.log        # 一致行数
+egrep '^(error|warning)' log.txt
+fgrep 'a.b' file.txt             # 正規表現を使わない固定文字列
+</code></pre>
+<p><code>sed</code> はストリームエディタです。</p>
+<pre><code class="language-bash">sed 's/old/new/' file.txt        # 各行の最初の old を new に
+sed 's/old/new/g' file.txt       # すべて置換
+sed -i 's/old/new/g' file.txt    # ファイルを直接編集
+sed -n '1,10p' file.txt          # 1〜10行目を表示
+sed '/^#/d' config.txt           # コメント行を削除
+sed -e 's/a/b/' -e 's/c/d/' file.txt
+</code></pre>
+<h3 id="35-vi">3.5 vi エディタ</h3>
+<p><code>vi</code> には<strong>コマンドモード</strong>と<strong>挿入モード</strong>があります。起動時はコマンドモードです。</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>キー</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>挿入モードへ（カーソル位置）</td>
+<td><code>i</code></td>
+</tr>
+<tr>
+<td>挿入モードへ（カーソルの次）</td>
+<td><code>a</code></td>
+</tr>
+<tr>
+<td>挿入モードへ（下に新しい行）</td>
+<td><code>o</code></td>
+</tr>
+<tr>
+<td>コマンドモードへ戻る</td>
+<td><code>Esc</code></td>
+</tr>
+<tr>
+<td>保存して終了</td>
+<td><code>:wq</code> または <code>ZZ</code></td>
+</tr>
+<tr>
+<td>保存せず終了</td>
+<td><code>:q!</code></td>
+</tr>
+<tr>
+<td>強制保存</td>
+<td><code>:w!</code></td>
+</tr>
+<tr>
+<td>カーソル移動</td>
+<td><code>h</code> <code>j</code> <code>k</code> <code>l</code></td>
+</tr>
+<tr>
+<td>1行削除</td>
+<td><code>dd</code></td>
+</tr>
+<tr>
+<td>1行コピー</td>
+<td><code>yy</code></td>
+</tr>
+<tr>
+<td>貼り付け</td>
+<td><code>p</code></td>
+</tr>
+<tr>
+<td>検索</td>
+<td><code>/word</code>、<code>?word</code></td>
+</tr>
+<tr>
+<td>次の検索結果</td>
+<td><code>n</code></td>
+</tr>
+<tr>
+<td>置換</td>
+<td><code>:%s/old/new/g</code></td>
+</tr>
+</tbody>
+</table>
+<p>標準エディタを変更するには <code>EDITOR</code> 環境変数を使います。</p>
+<pre><code class="language-bash">export EDITOR=vim
+export EDITOR=nano
+</code></pre>
+<h3 id="_28">本章のまとめ</h3>
+<ul>
+<li>シェル変数と環境変数の違い、<code>export</code> の役割を理解する。</li>
+<li>フィルタは「入力→加工→出力」の部品。組み合わせて使う。</li>
+<li><code>&gt;</code> は上書き、<code>&gt;&gt;</code> は追記、<code>2&gt;&amp;1</code> はエラーを標準出力へ合流。</li>
+<li><code>xargs</code> は標準入力を引数に変換。<code>tee</code> は画面とファイルの両方へ。</li>
+<li>正規表現は BRE と ERE の違いを意識する。</li>
+<li><code>vi</code> はモード切替、保存・終了、検索・置換を確実に覚える。</li>
+</ul>
+<h3 id="_29">練習問題</h3>
+<p><strong>練習問題 3.1</strong>　標準エラー出力を標準出力に合流させる記述はどれか。</p>
+<p>(a) <code>2&gt;&amp;1</code>　(b) <code>1&gt;&amp;2</code>　(c) <code>2&gt;1</code>　(d) <code>&amp;&gt;2</code></p>
+<p><strong>練習問題 3.2</strong>　<code>/etc/passwd</code> の1列目（ユーザー名）だけを表示するコマンドはどれか。</p>
+<p>(a) <code>cut -d: -f1 /etc/passwd</code>　(b) <code>cut -f1 /etc/passwd</code>　(c) <code>awk -F, '{print $1}' /etc/passwd</code>　(d) <code>head -1 /etc/passwd</code></p>
+<p><strong>練習問題 3.3</strong>　ファイル内のすべての <code>old</code> を <code>new</code> に置換し、直接ファイルを更新するコマンドはどれか。</p>
+<p>(a) <code>sed 's/old/new/' file</code>　(b) <code>sed -i 's/old/new/g' file</code>　(c) <code>grep -v old file</code>　(d) <code>tr old new &lt; file</code></p>
+<p><strong>練習問題 3.4</strong>　<code>find</code> の結果を <code>rm</code> の引数として安全に渡すコマンドはどれか。</p>
+<p>(a) <code>find . -name "*.tmp" | rm</code>　(b) <code>find . -name "*.tmp" -print0 | xargs -0 rm</code>　(c) <code>find . -name "*.tmp" &gt; rm</code>　(d) <code>xargs find . -name "*.tmp" | rm</code></p>
+<p><strong>練習問題 3.5</strong>　<code>vi</code> で変更を保存せずに終了する操作はどれか。</p>
+<p>(a) <code>:wq</code>　(b) <code>ZZ</code>　(c) <code>:q!</code>　(d) <code>:w!</code></p>
+<h2 class="chapter" id="4">第4章 リポジトリとパッケージ管理</h2>
+<h3 id="_30">この章で学ぶこと</h3>
+<ul>
+<li>パッケージ管理の基本概念（リポジトリ、依存関係）</li>
+<li>Debian 系の <code>apt</code>／<code>dpkg</code> と Red Hat 系の <code>yum</code>／<code>rpm</code></li>
+<li>パッケージの検索・情報表示・インストール・削除</li>
+<li>パッケージが提供するファイル、ファイルを含むパッケージの調べ方</li>
+</ul>
+<h3 id="41">4.1 パッケージ管理の基礎</h3>
+<p>Linux のソフトウェアは、<strong>パッケージ</strong>単位で配布されます。パッケージにはプログラム本体、設定ファイル、マニュアル、依存関係の情報が含まれます。パッケージをまとめて公開している場所を<strong>リポジトリ</strong>と呼びます。</p>
+<p>パッケージマネージャの主な役割は次のとおりです。</p>
+<ul>
+<li>リポジトリからパッケージを取得する。</li>
+<li>依存関係を解決する。</li>
+<li>インストール・アップグレード・削除を行う。</li>
+<li>パッケージデータベースを管理する。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>系統</th>
+<th>高レベルツール</th>
+<th>低レベルツール</th>
+<th>パッケージ形式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Debian/Ubuntu</td>
+<td><code>apt</code>、<code>apt-get</code></td>
+<td><code>dpkg</code></td>
+<td><code>.deb</code></td>
+</tr>
+<tr>
+<td>Red Hat/Fedora</td>
+<td><code>yum</code>、<code>dnf</code></td>
+<td><code>rpm</code></td>
+<td><code>.rpm</code></td>
+</tr>
+</tbody>
+</table>
+<p>高レベルツールはリポジトリと依存関係を扱い、低レベルツールは個々のパッケージファイルを直接扱います。</p>
+<h3 id="42-apt">4.2 apt によるパッケージ管理</h3>
+<pre><code class="language-bash">sudo apt update                  # リポジトリ情報を更新
+sudo apt upgrade                 # インストール済みパッケージを更新
+sudo apt install nginx           # インストール
+sudo apt remove nginx            # 削除（設定ファイルは残す）
+sudo apt purge nginx             # 設定ファイルも削除
+sudo apt search editor           # 検索
+apt show nginx                   # パッケージ情報
+apt list --installed             # インストール済み一覧
+sudo apt autoremove              # 不要な依存パッケージを削除
+</code></pre>
+<p><code>apt-cache</code> はパッケージ情報の検索に使います。</p>
+<pre><code class="language-bash">apt-cache search web server
+apt-cache show nginx
+apt-cache depends nginx          # 依存パッケージ
+apt-cache rdepends nginx         # 逆依存
+apt-cache policy nginx           # 候補バージョンと優先度
+</code></pre>
+<p><code>apt-file</code> は「あるファイルを含むパッケージ」を検索します。</p>
+<pre><code class="language-bash">sudo apt-file update
+apt-file search bin/nginx
+apt-file list nginx
+</code></pre>
+<p>リポジトリの設定は <code>/etc/apt/sources.list</code> と <code>/etc/apt/sources.list.d/</code> にあります。Ubuntu では <code>deb</code> 行に URL、ディストリビューション、コンポーネント（main、universe など）を指定します。</p>
+<h3 id="43-dpkg-debian">4.3 dpkg による Debian パッケージ管理</h3>
+<p><code>dpkg</code> は <code>.deb</code> ファイルを直接扱います。依存関係は自動解決しないため、必要に応じて <code>apt</code> を使います。</p>
+<pre><code class="language-bash">sudo dpkg -i package.deb         # インストール
+sudo dpkg -r package             # 削除（設定は残す）
+sudo dpkg -P package             # 完全削除
+dpkg -l                          # インストール済み一覧
+dpkg -l nginx                    # 特定パッケージの状態
+dpkg -L nginx                    # パッケージがインストールしたファイル一覧
+dpkg -S /usr/sbin/nginx          # ファイルを含むパッケージを検索
+dpkg -s nginx                    # パッケージの状態・情報
+sudo dpkg --configure -a         # 未設定パッケージを設定
+sudo dpkg-reconfigure tzdata     # パッケージの再設定
+</code></pre>
+<p><code>dpkg -l</code> の先頭2文字は状態を示します。<code>ii</code> は「インストール済みで設定済み」、<code>rc</code> は「削除済みだが設定ファイルが残っている」状態です。</p>
+<h3 id="44-yum">4.4 yum によるパッケージ管理</h3>
+<pre><code class="language-bash">sudo yum install httpd           # インストール
+sudo yum remove httpd            # 削除
+sudo yum update                  # すべて更新
+sudo yum update httpd            # 特定パッケージを更新
+yum search web server            # 検索
+yum info httpd                   # 情報表示
+yum list installed               # インストール済み一覧
+yum provides &quot;*/bin/ls&quot;          # ファイルを提供するパッケージ
+yum deplist httpd                # 依存関係
+sudo yum clean all               # キャッシュ削除
+sudo yum repolist                # 有効なリポジトリ一覧
+</code></pre>
+<p>リポジトリの設定は <code>/etc/yum.repos.d/</code> 以下の <code>.repo</code> ファイルと <code>/etc/yum.conf</code> にあります。<code>.repo</code> ファイルには <code>[repo-id]</code>、<code>name</code>、<code>baseurl</code>、<code>enabled</code>、<code>gpgcheck</code> などを記述します。</p>
+<pre><code class="language-ini">[epel]
+name=Extra Packages for Enterprise Linux
+baseurl=https://download.example.org/epel/$releasever/$basearch/
+enabled=1
+gpgcheck=1
+</code></pre>
+<p><code>yumdownloader</code> はパッケージをダウンロードするだけで、インストールはしません。</p>
+<pre><code class="language-bash">yumdownloader httpd
+yumdownloader --resolve httpd     # 依存パッケージも取得
+</code></pre>
+<h3 id="45-rpm-rpm">4.5 rpm による RPM パッケージ管理</h3>
+<pre><code class="language-bash">sudo rpm -ivh package.rpm        # インストール（i: install, v: verbose, h: hash）
+sudo rpm -Uvh package.rpm        # アップグレード（未インストールならインストール）
+sudo rpm -e package              # 削除
+rpm -qa                          # インストール済み全パッケージ
+rpm -qi httpd                    # 詳細情報
+rpm -ql httpd                    # 含まれるファイル一覧
+rpm -qf /usr/sbin/httpd          # ファイルを含むパッケージ
+rpm -qp package.rpm              # 未インストールの rpm ファイルを照会
+rpm -V httpd                     # ファイルの改ざん・欠落を検証
+rpm --import RPM-GPG-KEY         # GPG 鍵をインポート
+</code></pre>
+<p><code>rpm -V</code> は、パッケージのファイルがインストール時から変更されていないかを検証します。出力の記号（<code>S</code> サイズ、<code>M</code> モード、<code>5</code> ダイジェスト、<code>T</code> タイムスタンプなど）で差異を確認します。</p>
+<h3 id="46">4.6 どちらを使うべきか</h3>
+<table>
+<thead>
+<tr>
+<th>目的</th>
+<th>Debian 系</th>
+<th>Red Hat 系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>リポジトリからインストール</td>
+<td><code>apt install</code></td>
+<td><code>yum install</code></td>
+</tr>
+<tr>
+<td>ローカルのパッケージファイルをインストール</td>
+<td><code>dpkg -i</code></td>
+<td><code>rpm -ivh</code></td>
+</tr>
+<tr>
+<td>ファイルを含むパッケージを検索</td>
+<td><code>apt-file search</code>／<code>dpkg -S</code></td>
+<td><code>yum provides</code>／<code>rpm -qf</code></td>
+</tr>
+<tr>
+<td>パッケージのファイル一覧</td>
+<td><code>dpkg -L</code></td>
+<td><code>rpm -ql</code></td>
+</tr>
+<tr>
+<td>インストール済み一覧</td>
+<td><code>dpkg -l</code>／<code>apt list --installed</code></td>
+<td><code>rpm -qa</code>／<code>yum list installed</code></td>
+</tr>
+</tbody>
+</table>
+<p>試験では、コマンド名と「どの系統のツールか」をセットで覚えることが重要です。<code>apt</code> と <code>yum</code> は高レベル、<code>dpkg</code> と <code>rpm</code> は低レベルと整理しましょう。</p>
+<h3 id="_31">本章のまとめ</h3>
+<ul>
+<li>リポジトリはパッケージの公開場所。依存関係の解決は高レベルツールが担う。</li>
+<li>Debian 系は <code>apt</code>／<code>dpkg</code>、Red Hat 系は <code>yum</code>／<code>rpm</code>。</li>
+<li><code>apt update</code> はリポジトリ情報の更新であり、システム更新ではない。</li>
+<li>ファイルからパッケージを調べる方法を両系統で覚える。</li>
+<li><code>yumdownloader</code> はダウンロードのみ。<code>rpm -V</code> は検証。</li>
+</ul>
+<h3 id="_32">練習問題</h3>
+<p><strong>練習問題 4.1</strong>　Debian 系で、リポジトリ情報を更新するコマンドはどれか。</p>
+<p>(a) <code>apt upgrade</code>　(b) <code>apt update</code>　(c) <code>dpkg -l</code>　(d) <code>yum update</code></p>
+<p><strong>練習問題 4.2</strong>　<code>/usr/bin/ls</code> を含むパッケージを Debian 系で調べるコマンドはどれか。</p>
+<p>(a) <code>dpkg -L coreutils</code>　(b) <code>dpkg -S /usr/bin/ls</code>　(c) <code>apt-file list coreutils</code>　(d) <code>dpkg -s coreutils</code></p>
+<p><strong>練習問題 4.3</strong>　Red Hat 系で、ファイルを提供するパッケージを検索するコマンドはどれか。</p>
+<p>(a) <code>rpm -qf</code>　(b) <code>yum provides</code>　(c) <code>yum info</code>　(d) <code>rpm -V</code></p>
+<p><strong>練習問題 4.4</strong>　インストールせずに RPM パッケージをダウンロードするコマンドはどれか。</p>
+<p>(a) <code>yum install</code>　(b) <code>yumdownloader</code>　(c) <code>rpm -ivh</code>　(d) <code>yum deplist</code></p>
+<p><strong>練習問題 4.5</strong>　<code>dpkg -l</code> の状態 <code>rc</code> の意味はどれか。</p>
+<p>(a) インストール済みで設定済み　(b) 削除済みだが設定ファイルが残っている　(c) インストール中　(d) 壊れている</p>
+<h2 class="chapter" id="5">第5章 ハードウェア、ディスク、パーティション、ファイルシステム</h2>
+<h3 id="_33">この章で学ぶこと</h3>
+<ul>
+<li>ハードウェア情報の取得とカーネルモジュールの管理</li>
+<li>HDD／SSD の違い、MBR と GPT、パーティションの考え方</li>
+<li>LVM の基本概念と操作</li>
+<li>ファイルシステムの作成・マウント・<code>/etc/fstab</code></li>
+<li>スワップ領域の作成と有効化</li>
+</ul>
+<h3 id="51">5.1 ハードウェアの基礎</h3>
+<h4 id="_34">ハードウェア情報の取得</h4>
+<pre><code class="language-bash">lspci                 # PCI デバイス一覧
+lsusb                 # USB デバイス一覧
+lsblk                 # ブロックデバイスとパーティション
+lscpu                 # CPU 情報
+free -h               # メモリ使用量
+dmidecode -t memory   # メモリの詳細（要 root）
+cat /proc/cpuinfo
+cat /proc/meminfo
+</code></pre>
+<p><code>/proc</code> はカーネルが提供する仮想ファイルシステムで、プロセスやハードウェアの情報をファイルとして見せます。<code>/sys</code> は sysfs で、デバイスやドライバの情報を提供します。<code>/dev</code> にはデバイスファイルが置かれます。</p>
+<h4 id="_35">カーネルモジュール</h4>
+<pre><code class="language-bash">lsmod                     # 読み込まれているモジュール
+modinfo e1000             # モジュール情報
+sudo modprobe e1000       # 依存関係を解決して読み込む
+sudo insmod module.ko     # モジュールファイルを直接読み込む
+sudo rmmod e1000          # アンロード
+</code></pre>
+<p><code>modprobe</code> は依存関係を解決してくれますが、<code>insmod</code> は指定したファイルをそのまま読み込みます。設定は <code>/etc/modprobe.d/</code> に置きます。</p>
+<p><code>udev</code> はデバイスの検出時に <code>/dev</code> のデバイスファイルを作成・管理します。<code>dbus</code> はアプリケーション間のメッセージ通信を提供します。試験では「sysfs、udev、dbus の概念」が問われるため、役割を整理しておきましょう。</p>
+<h4 id="_36">記憶装置の種類</h4>
+<table>
+<thead>
+<tr>
+<th>種類</th>
+<th>特徴</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HDD</td>
+<td>磁気ディスク。大容量・低コスト。シーク時間がある</td>
+</tr>
+<tr>
+<td>SSD</td>
+<td>フラッシュメモリ。高速・耐衝撃。書き込み回数に制限</td>
+</tr>
+<tr>
+<td>光学ストレージ</td>
+<td>CD/DVD/Blu-ray。読み取り専用の用途が多い</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52">5.2 パーティションとディスクレイアウト</h3>
+<h4 id="mbr-gpt">MBR と GPT</h4>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>MBR</th>
+<th>GPT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最大ディスク</td>
+<td>2TB</td>
+<td>非常に大容量</td>
+</tr>
+<tr>
+<td>パーティション数</td>
+<td>基本4つ（拡張で拡張）</td>
+<td>多数（通常128）</td>
+</tr>
+<tr>
+<td>ブート</td>
+<td>BIOS + MBR</td>
+<td>UEFI + ESP</td>
+</tr>
+<tr>
+<td>冗長性</td>
+<td>なし</td>
+<td>パーティションテーブルのバックアップあり</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash">sudo fdisk -l                 # パーティション一覧
+sudo fdisk /dev/sdb           # MBR ディスクの編集
+sudo gdisk /dev/sdb           # GPT ディスクの編集
+sudo parted /dev/sdb print     # parted で表示
+</code></pre>
+<p><code>fdisk</code> の主な操作は、<code>n</code>（新規）、<code>d</code>（削除）、<code>p</code>（表示）、<code>t</code>（種類変更）、<code>w</code>（書き込み）、<code>q</code>（終了）です。パーティション変更後は <code>partprobe</code> や再読み込みが必要な場合があります。</p>
+<h4 id="_37">代表的なパーティション構成</h4>
+<table>
+<thead>
+<tr>
+<th>マウントポイント</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/</code></td>
+<td>ルートファイルシステム</td>
+</tr>
+<tr>
+<td><code>/boot</code></td>
+<td>カーネルとブートローダ</td>
+</tr>
+<tr>
+<td><code>/boot/efi</code></td>
+<td>UEFI の ESP</td>
+</tr>
+<tr>
+<td><code>/home</code></td>
+<td>ユーザーデータ</td>
+</tr>
+<tr>
+<td><code>/var</code></td>
+<td>ログ・スプールなど変化するデータ</td>
+</tr>
+<tr>
+<td><code>swap</code></td>
+<td>スワップ領域</td>
+</tr>
+</tbody>
+</table>
+<p>サーバーでは、<code>/var</code> や <code>/home</code> を別パーティションに分けることで、ログ肥大化やユーザーデータ増加がルートを圧迫するのを防げます。</p>
+<h3 id="53-lvm">5.3 LVM</h3>
+<p>LVM（Logical Volume Manager）は、物理ディスクを柔軟に組み合わせて論理ボリュームを作る仕組みです。</p>
+<table>
+<thead>
+<tr>
+<th>用語</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PV（Physical Volume）</td>
+<td>LVM で使う物理ボリューム（パーティションやディスク）</td>
+</tr>
+<tr>
+<td>VG（Volume Group）</td>
+<td>PV をまとめたプール</td>
+</tr>
+<tr>
+<td>LV（Logical Volume）</td>
+<td>VG から切り出した論理ボリューム</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash">sudo pvcreate /dev/sdb                 # PV 作成
+sudo vgcreate vgdata /dev/sdb          # VG 作成
+sudo lvcreate -L 10G -n lvweb vgdata   # 10GB の LV 作成
+sudo lvextend -L +5G /dev/vgdata/lvweb # 5GB 拡張
+sudo resize2fs /dev/vgdata/lvweb       # ext4 のサイズ反映
+sudo xfs_growfs /mnt/web               # XFS のサイズ反映
+sudo lvcreate -s -L 2G -n snap /dev/vgdata/lvweb  # スナップショット
+</code></pre>
+<p>LVM の利点は、動的な拡張・縮小、スナップショット、複数ディスクの束ね上げです。欠点は、構成が複雑になり、障害時の復旧が難しくなることです。</p>
+<h3 id="54">5.4 ファイルシステムの作成とマウント</h3>
+<h4 id="_38">主なファイルシステム</h4>
+<table>
+<thead>
+<tr>
+<th>ファイルシステム</th>
+<th>特徴</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ext4</td>
+<td>Linux で広く使われる。ジャーナリング、拡張属性対応</td>
+</tr>
+<tr>
+<td>XFS</td>
+<td>大容量・高並列性能。拡張はできるが縮小はできない</td>
+</tr>
+<tr>
+<td>Btrfs</td>
+<td>スナップショット、サブボリューム、圧縮、チェックサム</td>
+</tr>
+<tr>
+<td>VFAT</td>
+<td>USB メモリなどで使われる。Windows と互換</td>
+</tr>
+<tr>
+<td>tmpfs</td>
+<td>メモリ上に作る一時ファイルシステム。再起動で消える</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash">sudo mkfs.ext4 /dev/sdb1
+sudo mkfs.xfs /dev/sdb1
+sudo mkfs.vfat /dev/sdb1
+sudo mkfs.btrfs /dev/sdb1
+</code></pre>
+<h4 id="_39">スワップ</h4>
+<pre><code class="language-bash">sudo mkswap /dev/sdb2       # スワップ領域を初期化
+sudo swapon /dev/sdb2       # 有効化
+sudo swapon --show          # 確認
+sudo swapoff /dev/sdb2      # 無効化
+free -h                     # Swap 行を確認
+</code></pre>
+<p><code>/etc/fstab</code> に <code>swap</code> として登録すると、起動時に自動で有効になります。</p>
+<h4 id="_40">マウント</h4>
+<pre><code class="language-bash">sudo mount /dev/sdb1 /mnt/data
+sudo umount /mnt/data
+mount | grep sdb1
+findmnt
+sudo blkid                   # UUID とラベルを確認
+sudo mount UUID=&quot;xxxx-xxxx&quot; /mnt/data
+sudo mount LABEL=&quot;DATA&quot; /mnt/data
+</code></pre>
+<p><code>umount</code> は「アンマウント」であり、<code>unmount</code> ではありません。使用中のファイルシステムはアンマウントできないため、<code>lsof</code> や <code>fuser</code> で使用プロセスを確認します。</p>
+<h4 id="etcfstab">/etc/fstab</h4>
+<pre><code class="language-text">UUID=1234-ABCD  /          ext4  defaults        0 1
+UUID=5678-EFGH  /boot      ext4  defaults        0 2
+UUID=90AB-CDEF  /home      xfs   defaults        0 0
+UUID=1111-2222  none       swap  sw              0 0
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>フィールド</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>デバイス（UUID、LABEL、/dev/sdb1 など）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>マウントポイント</td>
+</tr>
+<tr>
+<td>3</td>
+<td>ファイルシステム種別</td>
+</tr>
+<tr>
+<td>4</td>
+<td>マウントオプション（<code>defaults</code>、<code>noatime</code>、<code>ro</code> など）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>dump の対象（通常0）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>起動時の fsck 順序（ルートは1、その他は2、不要は0）</td>
+</tr>
+</tbody>
+</table>
+<p><code>/etc/fstab</code> を編集したら、<code>sudo mount -a</code> で構文とマウントを確認します。誤った設定は起動失敗につながるため注意が必要です。</p>
+<h3 id="_41">本章のまとめ</h3>
+<ul>
+<li>ハードウェア情報は <code>lspci</code>、<code>lsusb</code>、<code>lsblk</code>、<code>lscpu</code> などで取得する。</li>
+<li>モジュールは <code>lsmod</code>／<code>modprobe</code>／<code>insmod</code>／<code>rmmod</code> で管理する。</li>
+<li>MBR は2TB制限、GPT は UEFI と ESP が基本。</li>
+<li>LVM は PV → VG → LV の順に構成する。</li>
+<li>ext4 は拡張・縮小可能、XFS は拡張のみ。</li>
+<li>マウント設定は <code>/etc/fstab</code>。UUID を使うとデバイス名の変化に強い。</li>
+</ul>
+<h3 id="_42">練習問題</h3>
+<p><strong>練習問題 5.1</strong>　読み込まれているカーネルモジュールの一覧を表示するコマンドはどれか。</p>
+<p>(a) <code>lsmod</code>　(b) <code>lspci</code>　(c) <code>lsblk</code>　(d) <code>modinfo</code></p>
+<p><strong>練習問題 5.2</strong>　UEFI 環境で必要な ESP をマウントする標準的な場所はどれか。</p>
+<p>(a) <code>/boot</code>　(b) <code>/boot/efi</code>　(c) <code>/efi</code>　(d) <code>/mnt/efi</code></p>
+<p><strong>練習問題 5.3</strong>　LVM の構成要素を正しい順序で並べたものはどれか。</p>
+<p>(a) LV → VG → PV　(b) PV → VG → LV　(c) VG → PV → LV　(d) PV → LV → VG</p>
+<p><strong>練習問題 5.4</strong>　XFS ファイルシステムについて正しい説明はどれか。</p>
+<p>(a) 拡張も縮小も自由にできる　(b) 拡張はできるが縮小はできない　(c) スナップショットが標準機能である　(d) メモリ上に作られる</p>
+<p><strong>練習問題 5.5</strong>　<code>/etc/fstab</code> の6番目のフィールドの意味はどれか。</p>
+<p>(a) dump の対象　(b) マウントオプション　(c) 起動時の fsck 順序　(d) ファイルシステム種別</p>
+<h2 class="chapter" id="6">第6章 シェルおよびスクリプト</h2>
+<h3 id="_43">この章で学ぶこと</h3>
+<ul>
+<li>ログインシェルと非ログインシェルの設定ファイル</li>
+<li>環境変数、<code>PATH</code>、<code>alias</code>、<code>source</code> の使い方</li>
+<li>Bash スクリプトの基本構文（変数、引数、条件分岐、ループ、関数）</li>
+<li>戻り値と <code>exit</code>、デバッグ方法</li>
+<li>安全で再利用可能なスクリプトの書き方</li>
+</ul>
+<h3 id="61">6.1 シェル環境のカスタマイズ</h3>
+<h4 id="_44">設定ファイルの読み込み</h4>
+<p>Bash は、起動の種類によって読み込む設定ファイルが異なります。</p>
+<table>
+<thead>
+<tr>
+<th>起動の種類</th>
+<th>主な読み込みファイル</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ログインシェル</td>
+<td><code>/etc/profile</code> → <code>~/.bash_profile</code> → <code>~/.bash_login</code> → <code>~/.profile</code> の順で最初に見つかったもの</td>
+</tr>
+<tr>
+<td>対話型の非ログインシェル</td>
+<td><code>/etc/bash.bashrc</code> → <code>~/.bashrc</code></td>
+</tr>
+<tr>
+<td>非対話型シェル</td>
+<td>通常は設定ファイルを読まない（<code>BASH_ENV</code> を除く）</td>
+</tr>
+</tbody>
+</table>
+<p>ディストリビューションによって <code>/etc/bashrc</code> など名称が異なる場合があります。<code>~/.bash_profile</code> から <code>~/.bashrc</code> を <code>source</code> する構成も一般的です。</p>
+<pre><code class="language-bash">source ~/.bashrc       # 現在のシェルに設定を反映
+. ~/.bashrc            # source と同じ
+alias ll='ls -alF'
+alias grep='grep --color=auto'
+export PATH=&quot;$HOME/bin:$PATH&quot;
+</code></pre>
+<p><code>;</code> は前のコマンドの結果に関係なく次を実行、<code>&amp;&amp;</code> は前が成功したときだけ次を実行、<code>||</code> は前が失敗したときだけ次を実行します。</p>
+<pre><code class="language-bash">cd /tmp &amp;&amp; rm -f workfile
+test -f config || echo &quot;設定ファイルがありません&quot;
+</code></pre>
+<h3 id="62-bash">6.2 Bash スクリプトの基本</h3>
+<h4 id="_45">スクリプトの作成と実行</h4>
+<pre><code class="language-bash">#!/bin/bash
+# hello.sh
+echo &quot;Hello, world!&quot;
+</code></pre>
+<pre><code class="language-bash">chmod +x hello.sh
+./hello.sh
+bash hello.sh
+</code></pre>
+<p>先頭の <code>#!</code> は<strong>シバン（shebang）</strong>と呼ばれ、スクリプトを実行するインタプリタを指定します。<code>#!/bin/bash</code> は Bash で実行するという意味です。</p>
+<h4 id="_46">変数と引数</h4>
+<pre><code class="language-bash">name=&quot;Alice&quot;          # = の前後に空白を入れない
+echo &quot;$name&quot;
+echo &quot;${name}san&quot;     # 変数名の境界を明示
+
+echo &quot;$0&quot;             # スクリプト名
+echo &quot;$1&quot;             # 第1引数
+echo &quot;$#&quot;             # 引数の数
+echo &quot;$@&quot;             # すべての引数（個別に展開）
+echo &quot;$*&quot;             # すべての引数（1つの文字列として展開）
+shift                 # 引数を1つずらす
+echo &quot;$?&quot;             # 直前のコマンドの終了ステータス
+</code></pre>
+<p><code>$@</code> は <code>"$@"</code> と引用すると各引数を個別に扱い、<code>$*</code> は1つの文字列として扱います。引数に空白が含まれる可能性がある場合は <code>"$@"</code> を使います。</p>
+<h4 id="_47">終了ステータス</h4>
+<p>Linux のコマンドは、成功時に 0、失敗時に 0 以外を返します。</p>
+<pre><code class="language-bash">grep -q &quot;error&quot; log.txt
+if [ $? -eq 0 ]; then
+  echo &quot;エラーが見つかりました&quot;
+fi
+exit 1
+</code></pre>
+<p><code>exit 0</code> は成功、<code>exit 1</code> は一般的な失敗を表します。</p>
+<h4 id="_48">条件分岐</h4>
+<pre><code class="language-bash">if [ -f /etc/passwd ]; then
+  echo &quot;ファイルがあります&quot;
+elif [ -d /etc ]; then
+  echo &quot;ディレクトリがあります&quot;
+else
+  echo &quot;どちらでもありません&quot;
+fi
+
+case &quot;$1&quot; in
+  start) echo &quot;開始します&quot; ;;
+  stop)  echo &quot;停止します&quot; ;;
+  *)     echo &quot;使い方: $0 {start|stop}&quot; ; exit 1 ;;
+esac
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>テスト</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-f file</code></td>
+<td>通常ファイルが存在</td>
+</tr>
+<tr>
+<td><code>-d dir</code></td>
+<td>ディレクトリが存在</td>
+</tr>
+<tr>
+<td><code>-e path</code></td>
+<td>存在する</td>
+</tr>
+<tr>
+<td><code>-r</code> / <code>-w</code> / <code>-x</code></td>
+<td>読み取り／書き込み／実行可能</td>
+</tr>
+<tr>
+<td><code>-z str</code></td>
+<td>文字列が空</td>
+</tr>
+<tr>
+<td><code>-n str</code></td>
+<td>文字列が空でない</td>
+</tr>
+<tr>
+<td><code>a -eq b</code></td>
+<td>数値が等しい</td>
+</tr>
+<tr>
+<td><code>a -ne b</code></td>
+<td>数値が等しくない</td>
+</tr>
+<tr>
+<td><code>a -lt b</code></td>
+<td>a が b より小さい</td>
+</tr>
+<tr>
+<td><code>str1 = str2</code></td>
+<td>文字列が等しい</td>
+</tr>
+<tr>
+<td><code>str1 != str2</code></td>
+<td>文字列が異なる</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_49">ループ</h4>
+<pre><code class="language-bash">for file in *.txt; do
+  echo &quot;処理中: $file&quot;
+done
+
+for i in $(seq 1 5); do
+  echo &quot;$i&quot;
+done
+
+while read -r line; do
+  echo &quot;$line&quot;
+done &lt; input.txt
+
+count=0
+while [ $count -lt 3 ]; do
+  echo &quot;$count&quot;
+  count=$((count + 1))
+done
+</code></pre>
+<h4 id="_50">関数</h4>
+<pre><code class="language-bash">greet() {
+  local name=&quot;$1&quot;
+  echo &quot;Hello, $name&quot;
+}
+
+greet &quot;Alice&quot;
+</code></pre>
+<p><code>local</code> を使うと関数内だけの変数になります。関数は <code>return</code> で終了ステータスを返せますが、文字列を返す場合は標準出力を使います。</p>
+<h4 id="_51">安全なスクリプトの書き方</h4>
+<pre><code class="language-bash">#!/bin/bash
+set -euo pipefail
+</code></pre>
+<ul>
+<li><code>-e</code>: コマンドが失敗したら即座に終了</li>
+<li><code>-u</code>: 未定義変数を参照したらエラー</li>
+<li><code>-o pipefail</code>: パイプ内の失敗も検出</li>
+</ul>
+<p>そのほか、<code>trap</code> で終了時の後処理を定義できます。</p>
+<pre><code class="language-bash">trap 'rm -f &quot;$tmpfile&quot;' EXIT
+tmpfile=$(mktemp)
+</code></pre>
+<h4 id="_52">デバッグ</h4>
+<pre><code class="language-bash">bash -x script.sh      # 実行するコマンドを表示
+bash -v script.sh      # 読み込んだ行を表示
+bash -n script.sh      # 構文チェックのみ
+</code></pre>
+<h3 id="_53">本章のまとめ</h3>
+<ul>
+<li>ログインシェルと非ログインシェルで読み込む設定ファイルが異なる。</li>
+<li><code>source</code>／<code>.</code> は現在のシェルに設定を反映する。</li>
+<li><code>&amp;&amp;</code> は成功時、<code>||</code> は失敗時に次を実行。</li>
+<li>スクリプトはシバンで始め、実行権を付ける。</li>
+<li>引数は <code>$1</code>、<code>$#</code>、<code>"$@"</code>、<code>shift</code> を使い分ける。</li>
+<li><code>set -euo pipefail</code> と <code>trap</code> で安全なスクリプトにする。</li>
+</ul>
+<h3 id="_54">練習問題</h3>
+<p><strong>練習問題 6.1</strong>　現在のシェルに <code>~/.bashrc</code> の設定を反映するコマンドはどれか。</p>
+<p>(a) <code>bash ~/.bashrc</code>　(b) <code>source ~/.bashrc</code>　(c) <code>exec ~/.bashrc</code>　(d) <code>cat ~/.bashrc</code></p>
+<p><strong>練習問題 6.2</strong>　スクリプトの第1引数を表す変数はどれか。</p>
+<p>(a) <code>$0</code>　(b) <code>$1</code>　(c) <code>$#</code>　(d) <code>$?</code></p>
+<p><strong>練習問題 6.3</strong>　直前のコマンドの終了ステータスを表す変数はどれか。</p>
+<p>(a) <code>$$</code>　(b) <code>$!</code>　(c) <code>$?</code>　(d) <code>$*</code></p>
+<p><strong>練習問題 6.4</strong>　引数がすべて個別の文字列として展開されるようにする記述はどれか。</p>
+<p>(a) <code>$*</code>　(b) <code>"$*"</code>　(c) <code>"$@"</code>　(d) <code>$@</code> を引用符なしで使う</p>
+<p><strong>練習問題 6.5</strong>　シェルスクリプトの構文チェックだけを行うコマンドはどれか。</p>
+<p>(a) <code>bash -x script.sh</code>　(b) <code>bash -v script.sh</code>　(c) <code>bash -n script.sh</code>　(d) <code>bash -e script.sh</code></p>
+<h2 class="chapter" id="7">第7章 ネットワークの基礎</h2>
+<h3 id="_55">この章で学ぶこと</h3>
+<ul>
+<li>TCP/IP の基礎、IPv4／IPv6、サブネットと CIDR</li>
+<li>主要なポート番号と TCP／UDP／ICMP の違い</li>
+<li>Linux のネットワーク設定（<code>ip</code>、<code>nmcli</code>、設定ファイル）</li>
+<li>名前解決の仕組みと DNS クライアント設定</li>
+<li>ネットワーク障害の切り分けと調査コマンド</li>
+</ul>
+<h3 id="71">7.1 インターネットプロトコルの基礎</h3>
+<h4 id="tcpip">TCP/IP モデル</h4>
+<p>TCP/IP は、ネットワーク通信を4つの層に分けて考えます。</p>
+<table>
+<thead>
+<tr>
+<th>層</th>
+<th>役割</th>
+<th>主なプロトコル</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>アプリケーション層</td>
+<td>アプリケーション間の通信</td>
+<td>HTTP、SSH、DNS、SMTP</td>
+</tr>
+<tr>
+<td>トランスポート層</td>
+<td>端末間の通信、ポート番号</td>
+<td>TCP、UDP</td>
+</tr>
+<tr>
+<td>インターネット層</td>
+<td>アドレスとルーティング</td>
+<td>IP、ICMP</td>
+</tr>
+<tr>
+<td>ネットワークインターフェース層</td>
+<td>物理的な通信</td>
+<td>Ethernet、ARP</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ipv4">IPv4 アドレスとサブネット</h4>
+<p>IPv4 アドレスは32ビットで、8ビットずつ4つに区切って表します（例: <code>192.168.1.10</code>）。ネットワーク部とホスト部を分けるのが<strong>サブネットマスク</strong>です。</p>
+<table>
+<thead>
+<tr>
+<th>CIDR</th>
+<th>サブネットマスク</th>
+<th>利用可能ホスト数（目安）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/24</code></td>
+<td>255.255.255.0</td>
+<td>254</td>
+</tr>
+<tr>
+<td><code>/25</code></td>
+<td>255.255.255.128</td>
+<td>126</td>
+</tr>
+<tr>
+<td><code>/26</code></td>
+<td>255.255.255.192</td>
+<td>62</td>
+</tr>
+<tr>
+<td><code>/30</code></td>
+<td>255.255.255.252</td>
+<td>2</td>
+</tr>
+<tr>
+<td><code>/32</code></td>
+<td>255.255.255.255</td>
+<td>1（単一ホスト）</td>
+</tr>
+</tbody>
+</table>
+<p>プライベートアドレスは次の範囲です。</p>
+<ul>
+<li><code>10.0.0.0/8</code></li>
+<li><code>172.16.0.0/12</code>（172.16.0.0〜172.31.255.255）</li>
+<li><code>192.168.0.0/16</code></li>
+<li><code>127.0.0.0/8</code>（ループバック）</li>
+<li><code>169.254.0.0/16</code>（APIPA／リンクローカル）</li>
+</ul>
+<h4 id="_56">主要なポート番号</h4>
+<table>
+<thead>
+<tr>
+<th>ポート</th>
+<th>プロトコル</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22</td>
+<td>TCP</td>
+<td>SSH</td>
+</tr>
+<tr>
+<td>25</td>
+<td>TCP</td>
+<td>SMTP</td>
+</tr>
+<tr>
+<td>53</td>
+<td>TCP/UDP</td>
+<td>DNS</td>
+</tr>
+<tr>
+<td>80</td>
+<td>TCP</td>
+<td>HTTP</td>
+</tr>
+<tr>
+<td>123</td>
+<td>UDP</td>
+<td>NTP</td>
+</tr>
+<tr>
+<td>443</td>
+<td>TCP</td>
+<td>HTTPS</td>
+</tr>
+</tbody>
+</table>
+<h4 id="tcpudpicmp">TCP・UDP・ICMP</h4>
+<table>
+<thead>
+<tr>
+<th>プロトコル</th>
+<th>特徴</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TCP</td>
+<td>コネクション型、再送・順序保証あり</td>
+<td>HTTP、SSH、SMTP</td>
+</tr>
+<tr>
+<td>UDP</td>
+<td>コネクションレス型、高速だが信頼性なし</td>
+<td>DNS、NTP、音声・動画</td>
+</tr>
+<tr>
+<td>ICMP</td>
+<td>エラー通知・診断</td>
+<td><code>ping</code>、<code>traceroute</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="ipv6">IPv6</h4>
+<p>IPv6 は128ビットのアドレス空間を持ちます。主な特徴は次のとおりです。</p>
+<ul>
+<li>アドレスを <code>:</code> で区切って16進数で表す（例: <code>2001:db8::1</code>）。</li>
+<li><code>::</code> は連続する0を1回だけ省略できる。</li>
+<li>ブロードキャストがなく、マルチキャストとエニーキャストを使う。</li>
+<li>近隣探索（NDP）と SLAAC による自動設定がある。</li>
+<li>リンクローカルアドレスは <code>fe80::/10</code>。</li>
+<li>グローバルユニキャストは <code>2000::/3</code>。</li>
+<li>ユニークローカルアドレスは <code>fc00::/7</code>。</li>
+</ul>
+<h3 id="72">7.2 ネットワーク設定</h3>
+<h4 id="ip">ip コマンド</h4>
+<pre><code class="language-bash">ip addr show                    # アドレス一覧
+ip addr add 192.168.1.10/24 dev eth0
+ip link set eth0 up
+ip link set eth0 down
+ip route show                   # ルーティングテーブル
+ip route add default via 192.168.1.1
+ip route del default
+ip neigh                        # ARP／近隣テーブル
+</code></pre>
+<p>従来の <code>ifconfig</code>、<code>route</code>、<code>arp</code> も試験範囲です。現在の Linux では <code>ip</code> 系のコマンドが推奨されます。</p>
+<pre><code class="language-bash">ifconfig eth0
+ifconfig eth0 192.168.1.10 netmask 255.255.255.0 up
+route -n
+route add default gw 192.168.1.1
+</code></pre>
+<h4 id="networkmanager">NetworkManager</h4>
+<pre><code class="language-bash">nmcli device status
+nmcli connection show
+nmcli connection up eth0
+nmcli connection modify eth0 ipv4.addresses 192.168.1.10/24
+nmcli connection modify eth0 ipv4.gateway 192.168.1.1
+nmcli connection modify eth0 ipv4.method manual
+nmcli connection up eth0
+</code></pre>
+<p><code>ifup</code>／<code>ifdown</code> は設定ファイルに基づいてインターフェースを制御します。ディストリビューションによって設定ファイルの場所が異なります。</p>
+<table>
+<thead>
+<tr>
+<th>ディストリビューション</th>
+<th>設定ファイルの例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Debian/Ubuntu（従来）</td>
+<td><code>/etc/network/interfaces</code></td>
+</tr>
+<tr>
+<td>RHEL 系</td>
+<td><code>/etc/sysconfig/network-scripts/ifcfg-eth0</code></td>
+</tr>
+<tr>
+<td>NetworkManager</td>
+<td><code>nmcli</code> で管理</td>
+</tr>
+</tbody>
+</table>
+<h4 id="hosts">ホスト名と hosts</h4>
+<pre><code class="language-bash">hostname
+hostnamectl set-hostname web01
+cat /etc/hostname
+cat /etc/hosts
+</code></pre>
+<p><code>/etc/hosts</code> は、IP アドレスとホスト名の対応をローカルに定義します。DNS より先に参照されることが多いため、名前解決の順序は <code>/etc/nsswitch.conf</code> の <code>hosts:</code> 行で決まります。</p>
+<h3 id="73">7.3 ネットワークの問題解決</h3>
+<pre><code class="language-bash">ping -c 4 8.8.8.8          # 疎通確認（ICMP）
+ping6 -c 4 2001:4860:4860::8888
+host example.com            # DNS 問い合わせ
+dig example.com             # 詳細な DNS 問い合わせ
+dig +short example.com
+dig @8.8.8.8 example.com
+ss -tuln                    # 待ち受けポート（TCP/UDP）
+ss -tanp                    # 確立済み TCP とプロセス
+netstat -tulnp              # 従来の表示
+nc -zv host 80              # ポート疎通確認
+traceroute example.com      # 経路表示
+tracepath example.com
+tcpdump -i eth0 port 80     # パケットキャプチャ
+</code></pre>
+<p><code>ss</code> は <code>netstat</code> の後継です。<code>-t</code> TCP、<code>-u</code> UDP、<code>-l</code> 待ち受け、<code>-n</code> 名前解決しない、<code>-p</code> プロセス表示を意味します。</p>
+<p>障害切り分けの基本順序は次のとおりです。</p>
+<ol>
+<li>インターフェースが UP か（<code>ip link</code>）。</li>
+<li>IP アドレスとルートがあるか（<code>ip addr</code>、<code>ip route</code>）。</li>
+<li>同一ネットワーク内に疎通するか（<code>ping</code>）。</li>
+<li>デフォルトゲートウェイに疎通するか。</li>
+<li>DNS が解決できるか（<code>dig</code>、<code>getent hosts</code>）。</li>
+<li>目的のポートが開いているか（<code>nc</code>、<code>ss</code>）。</li>
+</ol>
+<h3 id="74-dns">7.4 クライアント側の DNS 設定</h3>
+<p><code>/etc/resolv.conf</code> に DNS サーバーを指定します。</p>
+<pre><code class="language-text">nameserver 192.168.1.1
+nameserver 8.8.8.8
+search example.com
+options timeout:2 attempts:3
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nameserver</code></td>
+<td>問い合わせ先 DNS サーバー</td>
+</tr>
+<tr>
+<td><code>search</code></td>
+<td>短縮名に補うドメイン</td>
+</tr>
+<tr>
+<td><code>domain</code></td>
+<td>ローカルドメイン名</td>
+</tr>
+<tr>
+<td><code>options timeout:n</code></td>
+<td>タイムアウト秒数</td>
+</tr>
+<tr>
+<td><code>options attempts:n</code></td>
+<td>再試行回数</td>
+</tr>
+</tbody>
+</table>
+<p>名前解決の順序は <code>/etc/nsswitch.conf</code> で決まります。</p>
+<pre><code class="language-text">hosts: files dns
+</code></pre>
+<p>この場合、まず <code>/etc/hosts</code>（files）を参照し、見つからなければ DNS を参照します。<code>getent hosts example.com</code> は、アプリケーションと同じ順序で名前解決を確認できます。</p>
+<h3 id="_57">本章のまとめ</h3>
+<ul>
+<li>IPv4 は32ビット、IPv6 は128ビット。CIDR 表記に慣れる。</li>
+<li>プライベートアドレスと主要ポート（22、25、53、80、123、443）は暗記する。</li>
+<li>TCP は信頼性、UDP は高速性、ICMP は診断。</li>
+<li>設定は <code>ip</code>／<code>nmcli</code>、確認は <code>ss</code>／<code>dig</code>／<code>ping</code>／<code>traceroute</code>。</li>
+<li>名前解決は <code>/etc/hosts</code>、<code>/etc/resolv.conf</code>、<code>/etc/nsswitch.conf</code> の順で理解する。</li>
+</ul>
+<h3 id="_58">練習問題</h3>
+<p><strong>練習問題 7.1</strong>　<code>192.168.1.0/24</code> で利用可能なホストアドレスの数はどれか。</p>
+<p>(a) 128　(b) 254　(c) 256　(d) 512</p>
+<p><strong>練習問題 7.2</strong>　DNS の標準ポート番号はどれか。</p>
+<p>(a) 22　(b) 25　(c) 53　(d) 123</p>
+<p><strong>練習問題 7.3</strong>　TCP の説明として正しいものはどれか。</p>
+<p>(a) コネクションレスで再送を行わない　(b) コネクション型で順序保証がある　(c) 診断専用のプロトコルである　(d) ポート番号を使わない</p>
+<p><strong>練習問題 7.4</strong>　待ち受け中の TCP ポートとプロセスを表示するコマンドはどれか。</p>
+<p>(a) <code>ss -tulnp</code>　(b) <code>ping -c 4</code>　(c) <code>dig +short</code>　(d) <code>ip route</code></p>
+<p><strong>練習問題 7.5</strong>　<code>/etc/nsswitch.conf</code> の <code>hosts: files dns</code> の意味はどれか。</p>
+<p>(a) DNS を先に参照する　(b) <code>/etc/hosts</code> を先に参照し、次に DNS を参照する　(c) DNS を使わない　(d) 常にブロードキャストで解決する</p>
+<h2 class="chapter" id="8">第8章 システム管理</h2>
+<h3 id="_59">この章で学ぶこと</h3>
+<ul>
+<li>ユーザーとグループの追加・変更・削除</li>
+<li><code>/etc/passwd</code>、<code>/etc/shadow</code>、<code>/etc/group</code> の構造</li>
+<li>パスワードエージングとアカウントのロック</li>
+<li>cron／at／anacron によるジョブスケジューリング</li>
+<li>ロケールと文字コードの設定</li>
+</ul>
+<h3 id="81">8.1 アカウント管理</h3>
+<h4 id="_60">ユーザーとグループの操作</h4>
+<pre><code class="language-bash">sudo useradd -m -s /bin/bash -G developers alice
+sudo passwd alice
+sudo usermod -aG sudo alice        # グループを追加（-a を忘れない）
+sudo usermod -s /bin/zsh alice
+sudo userdel -r alice              # ホームディレクトリも削除
+sudo groupadd developers
+sudo groupdel developers
+sudo groupmod -n devs developers   # グループ名変更
+</code></pre>
+<p><code>useradd</code> はホームディレクトリを自動作成しません（ディストリビューションの設定による）。<code>-m</code> を付けると <code>/etc/skel</code> の内容をコピーしてホームを作成します。<code>-s</code> はログインシェル、<code>-G</code> は補助グループ、<code>-g</code> は主グループです。</p>
+<p><code>usermod -aG</code> の <code>-a</code> は「追加」を意味します。<code>-a</code> を忘れると、既存の補助グループが置き換わるため注意してください。</p>
+<h4 id="_61">アカウントデータベース</h4>
+<p><code>/etc/passwd</code> の各フィールドは次のとおりです。</p>
+<pre><code class="language-text">alice:x:1000:1000:Alice:/home/alice:/bin/bash
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>フィールド</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ユーザー名</td>
+</tr>
+<tr>
+<td>2</td>
+<td>パスワード（<code>x</code> は shadow に格納されていることを示す）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>UID</td>
+</tr>
+<tr>
+<td>4</td>
+<td>GID</td>
+</tr>
+<tr>
+<td>5</td>
+<td>GECOS（コメント・氏名など）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>ホームディレクトリ</td>
+</tr>
+<tr>
+<td>7</td>
+<td>ログインシェル</td>
+</tr>
+</tbody>
+</table>
+<p><code>/etc/shadow</code> にはハッシュ化されたパスワードとエージング情報が入ります。</p>
+<pre><code class="language-text">alice:$6$...:19500:0:99999:7:::
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>フィールド</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ユーザー名</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ハッシュ化パスワード（<code>!</code> や <code>*</code> はログイン不可）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>最終パスワード変更日（1970-01-01 からの日数）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>変更可能になるまでの日数（0は即時）</td>
+</tr>
+<tr>
+<td>5</td>
+<td>パスワードの有効期限（日数）</td>
+</tr>
+<tr>
+<td>6</td>
+<td>期限切れ前の警告日数</td>
+</tr>
+<tr>
+<td>7</td>
+<td>期限切れ後の猶予日数</td>
+</tr>
+<tr>
+<td>8</td>
+<td>アカウント失効日</td>
+</tr>
+<tr>
+<td>9</td>
+<td>予約</td>
+</tr>
+</tbody>
+</table>
+<p><code>/etc/group</code> にはグループ名、GID、所属ユーザーが入ります。</p>
+<pre><code class="language-text">developers:x:1001:alice,bob
+</code></pre>
+<h4 id="_62">確認コマンド</h4>
+<pre><code class="language-bash">id alice
+getent passwd alice
+getent group developers
+groups alice
+passwd -S alice          # パスワード状態
+chage -l alice           # パスワードエージング情報
+</code></pre>
+<h4 id="_63">パスワードエージング</h4>
+<pre><code class="language-bash">sudo chage -M 90 -W 7 -I 14 alice
+sudo chage -E 2026-12-31 alice
+sudo chage -d 0 alice      # 次回ログイン時に変更を強制
+</code></pre>
+<ul>
+<li><code>-M</code>: パスワードの最大有効日数</li>
+<li><code>-m</code>: 変更可能になるまでの最小日数</li>
+<li><code>-W</code>: 期限切れ前の警告日数</li>
+<li><code>-I</code>: 期限切れ後の猶予日数</li>
+<li><code>-E</code>: アカウントの失効日</li>
+<li><code>-d</code>: 最終変更日</li>
+</ul>
+<h4 id="_64">スケルトンディレクトリ</h4>
+<p><code>/etc/skel/</code> は、新規ユーザーのホームディレクトリ作成時にコピーされる雛形です。<code>.bashrc</code>、<code>.profile</code> などを置いておくと、全ユーザーに同じ初期設定を配れます。</p>
+<pre><code class="language-bash">ls -la /etc/skel/
+sudo useradd -m -k /etc/skel alice
+</code></pre>
+<h3 id="82">8.2 ジョブスケジューリング</h3>
+<h4 id="cron">cron</h4>
+<p>cron は、決まった時刻にコマンドを実行する仕組みです。</p>
+<pre><code class="language-text">分 時 日 月 曜日 コマンド
+*  *  *  *  *    command
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>フィールド</th>
+<th>範囲</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分</td>
+<td>0〜59</td>
+</tr>
+<tr>
+<td>時</td>
+<td>0〜23</td>
+</tr>
+<tr>
+<td>日</td>
+<td>1〜31</td>
+</tr>
+<tr>
+<td>月</td>
+<td>1〜12</td>
+</tr>
+<tr>
+<td>曜日</td>
+<td>0〜7（0と7が日曜）</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash">crontab -e        # 自分の crontab を編集
+crontab -l        # 一覧表示
+crontab -r        # 削除
+</code></pre>
+<pre><code class="language-text"># 毎日 3:00 にバックアップ
+0 3 * * * /usr/local/bin/backup.sh
+
+# 5分ごと
+*/5 * * * * /usr/bin/check.sh
+
+# 平日 9:00〜17:00 の毎時0分
+0 9-17 * * 1-5 /usr/bin/report.sh
+</code></pre>
+<p>システム全体の設定は <code>/etc/crontab</code> と <code>/etc/cron.d/</code> に置きます。<code>/etc/crontab</code> はコマンドの前に<strong>実行ユーザー</strong>を指定する点が、ユーザーの crontab と異なります。</p>
+<pre><code class="language-text">0 3 * * * root /usr/local/bin/backup.sh
+</code></pre>
+<p><code>/etc/cron.daily/</code>、<code>/etc/cron.hourly/</code>、<code>/etc/cron.weekly/</code>、<code>/etc/cron.monthly/</code> に置いたスクリプトは、それぞれの周期で実行されます。</p>
+<h4 id="cron_1">cron のアクセス制御</h4>
+<pre><code class="language-text">/etc/cron.allow
+/etc/cron.deny
+</code></pre>
+<p><code>cron.allow</code> が存在する場合、そこに記載されたユーザーだけが cron を使えます。<code>cron.allow</code> がない場合は <code>cron.deny</code> に記載されていない全ユーザーが使えます。<code>at</code> も同様に <code>/etc/at.allow</code> と <code>/etc/at.deny</code> で制御します。</p>
+<h4 id="anacron">anacron</h4>
+<p>anacron は、常時起動していないマシンでも「1日1回」「1週間に1回」といった周期でジョブを実行する仕組みです。設定は <code>/etc/anacrontab</code> に記述します。</p>
+<pre><code class="language-text"># period delay job-identifier command
+1        5     daily-backup    /usr/local/bin/daily.sh
+7        10    weekly-clean    /usr/local/bin/clean.sh
+</code></pre>
+<h4 id="at">at</h4>
+<p><code>at</code> は、指定した時刻に1回だけコマンドを実行します。</p>
+<pre><code class="language-bash">echo &quot;/usr/local/bin/task.sh&quot; | at 23:00
+at -f task.sh 23:00
+atq                # 予約一覧
+atrm 3             # 予約番号3を削除
+</code></pre>
+<h3 id="83">8.3 ローカライゼーションと国際化</h3>
+<p><strong>国際化（i18n）</strong>は、ソフトウェアが複数の言語・地域に対応できるようにする設計、<strong>ローカライゼーション（l10n）</strong>は、特定の言語・地域向けに調整することです。</p>
+<h4 id="_65">ロケール</h4>
+<pre><code class="language-bash">locale                     # 現在のロケール設定
+locale -a                  # 利用可能なロケール一覧
+localectl status           # システムのロケールとキーボード
+sudo localectl set-locale LANG=ja_JP.UTF-8
+</code></pre>
+<p>環境変数は次の優先順位で使われます。</p>
+<ul>
+<li><code>LC_ALL</code>: すべてのロケール設定を上書きする（最優先）。</li>
+<li><code>LC_*</code>: カテゴリ別の設定（<code>LC_TIME</code>、<code>LC_COLLATE</code>、<code>LC_MESSAGES</code> など）。</li>
+<li><code>LANG</code>: 既定のロケール。</li>
+</ul>
+<p>スクリプトで言語に依存しない出力を得たい場合は <code>LANG=C</code> や <code>LC_ALL=C</code> を使います。ソート順やメッセージが英語・C ロケールで固定され、処理が安定します。</p>
+<h4 id="_66">文字コード</h4>
+<pre><code class="language-bash">iconv -f ISO-2022-JP -t UTF-8 input.txt &gt; output.txt
+file -i text.txt
+</code></pre>
+<p>主な文字コードには ASCII、ISO-8859、UTF-8、ISO-2022-JP などがあります。現在の Linux では UTF-8 が標準的です。文字化けが起きる場合は、<code>file</code> や <code>iconv</code> で文字コードを確認・変換します。</p>
+<h3 id="_67">本章のまとめ</h3>
+<ul>
+<li><code>useradd -m</code> でホームを作成し、<code>usermod -aG</code> でグループを追加する。</li>
+<li><code>/etc/passwd</code> はユーザー情報、<code>/etc/shadow</code> はパスワードとエージング情報。</li>
+<li><code>chage</code> でパスワードの有効期限・警告・失効を設定する。</li>
+<li>cron は5つの時刻フィールド。<code>/etc/crontab</code> はユーザー欄がある。</li>
+<li><code>cron.allow</code> がある場合は記載ユーザーのみ許可。</li>
+<li>ロケールは <code>LANG</code>、<code>LC_*</code>、<code>LC_ALL</code> の優先順位を理解する。</li>
+</ul>
+<h3 id="_68">練習問題</h3>
+<p><strong>練習問題 8.1</strong>　新規ユーザー alice を作成し、ホームディレクトリも作成するコマンドはどれか。</p>
+<p>(a) <code>useradd alice</code>　(b) <code>useradd -m alice</code>　(c) <code>usermod -m alice</code>　(d) <code>groupadd alice</code></p>
+<p><strong>練習問題 8.2</strong>　alice を既存の補助グループ developers に追加するコマンドはどれか。</p>
+<p>(a) <code>usermod -G developers alice</code>　(b) <code>usermod -aG developers alice</code>　(c) <code>groupmod -a alice developers</code>　(d) <code>useradd -G developers alice</code></p>
+<p><strong>練習問題 8.3</strong>　毎日午前3時に <code>/usr/local/bin/backup.sh</code> を実行する crontab の記述はどれか。</p>
+<p>(a) <code>0 3 * * * /usr/local/bin/backup.sh</code>　(b) <code>3 0 * * * /usr/local/bin/backup.sh</code>　(c) <code>* 3 * * * /usr/local/bin/backup.sh</code>　(d) <code>0 3 * * 0 /usr/local/bin/backup.sh</code></p>
+<p><strong>練習問題 8.4</strong>　<code>/etc/cron.allow</code> が存在する場合の動作として正しいものはどれか。</p>
+<p>(a) 全ユーザーが cron を使える　(b) 記載されたユーザーだけが cron を使える　(c) 記載されたユーザーは cron を使えない　(d) cron が停止する</p>
+<p><strong>練習問題 8.5</strong>　すべてのロケール設定を一時的に C ロケールにする環境変数はどれか。</p>
+<p>(a) <code>LANG=C</code>　(b) <code>LC_ALL=C</code>　(c) <code>LC_TIME=C</code>　(d) <code>TZ=C</code></p>
+<h2 class="chapter" id="9">第9章 重要なシステムサービス</h2>
+<h3 id="_69">この章で学ぶこと</h3>
+<ul>
+<li>システム時刻の設定と NTP／chrony による同期</li>
+<li>rsyslog によるログ出力と中央ログサーバー</li>
+<li>systemd journal の検索・管理</li>
+<li>logrotate によるログローテーション</li>
+<li>MTA の基本とメールエイリアス</li>
+</ul>
+<h3 id="91">9.1 システム時刻の管理</h3>
+<h4 id="_70">日付とタイムゾーン</h4>
+<pre><code class="language-bash">date                               # 現在の日時
+sudo date -s &quot;2026-04-01 09:00:00&quot; # 手動設定（NTP 利用時は通常不要）
+timedatectl                        # 時刻・タイムゾーン・NTP 状態
+sudo timedatectl set-timezone Asia/Tokyo
+sudo timedatectl set-ntp true
+timedatectl list-timezones | grep Tokyo
+</code></pre>
+<p>タイムゾーンの定義は <code>/usr/share/zoneinfo/</code> にあります。<code>/etc/localtime</code> は使用するタイムゾーンファイルへのシンボリックリンク（またはコピー）です。</p>
+<pre><code class="language-bash">ls -l /etc/localtime
+cat /etc/timezone        # Debian 系
+</code></pre>
+<h4 id="_71">ハードウェアクロック</h4>
+<pre><code class="language-bash">sudo hwclock --show
+sudo hwclock --systohc     # システム時刻をハードウェアクロックへ
+sudo hwclock --hctosys     # ハードウェアクロックをシステム時刻へ
+</code></pre>
+<h4 id="ntp-chrony">NTP と chrony</h4>
+<p>NTP はネットワーク経由で時刻を同期するプロトコルです。現在は <code>chrony</code> が広く使われています。</p>
+<pre><code class="language-bash">chronyc sources -v
+chronyc tracking
+sudo systemctl status chronyd
+</code></pre>
+<p><code>/etc/chrony.conf</code>（または <code>/etc/chrony/chrony.conf</code>）に同期先を設定します。</p>
+<pre><code class="language-text">pool 2.pool.ntp.org iburst
+</code></pre>
+<p>従来の <code>ntpd</code> では <code>/etc/ntp.conf</code> を使い、<code>ntpq -p</code> で同期状態を確認します。<code>ntpdate</code> は一時的な時刻合わせに使われますが、現在は非推奨の場面もあります。</p>
+<h3 id="92">9.2 システムのログ</h3>
+<h4 id="rsyslog">rsyslog</h4>
+<p>rsyslog は、ファシリティと優先度に基づいてログを振り分けます。</p>
+<table>
+<thead>
+<tr>
+<th>ファシリティ</th>
+<th>主な用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>auth</code> / <code>authpriv</code></td>
+<td>認証関連</td>
+</tr>
+<tr>
+<td><code>cron</code></td>
+<td>cron</td>
+</tr>
+<tr>
+<td><code>daemon</code></td>
+<td>デーモン</td>
+</tr>
+<tr>
+<td><code>kern</code></td>
+<td>カーネル</td>
+</tr>
+<tr>
+<td><code>mail</code></td>
+<td>メール</td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>ユーザープロセス</td>
+</tr>
+<tr>
+<td><code>local0</code>〜<code>local7</code></td>
+<td>独自用途</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>優先度</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>emerg</code></td>
+<td>システム使用不能</td>
+</tr>
+<tr>
+<td><code>alert</code></td>
+<td>即時対応が必要</td>
+</tr>
+<tr>
+<td><code>crit</code></td>
+<td>重大</td>
+</tr>
+<tr>
+<td><code>err</code></td>
+<td>エラー</td>
+</tr>
+<tr>
+<td><code>warning</code></td>
+<td>警告</td>
+</tr>
+<tr>
+<td><code>notice</code></td>
+<td>通知</td>
+</tr>
+<tr>
+<td><code>info</code></td>
+<td>情報</td>
+</tr>
+<tr>
+<td><code>debug</code></td>
+<td>デバッグ</td>
+</tr>
+</tbody>
+</table>
+<p><code>/etc/rsyslog.conf</code> の書式は「ファシリティ.優先度　アクション」です。</p>
+<pre><code class="language-text">authpriv.*      /var/log/secure
+cron.*          /var/log/cron
+*.info;mail.none;authpriv.none;cron.none  /var/log/messages
+*.* @@logserver.example.com:514
+</code></pre>
+<p><code>@</code> は UDP、<code>@@</code> は TCP で転送します。中央のログサーバーとして受け取る場合は、モジュールの読み込みと受信設定を行います。</p>
+<pre><code class="language-text">module(load=&quot;imudp&quot;)
+input(type=&quot;imudp&quot; port=&quot;514&quot;)
+</code></pre>
+<p>設定変更後は <code>systemctl restart rsyslog</code> で反映します。<code>logger</code> コマンドでテストログを送れます。</p>
+<pre><code class="language-bash">logger -p local0.info &quot;test message&quot;
+</code></pre>
+<h4 id="systemd-journal">systemd journal</h4>
+<pre><code class="language-bash">journalctl                     # 全ログ
+journalctl -b                  # 今回の起動分
+journalctl -u sshd             # ユニットで絞り込み
+journalctl -f                  # リアルタイム表示
+journalctl --since &quot;2026-04-01 00:00&quot; --until &quot;2026-04-01 12:00&quot;
+journalctl -p err              # err 以上
+journalctl -n 50               # 最新50行
+journalctl --disk-usage
+sudo journalctl --vacuum-time=7d
+</code></pre>
+<p>既定では journal は <code>/run/log/journal/</code> に保存され、再起動で消える場合があります。永続化するには <code>/var/log/journal/</code> を作成するか、<code>/etc/systemd/journald.conf</code> の <code>Storage=persistent</code> を設定します。</p>
+<pre><code class="language-ini">[Journal]
+Storage=persistent
+SystemMaxUse=1G
+</code></pre>
+<h4 id="logrotate">logrotate</h4>
+<p>logrotate は、ログのローテーション・圧縮・削除を自動化します。設定は <code>/etc/logrotate.conf</code> と <code>/etc/logrotate.d/</code> に置きます。</p>
+<pre><code class="language-text">/var/log/myapp/*.log {
+    daily
+    rotate 7
+    compress
+    missingok
+    notifempty
+    create 0640 app app
+    sharedscripts
+    postrotate
+        systemctl reload myapp &gt;/dev/null 2&gt;&amp;1 || true
+    endscript
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>ディレクティブ</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>daily</code> / <code>weekly</code> / <code>monthly</code></td>
+<td>ローテーション周期</td>
+</tr>
+<tr>
+<td><code>rotate n</code></td>
+<td>n世代保持</td>
+</tr>
+<tr>
+<td><code>compress</code></td>
+<td>gzip で圧縮</td>
+</tr>
+<tr>
+<td><code>missingok</code></td>
+<td>ファイルがなくてもエラーにしない</td>
+</tr>
+<tr>
+<td><code>notifempty</code></td>
+<td>空ファイルはローテーションしない</td>
+</tr>
+<tr>
+<td><code>create</code></td>
+<td>新しいログファイルを作成</td>
+</tr>
+<tr>
+<td><code>postrotate</code></td>
+<td>ローテーション後の処理</td>
+</tr>
+</tbody>
+</table>
+<h3 id="93-mta">9.3 メール配送エージェント（MTA）</h3>
+<p>MTA（Mail Transfer Agent）は、メールの配送を担うソフトウェアです。代表的なものに Postfix、Exim、Sendmail があります。LinuC レベル1では、詳細な設定ではなく<strong>エイリアスと基本的な配送設定</strong>が問われます。</p>
+<h4 id="_72">エイリアス</h4>
+<p><code>/etc/aliases</code> にメールの転送先を定義します。</p>
+<pre><code class="language-text">root:   admin@example.com
+staff:  alice, bob
+support: &quot;|/usr/local/bin/ticket.sh&quot;
+</code></pre>
+<p>編集後は <code>newaliases</code> を実行してデータベースを更新します。</p>
+<pre><code class="language-bash">sudo newaliases
+</code></pre>
+<h4 id="_73">ローカル配送</h4>
+<p>ユーザーごとの転送は <code>~/.forward</code> に記述します。</p>
+<pre><code class="language-text">alice@example.com
+</code></pre>
+<p><code>mail</code> コマンドでメールを送信し、<code>mailq</code> でキューの状態を確認できます。</p>
+<pre><code class="language-bash">mail -s &quot;Test&quot; alice@example.com &lt; message.txt
+mailq
+</code></pre>
+<p>MTA のログは <code>/var/log/maillog</code>（RHEL 系）や <code>/var/log/mail.log</code>（Debian 系）に出力されます。</p>
+<h3 id="_74">本章のまとめ</h3>
+<ul>
+<li>時刻は <code>timedatectl</code>、<code>date</code>、<code>hwclock</code> で管理し、NTP は chrony が主流。</li>
+<li>タイムゾーンは <code>/usr/share/zoneinfo/</code> と <code>/etc/localtime</code>。</li>
+<li>rsyslog は「ファシリティ.優先度 アクション」で振り分ける。</li>
+<li>journal は <code>journalctl</code> で検索。永続化は <code>/var/log/journal/</code>。</li>
+<li>logrotate は <code>daily</code>、<code>rotate</code>、<code>compress</code> などを組み合わせる。</li>
+<li>メールは <code>/etc/aliases</code> と <code>newaliases</code>、<code>~/.forward</code> を覚える。</li>
+</ul>
+<h3 id="_75">練習問題</h3>
+<p><strong>練習問題 9.1</strong>　タイムゾーンを Asia/Tokyo に設定するコマンドはどれか。</p>
+<p>(a) <code>timedatectl set-timezone Asia/Tokyo</code>　(b) <code>date Asia/Tokyo</code>　(c) <code>hwclock Asia/Tokyo</code>　(d) <code>ntpdate Asia/Tokyo</code></p>
+<p><strong>練習問題 9.2</strong>　rsyslog で認証関連のログを <code>/var/log/secure</code> に出力する設定はどれか。</p>
+<p>(a) <code>authpriv.* /var/log/secure</code>　(b) <code>secure.* authpriv</code>　(c) <code>*.* /var/log/secure</code>　(d) <code>authpriv.* @@/var/log/secure</code></p>
+<p><strong>練習問題 9.3</strong>　今回の起動に関する journal を表示するコマンドはどれか。</p>
+<p>(a) <code>journalctl -b</code>　(b) <code>journalctl -f</code>　(c) <code>journalctl -u</code>　(d) <code>journalctl --vacuum-time=7d</code></p>
+<p><strong>練習問題 9.4</strong>　logrotate で7世代分のログを保持するディレクティブはどれか。</p>
+<p>(a) <code>rotate 7</code>　(b) <code>daily 7</code>　(c) <code>keep 7</code>　(d) <code>compress 7</code></p>
+<p><strong>練習問題 9.5</strong>　<code>/etc/aliases</code> を編集した後に実行するコマンドはどれか。</p>
+<p>(a) <code>mailq</code>　(b) <code>newaliases</code>　(c) <code>postfix stop</code>　(d) <code>aliases -u</code></p>
+<h2 class="chapter" id="10">第10章 セキュリティ</h2>
+<h3 id="_76">この章で学ぶこと</h3>
+<ul>
+<li>セキュリティ監査と、SUID／SGID ファイルの検索</li>
+<li>ログイン状況・プロセス・メモリ使用量の確認と制限</li>
+<li><code>sudo</code>／<code>su</code> の違いと sudoers の設定</li>
+<li>ホストのセキュリティ設定と不要サービスの停止</li>
+<li>SSH 鍵、GPG、暗号化アルゴリズムの基礎</li>
+<li>クラウドセキュリティの基礎</li>
+</ul>
+<h3 id="101">10.1 セキュリティ管理業務</h3>
+<h4 id="_77">監査</h4>
+<pre><code class="language-bash">find / -perm -4000 -type f 2&gt;/dev/null     # SUID ファイル
+find / -perm -2000 -type f 2&gt;/dev/null     # SGID ファイル
+find / -nouser -o -nogroup 2&gt;/dev/null     # 所有者不明ファイル
+</code></pre>
+<p>SUID が設定されたファイルは、一般ユーザーが所有者（しばしば root）の権限で実行できます。不要な SUID ファイルは攻撃対象になるため、定期的に監査します。</p>
+<h4 id="_78">ログイン状況と履歴</h4>
+<pre><code class="language-bash">who             # 現在ログイン中のユーザー
+w               # ログイン中のユーザーと実行中のコマンド
+last            # 最近のログイン履歴
+lastb           # 失敗したログイン（要 root）
+lastlog         # 各ユーザーの最終ログイン
+</code></pre>
+<h4 id="_79">プロセス・ポート・ファイルの確認</h4>
+<pre><code class="language-bash">ss -tulnp                  # 待ち受けポートとプロセス
+netstat -tulnp             # 従来のコマンド
+nmap -sT localhost         # ポートスキャン
+lsof -i :80                # 80番ポートを使うプロセス
+fuser -n tcp 80            # 80番ポートを使う PID
+</code></pre>
+<p><code>nmap</code> は自ホストの監査に使えますが、許可なく他者のホストをスキャンすることは避けてください。</p>
+<h4 id="_80">リソース制限</h4>
+<pre><code class="language-bash">ulimit -a          # すべての制限
+ulimit -u          # ユーザーあたりのプロセス数
+ulimit -n          # オープンファイル数
+ulimit -c          # コアダンプサイズ
+</code></pre>
+<p><code>/etc/security/limits.conf</code> でユーザーやグループごとの制限を設定できます。</p>
+<h4 id="sudo-su">sudo と su</h4>
+<pre><code class="language-bash">su -               # root に切り替え（root のパスワードが必要）
+su - alice         # alice に切り替え
+sudo command       # sudoers の設定に従って権限を借りて実行
+sudo -l            # 自分に許可された sudo コマンド
+sudo -u www-data command
+</code></pre>
+<p><code>/etc/sudoers</code> は必ず <code>visudo</code> で編集します。構文エラーを防ぎ、同時編集の競合を避けるためです。</p>
+<pre><code class="language-text">%wheel ALL=(ALL) ALL
+alice ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart httpd
+</code></pre>
+<p><code>%wheel</code> はグループ、<code>ALL=(ALL)</code> は「すべてのホストで、すべてのユーザーとして」実行可能という意味です。<code>NOPASSWD:</code> を付けるとパスワード入力が不要になります。</p>
+<h4 id="_81">自動ログアウト</h4>
+<pre><code class="language-bash">export TMOUT=600
+</code></pre>
+<p><code>TMOUT</code> は、指定秒数操作がない場合にシェルを終了します。<code>/etc/profile</code> などで設定できます。</p>
+<h3 id="102">10.2 ホストのセキュリティ設定</h3>
+<h4 id="_82">シャドウパスワード</h4>
+<p>パスワードハッシュを <code>/etc/shadow</code> に分離し、一般ユーザーから読めないようにする仕組みです。<code>/etc/passwd</code> のパスワード欄が <code>x</code> になっていれば shadow が使われています。</p>
+<pre><code class="language-bash">ls -l /etc/shadow     # 通常は root:shadow 600 または 640
+</code></pre>
+<h4 id="_83">ログイン禁止</h4>
+<p><code>/etc/nologin</code> を作成すると、root 以外のユーザーのログインを拒否できます。ファイルの内容がログイン時に表示されます。</p>
+<pre><code class="language-bash">sudo sh -c 'echo &quot;メンテナンス中です&quot; &gt; /etc/nologin'
+sudo rm /etc/nologin
+</code></pre>
+<h4 id="_84">不要なサービスの停止</h4>
+<pre><code class="language-bash">systemctl list-unit-files --type=service
+sudo systemctl stop telnet.socket
+sudo systemctl disable telnet.socket
+sudo systemctl disable --now httpd
+</code></pre>
+<p><code>disable</code> は自動起動を無効にし、<code>--now</code> を付けると同時に停止します。従来の <code>chkconfig</code> や <code>service</code> コマンドも試験範囲です。</p>
+<pre><code class="language-bash">chkconfig --list
+chkconfig httpd off
+service httpd stop
+</code></pre>
+<p><code>inetd</code>／<code>xinetd</code> は、スーパーサーバーとして必要時にサービスを起動する仕組みです。設定は <code>/etc/inetd.conf</code> や <code>/etc/xinetd.conf</code>、<code>/etc/xinetd.d/</code> に置かれます。現在は systemd に置き換えられていますが、概念として出題されます。</p>
+<h4 id="_85">ファイアウォール</h4>
+<pre><code class="language-bash">sudo iptables -L -n -v
+sudo firewall-cmd --list-all
+sudo firewall-cmd --add-service=http --permanent
+sudo firewall-cmd --reload
+</code></pre>
+<p><code>iptables</code> はパケットフィルタの伝統的なツールです。<code>firewalld</code> はゾーンとサービス単位で管理する高レベルなフロントエンドです。Ubuntu では <code>ufw</code> もよく使われます。</p>
+<pre><code class="language-bash">sudo ufw status
+sudo ufw allow 22/tcp
+sudo ufw enable
+</code></pre>
+<h3 id="103">10.3 暗号化によるデータの保護</h3>
+<h4 id="_86">暗号化の基本</h4>
+<table>
+<thead>
+<tr>
+<th>種類</th>
+<th>特徴</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>共通鍵暗号</td>
+<td>同じ鍵で暗号化・復号</td>
+<td>大量データの暗号化（AES など）</td>
+</tr>
+<tr>
+<td>公開鍵暗号</td>
+<td>公開鍵で暗号化、秘密鍵で復号</td>
+<td>鍵交換、署名、SSH</td>
+</tr>
+<tr>
+<td>ハッシュ関数</td>
+<td>一方向の変換</td>
+<td>完全性確認、パスワード保存</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ssh_1">SSH 鍵</h4>
+<pre><code class="language-bash">ssh-keygen -t ed25519 -C &quot;alice@example.com&quot;
+ssh-keygen -t rsa -b 4096
+ssh-add ~/.ssh/id_ed25519
+eval &quot;$(ssh-agent -s)&quot;
+ssh-copy-id user@server
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>アルゴリズム</th>
+<th>特徴</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RSA</td>
+<td>古くから使われる。鍵長は3072ビット以上が望ましい</td>
+</tr>
+<tr>
+<td>ECDSA</td>
+<td>楕円曲線暗号。鍵長が短い</td>
+</tr>
+<tr>
+<td>Ed25519</td>
+<td>高速で安全。現在の推奨</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ssh_2">SSH ポート転送</h4>
+<pre><code class="language-bash">ssh -L 8080:localhost:80 user@server   # ローカル転送
+ssh -R 8080:localhost:80 user@server   # リモート転送
+ssh -D 1080 user@server                # 動的転送（SOCKS プロキシ）
+</code></pre>
+<ul>
+<li><code>-L</code>: 手元のポートをリモート側のサービスへ転送する。</li>
+<li><code>-R</code>: リモート側のポートを手元のサービスへ転送する。</li>
+<li><code>-D</code>: SOCKS プロキシとして動的転送する。</li>
+</ul>
+<h4 id="gnupg">GnuPG</h4>
+<pre><code class="language-bash">gpg --gen-key
+gpg --list-keys
+gpg --export -a alice &gt; alice.asc
+gpg --import alice.asc
+gpg --encrypt -r alice@example.com file.txt
+gpg --decrypt file.txt.gpg
+gpg --sign file.txt
+gpg --verify file.txt.sig
+</code></pre>
+<p>GnuPG の鍵や設定は <code>~/.gnupg/</code> に保存されます。<code>gpg-agent</code> は秘密鍵のパスフレーズをキャッシュし、署名や復号を補助します。</p>
+<h3 id="104">10.4 クラウドセキュリティの基礎</h3>
+<p>パブリッククラウドでは、<strong>責任共有モデル</strong>が基本です。</p>
+<ul>
+<li>クラウド事業者: 物理設備、ハイパーバイザー、基盤ネットワークなど。</li>
+<li>利用者: OS の設定、アプリケーション、アカウント管理、データ、セキュリティグループなど。</li>
+</ul>
+<h4 id="_87">クラウド特有の注意点</h4>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>管理コンソール</td>
+<td>インターネット経由でアクセス。多要素認証（MFA）を必須にする</td>
+</tr>
+<tr>
+<td>ファイアウォール</td>
+<td>セキュリティグループ／ネットワーク ACL で制御</td>
+</tr>
+<tr>
+<td>ルーティング</td>
+<td>VPC／サブネット／ルートテーブルで設計</td>
+</tr>
+<tr>
+<td>リージョン</td>
+<td>データの所在、法規制、遅延を考慮して選択</td>
+</tr>
+<tr>
+<td>揮発性ストレージ</td>
+<td>インスタンス停止でデータが消える場合がある。永続ストレージと分ける</td>
+</tr>
+<tr>
+<td>メンテナンス</td>
+<td>事業者側のメンテナンスや再起動の影響を理解する</td>
+</tr>
+</tbody>
+</table>
+<p>クラウドでは、オンプレミスのように物理的なネットワーク機器を直接管理しません。管理コンソールの認証、IAM、セキュリティグループの設定が重要になります。</p>
+<h3 id="_88">本章のまとめ</h3>
+<ul>
+<li>SUID／SGID ファイルは <code>find -perm</code> で監査する。</li>
+<li>ログイン状況は <code>who</code>／<code>w</code>／<code>last</code>、ポートは <code>ss</code>／<code>nmap</code> で確認する。</li>
+<li><code>sudo</code> は sudoers に従って権限を借り、<code>su</code> はユーザーを切り替える。</li>
+<li>不要サービスは <code>systemctl disable --now</code> で停止する。</li>
+<li>SSH は Ed25519 が推奨。<code>-L</code>／<code>-R</code>／<code>-D</code> の違いを覚える。</li>
+<li>クラウドは責任共有モデルと MFA、セキュリティグループが重要。</li>
+</ul>
+<h3 id="_89">練習問題</h3>
+<p><strong>練習問題 10.1</strong>　SUID が設定されたファイルを検索するコマンドはどれか。</p>
+<p>(a) <code>find / -perm -4000 -type f</code>　(b) <code>find / -perm -2000 -type f</code>　(c) <code>find / -perm -1000 -type f</code>　(d) <code>find / -type d -perm 777</code></p>
+<p><strong>練習問題 10.2</strong>　現在ログイン中のユーザーと実行中のコマンドを表示するコマンドはどれか。</p>
+<p>(a) <code>who</code>　(b) <code>w</code>　(c) <code>last</code>　(d) <code>lastb</code></p>
+<p><strong>練習問題 10.3</strong>　<code>/etc/sudoers</code> を安全に編集するコマンドはどれか。</p>
+<p>(a) <code>vi /etc/sudoers</code>　(b) <code>visudo</code>　(c) <code>sudoedit /etc/passwd</code>　(d) <code>chmod 777 /etc/sudoers</code></p>
+<p><strong>練習問題 10.4</strong>　手元の8080番ポートを、リモートサーバーから見たlocalhost:80へ転送する SSH オプションはどれか。</p>
+<p>(a) <code>ssh -L 8080:localhost:80 user@server</code>　(b) <code>ssh -R 8080:localhost:80 user@server</code>　(c) <code>ssh -D 8080 user@server</code>　(d) <code>ssh -X user@server</code></p>
+<p><strong>練習問題 10.5</strong>　クラウドの責任共有モデルで、利用者が責任を持つものはどれか。</p>
+<p>(a) 物理サーバーの保守　(b) ハイパーバイザーの脆弱性対応　(c) OS の設定とアカウント管理　(d) データセンターの電源</p>
+<h2 class="chapter" id="11">第11章 オープンソースの文化</h2>
+<h3 id="_90">この章で学ぶこと</h3>
+<ul>
+<li>オープンソースの定義と特徴</li>
+<li>主要なライセンス（GPL、LGPL、AGPL、MPL、Apache、MIT、BSD）の違い</li>
+<li>コピーレフトと寛容型ライセンス</li>
+<li>オープンソースコミュニティとエコシステムへの参加方法</li>
+</ul>
+<h3 id="111">11.1 オープンソースの概念</h3>
+<p>オープンソースは、単に「ソースコードが公開されている」というだけではありません。OSI（Open Source Initiative）は、<strong>オープンソースの定義</strong>として次の10項目を定めています。</p>
+<ol>
+<li>自由な再頒布（Free Redistribution）</li>
+<li>ソースコードの公開（Source Code）</li>
+<li>派生作品の作成と頒布（Derived Works）</li>
+<li>原著作者のソースコードの完全性（Integrity of The Author's Source Code）</li>
+<li>個人・グループに対する差別の禁止</li>
+<li>利用分野に対する差別の禁止</li>
+<li>ライセンスの頒布</li>
+<li>ライセンスが特定の製品に依存しないこと</li>
+<li>ライセンスが他のソフトウェアを制限しないこと</li>
+<li>ライセンスが技術中立であること</li>
+</ol>
+<p>オープンソースの特徴として、次の点も押さえます。</p>
+<ul>
+<li>ソースコードが公開され、自由に利用・改変・再配布できる。</li>
+<li>著作権は維持される（パブリックドメインを除く）。</li>
+<li>原則として無保証である。</li>
+<li>コミュニティによって継続的に開発されることが多い。</li>
+<li>多数のライセンスが存在し、条件が異なる。</li>
+</ul>
+<h3 id="112">11.2 主要なライセンス</h3>
+<table>
+<thead>
+<tr>
+<th>ライセンス</th>
+<th>種類</th>
+<th>主な特徴</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPLv2／GPLv3</td>
+<td>強いコピーレフト</td>
+<td>派生作品も GPL で公開する必要がある</td>
+</tr>
+<tr>
+<td>AGPL</td>
+<td>強いコピーレフト</td>
+<td>ネットワーク経由の利用でもソース公開を要求</td>
+</tr>
+<tr>
+<td>LGPL</td>
+<td>弱いコピーレフト</td>
+<td>ライブラリの利用時は、利用側コードの公開を求めない</td>
+</tr>
+<tr>
+<td>MPL 2.0</td>
+<td>ファイル単位のコピーレフト</td>
+<td>改変したファイルのみソース公開</td>
+</tr>
+<tr>
+<td>Apache License 2.0</td>
+<td>寛容型</td>
+<td>特許許諾を含む。商用利用可</td>
+</tr>
+<tr>
+<td>MIT</td>
+<td>寛容型</td>
+<td>非常に簡潔。著作権表示と免責のみ</td>
+</tr>
+<tr>
+<td>BSD（2条／3条）</td>
+<td>寛容型</td>
+<td>再配布時に著作権表示を保持。3条は名称使用を制限</td>
+</tr>
+<tr>
+<td>パブリックドメイン</td>
+<td>著作権なし</td>
+<td>自由に利用できるが、保証もない</td>
+</tr>
+</tbody>
+</table>
+<h4 id="_91">コピーレフト</h4>
+<p>コピーレフトは、ソフトウェアの自由を維持するために、派生作品にも同じライセンス条件を課す考え方です。GPL はその代表で、改変・再配布時にソースコードの提供が求められます。</p>
+<ul>
+<li><strong>強いコピーレフト</strong>: GPL、AGPL。作品全体に影響する。</li>
+<li><strong>弱いコピーレフト</strong>: LGPL。ライブラリとリンクする部分に限定。</li>
+<li><strong>寛容型（permissive）</strong>: MIT、BSD、Apache。改変・再配布の条件が緩い。</li>
+</ul>
+<h4 id="_92">ライセンス選択の注意</h4>
+<p>ライセンスは、ソフトウェアの利用方法やビジネスモデルに影響します。たとえば、GPL のコードを組み込んだ製品を配布する場合、ソースコードの提供義務が生じることがあります。Apache 2.0 は特許許諾条項を含むため、特許リスクを考慮する企業に選ばれます。</p>
+<h3 id="113">11.3 コミュニティとエコシステム</h3>
+<p>オープンソースプロジェクトは、次のような仕組みで運営されます。</p>
+<table>
+<thead>
+<tr>
+<th>要素</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>メーリングリスト／フォーラム</td>
+<td>議論・質問・告知</td>
+</tr>
+<tr>
+<td>課題管理システム（Issue Tracker）</td>
+<td>バグ報告・機能要望の管理</td>
+</tr>
+<tr>
+<td>バージョン管理（Git など）</td>
+<td>ソースコードの管理</td>
+</tr>
+<tr>
+<td>プルリクエスト／コードレビュー</td>
+<td>変更提案と品質確認</td>
+</tr>
+<tr>
+<td>メンテナ</td>
+<td>変更の採否、リリース管理</td>
+</tr>
+<tr>
+<td>財団</td>
+<td>法務・資金・ガバナンスの支援（Linux Foundation など）</td>
+</tr>
+</tbody>
+</table>
+<p>参加方法は、大きく分けて次の3つです。</p>
+<ol>
+<li><strong>使う</strong>: ソフトウェアを導入し、フィードバックする。</li>
+<li><strong>紹介する</strong>: ブログや勉強会で広める。</li>
+<li><strong>貢献する</strong>: バグ報告、ドキュメント改善、コード提供、翻訳など。</li>
+</ol>
+<p>良いバグ報告には、再現手順、環境情報（OS・バージョン）、期待する動作と実際の動作、ログが含まれます。相手を尊重し、既存の報告を検索してから投稿するのがマナーです。</p>
+<h3 id="_93">本章のまとめ</h3>
+<ul>
+<li>オープンソースは「自由な再頒布」「ソースコード公開」「派生作品の許容」など10項目で定義される。</li>
+<li>GPL は強いコピーレフト、LGPL は弱いコピーレフト、MIT／BSD／Apache は寛容型。</li>
+<li>AGPL はネットワーク利用でもソース公開を要求する。</li>
+<li>コミュニティ参加は「使う」「紹介する」「貢献する」の3段階。</li>
+<li>バグ報告は再現手順と環境情報を具体的に書く。</li>
+</ul>
+<h3 id="_94">練習問題</h3>
+<p><strong>練習問題 11.1</strong>　オープンソースの定義に含まれるものはどれか。</p>
+<p>(a) ソースコードを非公開にできる　(b) 自由な再頒布を認める　(c) 特定の製品でのみ利用を許可する　(d) 個人の利用を禁止できる</p>
+<p><strong>練習問題 11.2</strong>　GPL の特徴として正しいものはどれか。</p>
+<p>(a) 派生作品のソース公開を求めない　(b) 派生作品も GPL で公開する必要がある　(c) 商用利用を禁止する　(d) 特許許諾を必ず含む</p>
+<p><strong>練習問題 11.3</strong>　Apache License 2.0 の特徴として正しいものはどれか。</p>
+<p>(a) 強いコピーレフトである　(b) 特許許諾条項を含む寛容型ライセンスである　(c) ソースコードの公開を禁止する　(d) ネットワーク利用時に必ずソース公開を求める</p>
+<p><strong>練習問題 11.4</strong>　オープンソースプロジェクトへの貢献方法として適切でないものはどれか。</p>
+<p>(a) バグを再現手順付きで報告する　(b) ドキュメントの誤りを修正する　(c) 既存の報告を無視して同じ内容を大量投稿する　(d) 翻訳を改善する</p>
+<h2 class="chapter" id="12">第12章 総まとめと合格戦略</h2>
+<h3 id="_95">この章で学ぶこと</h3>
+<ul>
+<li>101試験・102試験の出題範囲と重要度の整理</li>
+<li>頻出テーマの最終確認</li>
+<li>CBT 本番の時間配分と解き方</li>
+<li>学習チェックリスト</li>
+</ul>
+<h3 id="121">12.1 出題範囲の全体像</h3>
+<table>
+<thead>
+<tr>
+<th>試験</th>
+<th>主題</th>
+<th>内容</th>
+<th>重要度の目安</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>101</td>
+<td>1.01</td>
+<td>インストール、仮想マシン・コンテナ</td>
+<td>4</td>
+</tr>
+<tr>
+<td>101</td>
+<td>1.02</td>
+<td>ファイル・ディレクトリ操作</td>
+<td>3</td>
+</tr>
+<tr>
+<td>101</td>
+<td>1.03</td>
+<td>GNU と Unix のコマンド</td>
+<td>4</td>
+</tr>
+<tr>
+<td>101</td>
+<td>1.04</td>
+<td>リポジトリとパッケージ管理</td>
+<td>3</td>
+</tr>
+<tr>
+<td>101</td>
+<td>1.05</td>
+<td>ハードウェア、ディスク、ファイルシステム</td>
+<td>4</td>
+</tr>
+<tr>
+<td>102</td>
+<td>1.06</td>
+<td>シェルおよびスクリプト</td>
+<td>6</td>
+</tr>
+<tr>
+<td>102</td>
+<td>1.07</td>
+<td>ネットワークの基礎</td>
+<td>4</td>
+</tr>
+<tr>
+<td>102</td>
+<td>1.08</td>
+<td>システム管理</td>
+<td>5</td>
+</tr>
+<tr>
+<td>102</td>
+<td>1.09</td>
+<td>重要なシステムサービス</td>
+<td>5</td>
+</tr>
+<tr>
+<td>102</td>
+<td>1.10</td>
+<td>セキュリティ</td>
+<td>3</td>
+</tr>
+<tr>
+<td>102</td>
+<td>1.11</td>
+<td>オープンソースの文化</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>重要度は公式出題範囲のトピックごとの重みです。特に 1.06（シェルスクリプト）は重要度が高く、配点も多くなります。1.08 と 1.09 も出題が多いため、cron、ログ、アカウント管理は確実に押さえましょう。</p>
+<h3 id="122">12.2 頻出テーマの最終確認</h3>
+<h4 id="101_1">101試験</h4>
+<ul>
+<li>インストール時の UEFI／GPT／ESP の関係</li>
+<li><code>shutdown</code>、<code>reboot</code>、<code>halt</code>、<code>poweroff</code> の違い</li>
+<li>systemd のターゲットと <code>systemctl set-default</code>／<code>isolate</code></li>
+<li><code>ps</code>、<code>top</code>、<code>pgrep</code>、<code>kill</code>、<code>jobs</code>、<code>fg</code>、<code>bg</code></li>
+<li>パーミッションの数値計算、SUID／SGID／スティッキービット、<code>umask</code></li>
+<li>ハードリンクとシンボリックリンクの違い</li>
+<li><code>find</code> の条件指定、FHS の主要ディレクトリ</li>
+<li>リダイレクト（<code>&gt;</code>、<code>&gt;&gt;</code>、<code>2&gt;&amp;1</code>）、パイプ、<code>xargs</code>、<code>tee</code></li>
+<li>正規表現と <code>grep</code>、<code>sed</code> の置換</li>
+<li><code>vi</code> のモード切替と保存・終了</li>
+<li><code>apt</code>／<code>dpkg</code>、<code>yum</code>／<code>rpm</code> の対応関係</li>
+<li>パーティション、<code>/etc/fstab</code>、UUID、LVM の PV／VG／LV</li>
+<li><code>mkfs</code>、<code>mount</code>、<code>swapon</code>、<code>blkid</code></li>
+</ul>
+<h4 id="102_1">102試験</h4>
+<ul>
+<li>ログインシェルと <code>~/.bash_profile</code>／<code>~/.bashrc</code> の読み込み</li>
+<li><code>source</code>、<code>alias</code>、<code>PATH</code>、<code>&amp;&amp;</code>／<code>||</code></li>
+<li>シェルスクリプトの引数（<code>$1</code>、<code>$#</code>、<code>$@</code>、<code>$?</code>）、<code>if</code>、<code>case</code>、<code>for</code>、<code>while</code></li>
+<li>シバン、実行権、<code>set -euo pipefail</code>、<code>bash -x</code></li>
+<li>IPv4／IPv6、CIDR、プライベートアドレス、主要ポート</li>
+<li><code>ip addr</code>、<code>ip route</code>、<code>ss</code>、<code>dig</code>、<code>ping</code>、<code>traceroute</code></li>
+<li><code>/etc/resolv.conf</code>、<code>/etc/nsswitch.conf</code>、<code>/etc/hosts</code></li>
+<li><code>useradd</code>、<code>usermod</code>、<code>userdel</code>、<code>chage</code>、<code>/etc/passwd</code>、<code>/etc/shadow</code></li>
+<li>crontab の書式、<code>/etc/cron.d</code>、<code>cron.allow</code>、<code>at</code></li>
+<li>ロケール（<code>LANG</code>、<code>LC_ALL</code>）、<code>iconv</code></li>
+<li><code>timedatectl</code>、chrony、<code>journalctl</code>、<code>logrotate</code>、<code>/etc/aliases</code></li>
+<li><code>sudo</code>／<code>su</code>、<code>visudo</code>、<code>TMOUT</code>、<code>ss</code>／<code>nmap</code>／<code>lsof</code></li>
+<li>SSH 鍵、<code>ssh-keygen</code>、<code>-L</code>／<code>-R</code>／<code>-D</code>、GPG</li>
+<li>クラウドの責任共有モデル、MFA、セキュリティグループ</li>
+<li>オープンソースライセンスの種類と特徴</li>
+</ul>
+<h3 id="123">12.3 本番の解き方</h3>
+<ol>
+<li><strong>最初に全問をざっと確認する</strong>。時間のかかる問題を把握する。</li>
+<li><strong>1問あたり90秒を目安</strong>に進める。分からなければフラグを付けて次へ。</li>
+<li><strong>選択肢は消去法</strong>で絞る。似たコマンド名は「どの系統か」「何を操作するか」で判断する。</li>
+<li><strong>コマンド入力問題</strong>は、スペルとオプションを慎重に確認する。余計な空白や引用符に注意。</li>
+<li><strong>見直しでは、フラグを付けた問題とマーク切替を優先</strong>する。</li>
+<li>最後まで空欄を残さない。分からなくても最も妥当な選択肢を選ぶ。</li>
+</ol>
+<h3 id="124">12.4 学習チェックリスト</h3>
+<ul>
+<li>[ ] 仮想マシンを1台構築し、SSH で接続できた</li>
+<li>[ ] ユーザーを追加し、グループ・パスワード・有効期限を設定できた</li>
+<li>[ ] パーティションを切り、ファイルシステムを作成してマウントできた</li>
+<li>[ ] <code>/etc/fstab</code> に UUID で登録し、再起動後もマウントされた</li>
+<li>[ ] <code>find</code> と <code>grep</code> を組み合わせて目的のファイルを探せた</li>
+<li>[ ] パイプとリダイレクトを使ってログを加工できた</li>
+<li>[ ] 引数・条件分岐・ループを含む Bash スクリプトを書けた</li>
+<li>[ ] cron で定期実行を設定し、<code>journalctl</code> で確認できた</li>
+<li>[ ] <code>ip</code>／<code>ss</code>／<code>dig</code> でネットワークを調査できた</li>
+<li>[ ] SSH の鍵認証とポート転送を設定できた</li>
+<li>[ ] <code>sudoers</code> を <code>visudo</code> で編集できた</li>
+<li>[ ] 主要なオープンソースライセンスの違いを説明できた</li>
+</ul>
+<h3 id="125">12.5 総仕上げ問題</h3>
+<p><strong>練習問題 12.1</strong>　<code>/etc/fstab</code> の第1フィールドに UUID を指定する利点はどれか。</p>
+<p>(a) デバイス名の変化に強い　(b) マウントが不要になる　(c) パーミッションが自動設定される　(d) ファイルシステムが不要になる</p>
+<p><strong>練習問題 12.2</strong>　Bash スクリプトで、未定義変数の参照をエラーにする設定はどれか。</p>
+<p>(a) <code>set -e</code>　(b) <code>set -u</code>　(c) <code>set -x</code>　(d) <code>set -n</code></p>
+<p><strong>練習問題 12.3</strong>　<code>/etc/shadow</code> に格納される情報はどれか。</p>
+<p>(a) ユーザー名とホームディレクトリのみ　(b) ハッシュ化パスワードとエージング情報　(c) グループの一覧のみ　(d) DNS サーバーの設定</p>
+<p><strong>練習問題 12.4</strong>　<code>journalctl -u sshd</code> の意味はどれか。</p>
+<p>(a) sshd ユニットのログを表示する　(b) sshd を再起動する　(c) sshd の設定を表示する　(d) sshd を停止する</p>
+<p><strong>練習問題 12.5</strong>　<code>ip route add default via 192.168.1.1</code> の意味はどれか。</p>
+<p>(a) IP アドレスを追加する　(b) デフォルトゲートウェイを設定する　(c) インターフェースを起動する　(d) DNS を設定する</p>
+<p><strong>練習問題 12.6</strong>　「弱いコピーレフト」に分類されるライセンスはどれか。</p>
+<p>(a) GPL　(b) LGPL　(c) MIT　(d) Apache 2.0</p>
+<p><strong>練習問題 12.7</strong>　<code>sudo</code> の説明として正しいものはどれか。</p>
+<p>(a) root のパスワードを常に要求する　(b) sudoers の設定に従って権限を借りてコマンドを実行する　(c) すべてのユーザーに無制限の権限を与える　(d) ログインシェルを変更する</p>
+<p><strong>練習問題 12.8</strong>　クラウドで多要素認証（MFA）を導入する主な目的はどれか。</p>
+<p>(a) 通信速度を上げる　(b) パスワード漏えい時の不正ログインリスクを下げる　(c) ストレージ容量を増やす　(d) OS のアップデートを自動化する</p>
+<h2 class="chapter" id="a">付録A 練習問題の解答</h2>
+<h3 id="1">第1章</h3>
+<p><strong>解答 1.1</strong>　(b)　UEFI は ESP（EFI System Partition）からブートローダを読み込みます。ESP は FAT32 で、通常 <code>/boot/efi</code> にマウントします。</p>
+<p><strong>解答 1.2</strong>　(b)　<code>shutdown -h +10</code> は10分後に停止します。<code>-r</code> は再起動、<code>-h</code> は停止です。</p>
+<p><strong>解答 1.3</strong>　(b)　コンテナはホスト OS のカーネルを共有し、名前空間と cgroups で隔離します。ゲスト OS ごとにカーネルを持つのは仮想マシンです。</p>
+<p><strong>解答 1.4</strong>　(b)　<code>set-default</code> はデフォルトのブートターゲットを変更します。<code>isolate</code> は一時的な切り替えです。</p>
+<p><strong>解答 1.5</strong>　(a)　<code>kill -9</code> は SIGKILL を送り、プロセスを強制終了します。<code>-15</code> は SIGTERM です。</p>
+<h3 id="2_1">第2章</h3>
+<p><strong>解答 2.1</strong>　(a)　ファイルの基準 666 から 027 を引くと 640 になります（グループは読み取りのみ、その他は権限なし）。</p>
+<p><strong>解答 2.2</strong>　(b)　<code>/tmp</code> は誰でも書き込めますが、スティッキービットにより他ユーザーのファイルは削除できません。</p>
+<p><strong>解答 2.3</strong>　(b)　ハードリンクは同じ inode を共有します。異なるファイルシステム間では作成できません。</p>
+<p><strong>解答 2.4</strong>　(a)　<code>-type f</code> は通常ファイル、<code>-mtime -7</code> は7日以内に更新されたファイルを意味します。</p>
+<p><strong>解答 2.5</strong>　(c)　システム設定ファイルは <code>/etc</code> に置かれます。</p>
+<h3 id="3">第3章</h3>
+<p><strong>解答 3.1</strong>　(a)　<code>2&gt;&amp;1</code> は標準エラー出力（fd 2）を標準出力（fd 1）へ合流させます。</p>
+<p><strong>解答 3.2</strong>　(a)　<code>/etc/passwd</code> は <code>:</code> 区切りなので、<code>-d:</code> と <code>-f1</code> で1列目を取り出します。</p>
+<p><strong>解答 3.3</strong>　(b)　<code>sed -i</code> はファイルを直接編集し、<code>g</code> は各行のすべての一致を置換します。</p>
+<p><strong>解答 3.4</strong>　(b)　<code>-print0</code> と <code>xargs -0</code> を組み合わせると、空白を含むファイル名も安全に扱えます。</p>
+<p><strong>解答 3.5</strong>　(c)　<code>:q!</code> は変更を破棄して終了します。<code>:wq</code> と <code>ZZ</code> は保存して終了です。</p>
+<h3 id="4_1">第4章</h3>
+<p><strong>解答 4.1</strong>　(b)　<code>apt update</code> はリポジトリのパッケージ情報を更新します。システムの更新は <code>apt upgrade</code> です。</p>
+<p><strong>解答 4.2</strong>　(b)　<code>dpkg -S</code> は指定したファイルを含むインストール済みパッケージを検索します。</p>
+<p><strong>解答 4.3</strong>　(b)　<code>yum provides</code> はファイルや機能を提供するパッケージを検索します。</p>
+<p><strong>解答 4.4</strong>　(b)　<code>yumdownloader</code> はパッケージをダウンロードするだけでインストールしません。</p>
+<p><strong>解答 4.5</strong>　(b)　<code>r</code> は削除済み、<code>c</code> は設定ファイルが残っている状態です。</p>
+<h3 id="5_1">第5章</h3>
+<p><strong>解答 5.1</strong>　(a)　<code>lsmod</code> は読み込まれているカーネルモジュールを一覧表示します。</p>
+<p><strong>解答 5.2</strong>　(b)　ESP は通常 <code>/boot/efi</code> にマウントします。</p>
+<p><strong>解答 5.3</strong>　(b)　PV を作成し、VG にまとめ、そこから LV を切り出します。</p>
+<p><strong>解答 5.4</strong>　(b)　XFS は拡張できますが、縮小はサポートされていません。</p>
+<p><strong>解答 5.5</strong>　(c)　6番目は fsck の実行順序です。ルートは1、その他は2、不要なら0です。</p>
+<h3 id="6_1">第6章</h3>
+<p><strong>解答 6.1</strong>　(b)　<code>source</code>（または <code>.</code>）は、現在のシェルで設定ファイルを読み込みます。</p>
+<p><strong>解答 6.2</strong>　(b)　<code>$1</code> は第1引数です。<code>$0</code> はスクリプト名、<code>$#</code> は引数の数、<code>$?</code> は終了ステータスです。</p>
+<p><strong>解答 6.3</strong>　(c)　<code>$?</code> は直前のコマンドの終了ステータスです。</p>
+<p><strong>解答 6.4</strong>　(c)　<code>"$@"</code> は各引数を個別の文字列として展開します。</p>
+<p><strong>解答 6.5</strong>　(c)　<code>bash -n</code> は実行せずに構文だけをチェックします。</p>
+<h3 id="7_1">第7章</h3>
+<p><strong>解答 7.1</strong>　(b)　<code>/24</code> は256個のアドレスのうち、ネットワークアドレスとブロードキャストアドレスを除いた254個が利用可能です。</p>
+<p><strong>解答 7.2</strong>　(c)　DNS は TCP と UDP の53番ポートを使います。</p>
+<p><strong>解答 7.3</strong>　(b)　TCP はコネクション型で、再送制御と順序保証があります。</p>
+<p><strong>解答 7.4</strong>　(a)　<code>ss -tulnp</code> は TCP/UDP の待ち受けポートとプロセスを表示します。</p>
+<p><strong>解答 7.5</strong>　(b)　<code>files</code> は <code>/etc/hosts</code>、<code>dns</code> は DNS サーバーを意味し、記載順に参照します。</p>
+<h3 id="8_1">第8章</h3>
+<p><strong>解答 8.1</strong>　(b)　<code>useradd -m</code> はホームディレクトリを作成し、<code>/etc/skel</code> の内容をコピーします。</p>
+<p><strong>解答 8.2</strong>　(b)　<code>-aG</code> は既存の補助グループを維持したまま追加します。</p>
+<p><strong>解答 8.3</strong>　(a)　「分 時 日 月 曜日」の順で、<code>0 3 * * *</code> は毎日3時0分です。</p>
+<p><strong>解答 8.4</strong>　(b)　<code>cron.allow</code> が存在する場合、記載されたユーザーだけが cron を利用できます。</p>
+<p><strong>解答 8.5</strong>　(b)　<code>LC_ALL</code> はすべてのロケールカテゴリを上書きします。</p>
+<h3 id="9_1">第9章</h3>
+<p><strong>解答 9.1</strong>　(a)　<code>timedatectl set-timezone</code> でタイムゾーンを設定します。</p>
+<p><strong>解答 9.2</strong>　(a)　<code>authpriv.*</code> は認証関連のすべての優先度を意味します。</p>
+<p><strong>解答 9.3</strong>　(a)　<code>journalctl -b</code> は今回の起動に関するログを表示します。</p>
+<p><strong>解答 9.4</strong>　(a)　<code>rotate 7</code> は7世代分を保持します。</p>
+<p><strong>解答 9.5</strong>　(b)　<code>/etc/aliases</code> を変更したら <code>newaliases</code> でデータベースを更新します。</p>
+<h3 id="10_1">第10章</h3>
+<p><strong>解答 10.1</strong>　(a)　<code>-perm -4000</code> は SUID ビットが設定されたファイルを検索します。</p>
+<p><strong>解答 10.2</strong>　(b)　<code>w</code> はログイン中のユーザーと実行中のコマンドを表示します。</p>
+<p><strong>解答 10.3</strong>　(b)　<code>visudo</code> は構文チェックを行いながら sudoers を編集します。</p>
+<p><strong>解答 10.4</strong>　(a)　<code>-L</code> はローカルポート転送です。手元の8080番をリモートのlocalhost:80へ転送します。</p>
+<p><strong>解答 10.5</strong>　(c)　クラウド事業者は物理基盤を、利用者は OS 設定・アプリ・アカウント・データなどを担当します。</p>
+<h3 id="11_1">第11章</h3>
+<p><strong>解答 11.1</strong>　(b)　オープンソースの定義には自由な再頒布が含まれます。特定の製品や個人に限定することはできません。</p>
+<p><strong>解答 11.2</strong>　(b)　GPL は強いコピーレフトで、派生作品も GPL で公開する必要があります。</p>
+<p><strong>解答 11.3</strong>　(b)　Apache 2.0 は寛容型で、特許許諾条項を含みます。</p>
+<p><strong>解答 11.4</strong>　(c)　既存の報告を無視した重複投稿は、コミュニティの負担を増やします。まず検索し、必要な情報を添えて報告します。</p>
+<h3 id="12_1">第12章</h3>
+<p><strong>解答 12.1</strong>　(a)　UUID はデバイス名（<code>/dev/sdb1</code> など）が変わっても同じファイルシステムを識別できます。</p>
+<p><strong>解答 12.2</strong>　(b)　<code>set -u</code> は未定義変数の参照をエラーにします。<code>-e</code> はコマンド失敗時の終了です。</p>
+<p><strong>解答 12.3</strong>　(b)　<code>/etc/shadow</code> にはハッシュ化パスワードとエージング情報が格納されます。</p>
+<p><strong>解答 12.4</strong>　(a)　<code>-u</code> は systemd のユニットで絞り込みます。</p>
+<p><strong>解答 12.5</strong>　(b)　<code>default via</code> はデフォルトゲートウェイを指定します。</p>
+<p><strong>解答 12.6</strong>　(b)　LGPL は弱いコピーレフトです。GPL は強いコピーレフト、MIT と Apache は寛容型です。</p>
+<p><strong>解答 12.7</strong>　(b)　<code>sudo</code> は sudoers の設定に従い、許可された権限でコマンドを実行します。</p>
+<p><strong>解答 12.8</strong>　(b)　MFA はパスワード以外の要素も要求し、認証情報の漏えいによる不正ログインのリスクを下げます。</p>
+<h2 class="chapter" id="b">付録B コマンド早見表</h2>
+<h3 id="_96">ファイル・ディレクトリ</h3>
+<table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ls -la</code></td>
+<td>隠しファイルを含む詳細一覧</td>
+</tr>
+<tr>
+<td><code>cp -r</code> / <code>mv</code> / <code>rm -r</code></td>
+<td>コピー／移動／再帰削除</td>
+</tr>
+<tr>
+<td><code>mkdir -p</code> / <code>rmdir</code></td>
+<td>親ごと作成／空ディレクトリ削除</td>
+</tr>
+<tr>
+<td><code>chmod</code> / <code>chown</code> / <code>chgrp</code></td>
+<td>権限／所有者／グループ変更</td>
+</tr>
+<tr>
+<td><code>umask</code></td>
+<td>新規ファイルの権限マスク</td>
+</tr>
+<tr>
+<td><code>ln</code> / <code>ln -s</code></td>
+<td>ハードリンク／シンボリックリンク</td>
+</tr>
+<tr>
+<td><code>find</code> / <code>locate</code> / <code>which</code> / <code>whereis</code></td>
+<td>ファイル・コマンド検索</td>
+</tr>
+<tr>
+<td><code>tar</code> / <code>gzip</code> / <code>xz</code> / <code>dd</code></td>
+<td>アーカイブ・圧縮・コピー</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_97">テキスト処理</h3>
+<table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cat</code> / <code>less</code> / <code>head</code> / <code>tail</code></td>
+<td>表示</td>
+</tr>
+<tr>
+<td><code>grep</code> / <code>egrep</code> / <code>fgrep</code></td>
+<td>検索</td>
+</tr>
+<tr>
+<td><code>sed</code></td>
+<td>置換・削除・抽出</td>
+</tr>
+<tr>
+<td><code>cut</code> / <code>sort</code> / <code>uniq</code> / <code>wc</code></td>
+<td>列・並べ替え・重複・集計</td>
+</tr>
+<tr>
+<td><code>tr</code> / <code>xargs</code> / <code>tee</code></td>
+<td>文字変換・引数変換・分岐出力</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_98">プロセス・システム</h3>
+<table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ps aux</code> / <code>top</code> / <code>pstree</code></td>
+<td>プロセス表示</td>
+</tr>
+<tr>
+<td><code>pgrep</code> / <code>pkill</code> / <code>kill</code> / <code>killall</code></td>
+<td>プロセス検索・シグナル</td>
+</tr>
+<tr>
+<td><code>jobs</code> / <code>fg</code> / <code>bg</code> / <code>nohup</code></td>
+<td>ジョブ管理</td>
+</tr>
+<tr>
+<td><code>systemctl</code></td>
+<td>systemd の操作</td>
+</tr>
+<tr>
+<td><code>journalctl</code></td>
+<td>journal の表示</td>
+</tr>
+<tr>
+<td><code>crontab -e</code> / <code>at</code></td>
+<td>定期実行／一回実行</td>
+</tr>
+<tr>
+<td><code>timedatectl</code> / <code>chronyc</code></td>
+<td>時刻・NTP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_99">ネットワーク</h3>
+<table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ip addr</code> / <code>ip route</code> / <code>ip link</code></td>
+<td>アドレス・経路・リンク</td>
+</tr>
+<tr>
+<td><code>ss -tulnp</code> / <code>netstat</code></td>
+<td>ポート・接続</td>
+</tr>
+<tr>
+<td><code>ping</code> / <code>traceroute</code> / <code>tracepath</code></td>
+<td>疎通・経路</td>
+</tr>
+<tr>
+<td><code>dig</code> / <code>host</code> / <code>getent hosts</code></td>
+<td>DNS 問い合わせ</td>
+</tr>
+<tr>
+<td><code>nmcli</code></td>
+<td>NetworkManager 操作</td>
+</tr>
+<tr>
+<td><code>nc</code></td>
+<td>ポート疎通確認</td>
+</tr>
+<tr>
+<td><code>tcpdump</code></td>
+<td>パケットキャプチャ</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_100">パッケージ・ストレージ</h3>
+<table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>apt update</code> / <code>apt install</code> / <code>apt remove</code></td>
+<td>Debian 系パッケージ</td>
+</tr>
+<tr>
+<td><code>dpkg -i</code> / <code>dpkg -l</code> / <code>dpkg -S</code></td>
+<td>Debian パッケージ直接操作</td>
+</tr>
+<tr>
+<td><code>yum install</code> / <code>yum provides</code></td>
+<td>Red Hat 系パッケージ</td>
+</tr>
+<tr>
+<td><code>rpm -ivh</code> / <code>rpm -qa</code> / <code>rpm -qf</code></td>
+<td>RPM 直接操作</td>
+</tr>
+<tr>
+<td><code>lsblk</code> / <code>fdisk</code> / <code>gdisk</code> / <code>parted</code></td>
+<td>ディスク・パーティション</td>
+</tr>
+<tr>
+<td><code>mkfs</code> / <code>mkswap</code> / <code>swapon</code></td>
+<td>ファイルシステム・スワップ</td>
+</tr>
+<tr>
+<td><code>mount</code> / <code>umount</code> / <code>blkid</code></td>
+<td>マウント・UUID</td>
+</tr>
+<tr>
+<td><code>pvcreate</code> / <code>vgcreate</code> / <code>lvcreate</code></td>
+<td>LVM</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_101">セキュリティ</h3>
+<table>
+<thead>
+<tr>
+<th>コマンド</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ssh</code> / <code>ssh-keygen</code> / <code>ssh-copy-id</code></td>
+<td>SSH 接続・鍵</td>
+</tr>
+<tr>
+<td><code>ssh -L</code> / <code>-R</code> / <code>-D</code></td>
+<td>ポート転送</td>
+</tr>
+<tr>
+<td><code>sudo</code> / <code>su</code> / <code>visudo</code></td>
+<td>権限昇格・sudoers</td>
+</tr>
+<tr>
+<td><code>gpg</code></td>
+<td>暗号化・署名</td>
+</tr>
+<tr>
+<td><code>find -perm -4000</code></td>
+<td>SUID 監査</td>
+</tr>
+<tr>
+<td><code>ss</code> / <code>nmap</code> / <code>lsof</code> / <code>fuser</code></td>
+<td>ポート・プロセス調査</td>
+</tr>
+<tr>
+<td><code>last</code> / <code>who</code> / <code>w</code></td>
+<td>ログイン履歴</td>
+</tr>
+</tbody>
+</table>
+<h2 class="chapter" id="c">付録C 用語集</h2>
+<table>
+<thead>
+<tr>
+<th>用語</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>inode</strong></td>
+<td>ファイルのメタデータ（所有者、権限、サイズ、データ位置）を管理する番号</td>
+</tr>
+<tr>
+<td><strong>FHS</strong></td>
+<td>Filesystem Hierarchy Standard。Linux のディレクトリ構造の標準</td>
+</tr>
+<tr>
+<td><strong>systemd</strong></td>
+<td>PID 1 として動作する init システム。ユニットとターゲットで管理</td>
+</tr>
+<tr>
+<td><strong>ターゲット</strong></td>
+<td>systemd の動作状態。従来のランレベルに相当</td>
+</tr>
+<tr>
+<td><strong>ESP</strong></td>
+<td>EFI System Partition。UEFI ブートに必要な FAT32 パーティション</td>
+</tr>
+<tr>
+<td><strong>GPT</strong></td>
+<td>GUID Partition Table。大容量ディスク向けのパーティションテーブル</td>
+</tr>
+<tr>
+<td><strong>LVM</strong></td>
+<td>物理ボリュームをまとめて論理ボリュームを作る管理機能</td>
+</tr>
+<tr>
+<td><strong>スワップ</strong></td>
+<td>メモリ不足時にディスクへ退避する領域</td>
+</tr>
+<tr>
+<td><strong>UUID</strong></td>
+<td>ファイルシステムを一意に識別する値。<code>/etc/fstab</code> で利用</td>
+</tr>
+<tr>
+<td><strong>umask</strong></td>
+<td>新規ファイル・ディレクトリ作成時に剥奪する権限</td>
+</tr>
+<tr>
+<td><strong>SUID</strong></td>
+<td>実行時にファイル所有者の権限で動作するビット</td>
+</tr>
+<tr>
+<td><strong>SGID</strong></td>
+<td>実行時にグループ権限で動作、またはディレクトリのグループ継承</td>
+</tr>
+<tr>
+<td><strong>スティッキービット</strong></td>
+<td>ディレクトリ内のファイルを所有者以外が削除できないようにするビット</td>
+</tr>
+<tr>
+<td><strong>ハードリンク</strong></td>
+<td>同じ inode を指す別名。異なるファイルシステム間では不可</td>
+</tr>
+<tr>
+<td><strong>シンボリックリンク</strong></td>
+<td>リンク先のパスを保持する特殊ファイル</td>
+</tr>
+<tr>
+<td><strong>リポジトリ</strong></td>
+<td>パッケージを公開・配布する場所</td>
+</tr>
+<tr>
+<td><strong>依存関係</strong></td>
+<td>パッケージが動作するために必要な別のパッケージ</td>
+</tr>
+<tr>
+<td><strong>CIDR</strong></td>
+<td>IP アドレスのネットワーク部を <code>/24</code> のように表す記法</td>
+</tr>
+<tr>
+<td><strong>NAT</strong></td>
+<td>プライベート IP とグローバル IP を変換する技術</td>
+</tr>
+<tr>
+<td><strong>DNS</strong></td>
+<td>ドメイン名と IP アドレスを対応付ける仕組み</td>
+</tr>
+<tr>
+<td><strong>NTP</strong></td>
+<td>ネットワーク経由で時刻を同期するプロトコル</td>
+</tr>
+<tr>
+<td><strong>chrony</strong></td>
+<td>現在広く使われる NTP 実装</td>
+</tr>
+<tr>
+<td><strong>rsyslog</strong></td>
+<td>ファシリティと優先度でログを振り分けるデーモン</td>
+</tr>
+<tr>
+<td><strong>journal</strong></td>
+<td>systemd が管理するログ。<code>journalctl</code> で閲覧</td>
+</tr>
+<tr>
+<td><strong>logrotate</strong></td>
+<td>ログのローテーション・圧縮・削除を自動化する仕組み</td>
+</tr>
+<tr>
+<td><strong>MTA</strong></td>
+<td>Mail Transfer Agent。メール配送を担うソフトウェア</td>
+</tr>
+<tr>
+<td><strong>PAM</strong></td>
+<td>Pluggable Authentication Modules。認証方式をモジュール化する仕組み</td>
+</tr>
+<tr>
+<td><strong>sudoers</strong></td>
+<td>sudo の権限設定ファイル。<code>visudo</code> で編集</td>
+</tr>
+<tr>
+<td><strong>GPG</strong></td>
+<td>GnuPG。公開鍵暗号による暗号化・署名</td>
+</tr>
+<tr>
+<td><strong>コピーレフト</strong></td>
+<td>派生作品にも同じライセンス条件を課す考え方</td>
+</tr>
+<tr>
+<td><strong>寛容型ライセンス</strong></td>
+<td>MIT／BSD／Apache など、改変・再配布の条件が緩いライセンス</td>
+</tr>
+</tbody>
+</table>
+<h2 class="chapter" id="d">付録D 参考情報</h2>
+<h3 id="_102">公式情報</h3>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LinuC レベル1 試験概要</td>
+<td>https://linuc.org/linuc1/</td>
+</tr>
+<tr>
+<td>101試験 出題範囲</td>
+<td>https://linuc.org/linuc1/range/101.html</td>
+</tr>
+<tr>
+<td>102試験 出題範囲</td>
+<td>https://linuc.org/linuc1/range/102.html</td>
+</tr>
+<tr>
+<td>LinuC 公式サイト</td>
+<td>https://linuc.org/</td>
+</tr>
+<tr>
+<td>LPI-Japan</td>
+<td>https://lpi.or.jp/</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_103">学習に役立つ情報</h3>
+<ul>
+<li>LinuC 公式の「例題解説」: https://linuc.org/study/samples/</li>
+<li>Linux 標準教科書シリーズ: https://linuc.org/textbooks/linux/</li>
+<li><code>man</code> ページと <code>--help</code> を習慣にする。</li>
+<li>実際に仮想マシンを構築し、設定ファイルを変更して再起動で確認する。</li>
+</ul>
+<h3 id="_104">免責</h3>
+<p>本書は LinuC レベル1 Version 10.0 の公式出題範囲を参考に、学習用に独自にまとめたものです。試験制度・出題範囲・料金などは変更される可能性があります。受験前には必ず公式サイトで最新情報を確認してください。コマンドの動作はディストリビューションやバージョンによって異なる場合があります。</p>
+<!-- CONTENT-END -->
+<script>
+(function () {
+  function answerKey(text) {
+    var m = text.match(/^解答\s*(\d+)\.(\d+)/);
+    return m ? m[1] + "." + m[2] : null;
+  }
+  function questionKey(text) {
+    var m = text.match(/^練習問題\s*(\d+)\.(\d+)/);
+    return m ? m[1] + "." + m[2] : null;
+  }
+  var answers = {};
+  var answerParagraphs = [];
+  document.querySelectorAll("p").forEach(function (p) {
+    var key = answerKey(p.textContent.trim());
+    if (key && answers[key] === undefined) {
+      answers[key] = p.innerHTML;
+      answerParagraphs.push(p);
+    }
+  });
+  answerParagraphs.forEach(function (p) {
+    var key = answerKey(p.textContent.trim());
+    var body = document.createElement("div");
+    body.className = "answer-body";
+    body.hidden = true;
+    body.innerHTML = answers[key];
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "answer-btn";
+    btn.textContent = "解答を表示";
+    btn.addEventListener("click", function () { body.hidden = !body.hidden; });
+    var wrap = document.createElement("div");
+    wrap.className = "answer-item";
+    wrap.appendChild(btn);
+    wrap.appendChild(body);
+    p.parentNode.replaceChild(wrap, p);
+  });
+  document.querySelectorAll("p").forEach(function (p) {
+    var key = questionKey(p.textContent.trim());
+    if (!key || answers[key] === undefined) return;
+    p.classList.add("has-answer");
+    var tip = document.createElement("span");
+    tip.className = "answer-tip";
+    tip.textContent = "解答: " + answers[key]
+      .replace(/<[^>]+>/g, "")
+      .replace(/^解答\s*\d+\.\d+\s*/, "")
+      .trim();
+    p.appendChild(tip);
+    p.addEventListener("click", function (ev) {
+      if (ev.target.tagName === "A") return;
+      tip.classList.toggle("open");
+    });
+  });
+})();
+</script>
+</body>
+</html>
